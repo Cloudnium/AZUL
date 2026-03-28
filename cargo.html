@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azul - Cargo</title>
+  <link rel="icon" href="images/LOGO AZUL.png" type="image/png">
+
+  <!--
+  ============================================================
+  🔤 FUENTES — mismas que index.html
+  ============================================================
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/cargo.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       🧭 NAVBAR — igual que index.html
+       ============================================================ -->
+  <header class="navbar">
+    <div class="navbar__inner">
+
+      <!-- 🖼️ LOGO NAVBAR — cambia src por tu logo -->
+      <a href="index.html" class="navbar__logo">
+        <img src="images/LOGO.png" alt="Azul Logo" onerror="this.outerHTML='<span class=\'logo-text\'>⚡ AZUL</span>'" />
+      </a>
+
+      <!-- Botón hamburguesa (móvil) -->
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navbar__menu" id="navMenu">
+        <a href="index.html">INICIO</a>
+        <a href="cargo.html" class="active">CARGO</a>
+        <a href="index.html#destinos">DESTINOS</a>
+        <div class="navbar__dropdown">
+          <a href="#">SERVICIOS ▾</a>
+          <div class="navbar__dropdown-menu">
+            <a href="#">Bus Cama</a>
+            <a href="#">Semi Cama</a>
+            <a href="#">Encomiendas</a>
+          </div>
+        </div>
+        <a href="#">TERMINALES</a>
+        <a href="#contacto">CONTACTO</a>
+        <a href="#">NOSOTROS</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       🚛 HERO CARGO
+       Sección azul con camión y texto
+       ============================================================ -->
+  <section class="cargo-hero">
+
+    <!-- 🎨 COLOR DE FONDO — cambia en cargo.css → .cargo-hero { background: ... } -->
+
+    <div class="cargo-hero__inner">
+
+      <!-- LADO IZQUIERDO: imagen del camión -->
+      <div class="cargo-hero__img-wrap">
+        <!--
+          🖼️ IMAGEN DEL CAMIÓN — cambia src
+          Tamaño recomendado: ~600x350px, PNG con fondo transparente
+        -->
+        <img
+          src="images/CAMION.png"
+          alt="Camión Azul Cargo"
+          class="cargo-hero__truck"
+          onerror="this.style.opacity='0.3'"
+        />
+      </div>
+
+      <!-- LADO DERECHO: texto -->
+      <div class="cargo-hero__text">
+        <!-- ✏️ Cambia el título -->
+        <h1 class="cargo-hero__title">CARGO</h1>
+        <!-- ✏️ Cambia el subtítulo -->
+        <p class="cargo-hero__sub">Descubre el Perú</p>
+        <p class="cargo-hero__sub">Viaja con clase</p>
+      </div>
+
+    </div>
+
+    <!-- ============================================================
+         🔍 BUSCADOR DE ORDEN
+         ============================================================ -->
+    <div class="cargo-search">
+      <div class="cargo-search__inner">
+
+        <!-- ✏️ Cambia el placeholder del campo 1 -->
+        <input
+          type="text"
+          class="cargo-search__input"
+          placeholder="N° de Orden"
+          id="nroOrden"
+        />
+
+        <!-- ✏️ Cambia el placeholder del campo 2 -->
+        <input
+          type="text"
+          class="cargo-search__input"
+          placeholder="Código de Orden"
+          id="codigoOrden"
+        />
+
+        <!--
+          🔵 BOTÓN BUSCAR
+          ✏️ Cambia el texto del botón
+          🔧 La lógica de búsqueda está en js/cargo.js
+        -->
+        <button class="cargo-search__btn" id="btnBuscarOrden">
+          Buscar ▶
+        </button>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       🚌 SECCIÓN NUESTROS BUSES
+       ============================================================ -->
+  <section class="buses-section">
+    <div class="container">
+
+      <!-- ✏️ Cambia el título — la palabra en negrita se puede editar -->
+<h2 class="buses-section__title">
+  <span class="italic-normal">NUESTROS</span> <span class="bold-text">BUCES</span>
+</h2>
+
+      <!-- Grid de buses — agrega o quita tarjetas según necesites -->
+      <div class="buses-grid">
+
+        <!-- ============================================================
+             🚌 TARJETA BUS 1 — duplica este bloque para más buses
+             ============================================================ -->
+        <div class="bus-card">
+          <!--
+            🖼️ IMAGEN BUS — cambia src
+            Tamaño recomendado: ~500x200px, PNG con fondo transparente
+          -->
+          <img
+            src="images/BUS1.png"
+            alt="Bus Azul"
+            class="bus-card__img"
+            onerror="this.src='https://placehold.co/480x180/0662c7/fff?text=Bus+Azul'"
+          />
+        </div>
+
+        <!-- TARJETA BUS 2 -->
+        <div class="bus-card">
+          <!--
+            🖼️ IMAGEN BUS PLATINO — cambia src
+          -->
+          <img
+            src="images/BUS2.png"
+            alt="Bus Azul Platino"
+            class="bus-card__img"
+            onerror="this.src='https://placehold.co/480x180/003d82/fff?text=Bus+Platino'"
+          />
+        </div>
+
+        <!-- ➕ Para añadir más buses, copia el bloque .bus-card -->
+
+      </div>
+
+      <!-- ============================================================
+           🛎️ SERVICIOS A BORDO
+           ============================================================ -->
+      <div class="servicios-bordo">
+
+        <!-- ✏️ Cambia el título -->
+        <h3 class="servicios-bordo__title">Servicios a Bordo</h3>
+
+        <div class="servicios-bordo__grid">
+
+          <!-- ============================================================
+               ÍCONO DE SERVICIO — duplica este bloque para más servicios
+               ============================================================ -->
+          <div class="servicio-item">
+            <!--
+              🖼️ ÍCONO — cambia src
+              Tamaño recomendado: 48x48px, PNG con fondo transparente
+              O usa un emoji temporal hasta tener el ícono real
+            -->
+            <div class="servicio-item__icon">
+              <img
+                src="images/ICON-CARGADOR.png"
+                alt="Cargador de Celular"
+                onerror="this.outerHTML='<span class=\'icon-fallback\'>🔌</span>'"
+              />
+            </div>
+          </div>
+
+          <div class="servicio-item">
+            <div class="servicio-item__icon">
+              <img
+                src="images/ICON-PELICULAS.png"
+                alt="Películas a Bordo"
+                onerror="this.outerHTML='<span class=\'icon-fallback\'>🎬</span>'"
+              />
+            </div>
+          </div>
+
+          <div class="servicio-item">
+            <div class="servicio-item__icon">
+              <img
+                src="images/ICON-AIRE.png"
+                alt="Aire Acondicionado"
+                onerror="this.outerHTML='<span class=\'icon-fallback\'>❄️</span>'"
+              />
+            </div>
+          </div>
+
+          <div class="servicio-item">
+            <div class="servicio-item__icon">
+              <img
+                src="images/ICON-BUSCAMA.png"
+                alt="Bus Cama 160°"
+                onerror="this.outerHTML='<span class=\'icon-fallback\'>🛏️</span>'"
+              />
+            </div>
+          </div>
+
+          <div class="servicio-item">
+            <div class="servicio-item__icon">
+              <img
+                src="images/ICON-SEMICAMA.png"
+                alt="Semi Cama 145°"
+                onerror="this.outerHTML='<span class=\'icon-fallback\'>💺</span>'"
+              />
+            </div>
+          </div>
+
+          <div class="servicio-item">
+            <div class="servicio-item__icon">
+              <img
+                src="images/ICON-GPS.png"
+                alt="Monitoreo GPS"
+                onerror="this.outerHTML='<span class=\'icon-fallback\'>📍</span>'"
+              />
+            </div>
+          </div>
+
+          <div class="servicio-item">
+            <div class="servicio-item__icon">
+              <img
+                src="images/ICON-BANIO.png"
+                alt="Baño Químico"
+                onerror="this.outerHTML='<span class=\'icon-fallback\'>🚻</span>'"
+              />
+            </div>
+          </div>
+
+          <!-- ➕ Para añadir más servicios, copia el bloque .servicio-item -->
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       🦶 FOOTER — igual que index.html
+       ============================================================ -->
+  <footer class="footer" id="contacto">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div class="footer__brand">
+          <!-- 🖼️ LOGO FOOTER — cambia src -->
+          <img src="images/LOGO.png" alt="Azul Logo" class="footer__logo"
+               onerror="this.outerHTML='<span class=\'footer-logo-text\'>⚡ AZUL</span>'" />
+          <p>Conectando el norte del Perú con seguridad, confort y la mejor tecnología. Viaja con nosotros.</p>
+        </div>
+
+        <div class="footer__col">
+          <h4>Enlaces</h4>
+          <a href="index.html">Inicio</a>
+          <a href="cargo.html">Cargo</a>
+          <a href="index.html#destinos">Destinos</a>
+          <a href="#">Terminales</a>
+          <a href="#contacto">Contacto</a>
+          <a href="#">Nosotros</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Ayuda</h4>
+          <a href="#">Preguntas frecuentes</a>
+          <a href="#">Libro de reclamaciones</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <a href="#">Agencias</a>
+          <a href="#">Av. bolognesi 817 Piura.</a>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2026 AZUL TODOS LOS DERECHOS RESERVADOS</p>
+        <div class="footer__social">
+          <a href="#"><img src="images/IN.png" alt="LinkedIn"></a>
+          <a href="#"><img src="images/X.png" alt="X"></a>
+          <a href="#"><img src="images/INSTA.png" alt="Instagram"></a>
+          <a href="#"><img src="images/TIKTOK.png" alt="TikTok"></a>
+        </div>
+        <div class="footer__payments">
+          <span>
+            <img src="images/METODOSPAGO.png" alt="Pagos">
+            VISA / MASTERCARD
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/cargo.js"></script>
+
+</body>
+</html>
