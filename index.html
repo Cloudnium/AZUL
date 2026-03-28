@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azul - Descubre el Perú</title>
+  <link rel="icon" href="images/LOGO AZUL.png" type="image/png">
+
+  <!--
+  ============================================================
+  🔤 FUENTES DE LETRA — cámbiala aquí
+  Fuente actual: Montserrat (títulos) + Roboto (cuerpo)
+  Para cambiar, reemplaza el link de Google Fonts y actualiza
+  en css/style.css las variables:
+    --font-display: 'Montserrat', sans-serif;
+    --font-body:    'Roboto', sans-serif;
+  ============================================================
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       🧭 NAVBAR
+       Cambia los enlaces del menú aquí
+       ============================================================ -->
+  <header class="navbar">
+    <div class="navbar__inner">
+
+      <!-- 🖼️ LOGO NAVBAR — cambia src por tu logo -->
+      <a href="#" class="navbar__logo">
+        <img src="images/LOGO.png" alt="Azul Logo" onerror="this.outerHTML='<span class=\'logo-text\'>⚡ AZUL</span>'" />
+      </a>
+
+      <!-- Botón hamburguesa (móvil) -->
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navbar__menu" id="navMenu">
+        <!-- 🔗 ENLACES DEL MENÚ — edita textos y hrefs -->
+        <a href="#inicio">INICIO</a>
+        <a href="#cargo">CARGO</a>
+        <a href="#destinos">DESTINOS</a>
+        <div class="navbar__dropdown">
+          <a href="#servicios">SERVICIOS ▾</a>
+          <div class="navbar__dropdown-menu">
+            <a href="#">Bus Cama</a>
+            <a href="#">Semi Cama</a>
+            <a href="#">Encomiendas</a>
+          </div>
+        </div>
+        <a href="#terminales">TERMINALES</a>
+        <a href="#contacto">CONTACTO</a>
+        <a href="#nosotros">NOSOTROS</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       🦸 HERO SECTION
+       ============================================================ -->
+  <section class="hero" id="inicio">
+
+    <!-- 🖼️ FONDO HERO — cambia la imagen en css/style.css
+         busca: .hero { background-image: url(...) }
+         o bien pon aquí un <img> con class="hero__bg" -->
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <!-- ✏️ TÍTULO PRINCIPAL -->
+      <h1 class="hero__title">DESCUBRE EL PERÚ</h1>
+      <p class="hero__subtitle">viaja seguro viaja en azul</p>
+
+      <!-- 🔍 BUSCADOR DE PASAJES -->
+      <div class="search-box">
+        <div class="search-box__tabs">
+          <!-- ✏️ Cambia las etiquetas de las pestañas -->
+          <button class="tab active" data-tab="ida-vuelta">Ida y vuelta</button>
+          <button class="tab" data-tab="solo-ida">Solo Ida</button>
+        </div>
+        <div class="search-box__form">
+          <div class="search-field">
+            <label>ORIGEN</label>
+            <div class="search-field__input">
+              <img src="images/ubicacion.png" class="icon-loc" alt="Ubicación">
+              <!-- ✏️ Cambia el placeholder del origen -->
+              <input type="text" placeholder="Lima" />
+            </div>
+          </div>
+          <div class="search-field">
+            <label>DESTINO</label>
+            <div class="search-field__input">
+              <img src="images/DESTINO.png" class="icon-loc" alt="Ubicación">
+              <!-- ✏️ Cambia el placeholder del destino -->
+              <input type="text" placeholder="Piura" />
+            </div>
+          </div>
+          <div class="search-field">
+            <label>SALIDA</label>
+            <div class="search-field__input">
+              <input type="date" />
+            </div>
+          </div>
+          <div class="search-field">
+            <label>REGRESO</label>
+            <div class="search-field__input">
+              <input type="date" />
+            </div>
+          </div>
+          <!-- 🔵 BOTÓN BUSCAR -->
+            <button class="btn-search">
+    <img src="images/buscar.png">
+  </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🚌 BANNER NUEVA FLOTA 2026 -->
+    <div class="hero__flota-banner">
+      <div class="hero__flota-banner-inner">
+        <!-- 🖼️ IMAGEN DEL BUS — cambia src -->
+        <img src="images/NUEVAFLOTA2026.png" alt="Nueva Flota 2026" class="flota-bus-img"
+             onerror="this.style.display='none'" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ BADGES DE FEATURES -->
+<div class="hero__badges">
+  <div class="badge"><img src="images/pago.png" alt="Pago Seguro"></div>
+  <div class="badge"><img src="images/cama.png" alt="Bus cama"></div>
+  <div class="badge"><img src="images/asiento.png" alt="Semi cama"></div>
+  <div class="badge"><img src="images/cargador.png" alt="Cargador"></div>
+  <div class="badge"><img src="images/aire.png" alt="Aire"></div>
+  <div class="badge"><img src="images/gps.png" alt="GPS"></div>
+</div>
+  </section>
+
+  <!-- ============================================================
+       📍 SECCIÓN DESTINOS
+       ============================================================ -->
+  <section class="destinos" id="destinos">
+    <div class="container">
+      <!-- ✏️ Cambia el subtítulo y título de sección -->
+      <p class="section-label">NUESTROS DESTINOS</p>
+      <h2 class="section-title">Destinos del Norte</h2>
+
+      <div class="destinos__grid">
+
+        <!-- ============================================================
+             🗺️ TARJETA DE DESTINO — duplica o modifica este bloque
+             para agregar/quitar destinos
+             ============================================================ -->
+        <div class="destino-card">
+          <!-- 🖼️ IMAGEN DESTINO — cambia src -->
+          <img src="images/Trujillo.png" alt="Trujillo"
+               onerror="this.src='https://placehold.co/400x250/1a3a6b/fff?text=Trujillo'" />
+          <div class="destino-card__overlay">
+            <span class="badge-popular">POPULAR</span>
+            <!-- ✏️ Nombre y precio del destino -->
+            <h3>Trujillo</h3>
+            <p class="precio">Desde S/ 35.00</p>
+            <button class="btn-reservar">RESERVAR →</button>
+          </div>
+        </div>
+
+        <div class="destino-card">
+          <img src="images/PIURA.png" alt="Piura"
+               onerror="this.src='https://placehold.co/400x250/1a3a6b/fff?text=Piura'" />
+          <div class="destino-card__overlay">
+            <h3>Piura</h3>
+            <p class="precio">Desde S/ 35.00</p>
+            <button class="btn-reservar">RESERVAR →</button>
+          </div>
+        </div>
+
+        <div class="destino-card">
+          <img src="images/SULLANA.png" alt="Sullana"
+               onerror="this.src='https://placehold.co/400x250/1a3a6b/fff?text=Sullana'" />
+          <div class="destino-card__overlay">
+            <h3>Sullana</h3>
+            <p class="precio">Desde S/ 35.00</p>
+            <button class="btn-reservar">RESERVAR →</button>
+          </div>
+        </div>
+
+        <!-- ➕ Para añadir más destinos, copia el bloque .destino-card -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       🚀 SECCIÓN MEJORAMOS
+       ============================================================ -->
+  <section class="mejoramos">
+    <div class="container">
+      <!-- ✏️ Cambia el título y subtítulo -->
+      <h2 class="mejoramos__title">MEJORAMOS</h2>
+      <p class="mejoramos__sub">Constantemente para ti</p>
+
+      <div class="mejoramos__content">
+        <div class="mejoramos__year">
+          <img src="images/NV2026.png" alt="Nueva Flota 2026">
+        </div>
+        <div class="mejoramos__features">
+          <!-- 🖼️ ICONOS de mejoras — cambia emoji o usa <img> -->
+  <div class="feature-item">
+  <div class="feature-icon">
+    <img src="images/FLOTAMODER.png" alt="Bus">
+  </div>
+</div>
+<div class="feature-item">
+  <div class="feature-icon">
+    <img src="images/MANTENIMIENTO.png" alt="Mantenimiento">
+  </div>
+</div>
+<div class="feature-item">
+  <div class="feature-icon">
+    <img src="images/MONITOREO.png" alt="Monitoreo">
+  </div>
+</div>
+<div class="feature-item">
+  <div class="feature-icon">
+    <img src="images/AIREACON.png" alt="Aire">
+  </div>
+</div>
+          <!-- ➕ Para añadir más features, copia el bloque .feature-item -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       🦶 FOOTER
+       ============================================================ -->
+  <footer class="footer" id="contacto">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- Columna 1: Marca -->
+        <div class="footer__brand">
+          <!-- 🖼️ LOGO FOOTER — cambia src -->
+          <img src="images/logo.png" alt="Azul Logo" class="footer__logo"
+               onerror="this.outerHTML='<span class=\'footer-logo-text\'>⚡ AZUL</span>'" />
+          <!-- ✏️ Tagline del footer -->
+          <p>Conectando el norte del Perú con seguridad, confort y la mejor tecnología. Viaja con nosotros.</p>
+        </div>
+
+        <!-- Columna 2: Enlaces -->
+        <div class="footer__col">
+          <h4>Enlaces</h4>
+          <!-- ✏️ Cambia los enlaces del footer -->
+          <a href="#inicio">Inicio</a>
+          <a href="#cargo">Cargo</a>
+          <a href="#destinos">Destinos</a>
+          <a href="#terminales">Terminales</a>
+          <a href="#contacto">Contacto</a>
+          <a href="#nosotros">Nosotros</a>
+        </div>
+
+        <!-- Columna 3: Ayuda -->
+        <div class="footer__col">
+          <h4>Ayuda</h4>
+          <a href="#">Preguntas frecuentes</a>
+          <a href="#">Libro de reclamaciones</a>
+        </div>
+
+        <!-- Columna 4: Contacto -->
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <!-- ✏️ Cambia la dirección y datos de contacto -->
+          <a href="#">Agencias</a>
+          <a href="#">Av. bolognesi 817 Piura.</a>
+        </div>
+
+      </div>
+
+      <!-- Redes sociales -->
+      <div class="footer__bottom">
+        <p>© 2026 AZUL TODOS LOS DERECHOS RESERVADOS</p>
+<div class="footer__social">
+  <a href="#"><img src="images/IN.png" alt="Facebook"></a>
+  <a href="#"><img src="images/X.png" alt="Instagram"></a>
+  <a href="#"><img src="images/INSTA.png" alt="YouTube"></a>
+  <a href="#"><img src="images/TIKTOK.png" alt="TikTok"></a>
+</div>
+        <!-- 🖼️ LOGOS DE PAGO — cambia src -->
+<div class="footer__payments">
+  <span>
+    <img src="images/METODOSPAGO.png" alt="Pagos">
+    VISA / MASTERCARD
+  </span>
+</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

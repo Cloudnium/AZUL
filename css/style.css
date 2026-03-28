@@ -1,0 +1,671 @@
+/* ============================================================
+   🎨 VARIABLES GLOBALES — edita aquí los colores y fuentes
+   ============================================================ */
+:root {
+  /* 🔵 COLORES PRINCIPALES */
+  --color-primary:    #0662c7;   /* Azul principal */
+  --color-primary-dark: #003d82; /* Azul oscuro (hover, sombras) */
+  --color-accent:     #0077e6;   /* Azul acento / botones */
+  --color-white:      #ffffff;
+  --color-dark:       #0a0e1a;   /* Fondo oscuro / footer */
+  --color-gray-light: #f4f6fa;
+  --color-gray:       #8a9ab5;
+  --color-banner-bg:  #0055a5;   /* Fondo del banner Nueva Flota */
+  --color-mejoramos-bg: #111827; /* Fondo sección Mejoramos */
+  --color-footer-bg:  #0662c7;   /* Fondo footer */
+
+  /* ============================================================
+     🔤 FUENTES DE LETRA
+     Para cambiar la fuente:
+     1. Ve al <head> de index.html y cambia el link de Google Fonts
+     2. Cambia los valores de estas variables
+     Ejemplos: 'Poppins', 'Barlow Condensed', 'Oswald', 'Raleway'
+     ============================================================ */
+  --font-display: 'Montserrat', sans-serif;  /* Títulos, navbar */
+  --font-body:    'Roboto', sans-serif;       /* Textos generales */
+
+  /* 📐 ESPACIADOS */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --navbar-h:   64px;
+  --transition: 0.25s ease;
+}
+
+/* ============================================================
+   RESET Y BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--color-white);
+  background: var(--color-dark);
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; outline: none; }
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* ============================================================
+   🧭 NAVBAR
+   ============================================================ */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--color-primary);
+  height: var(--navbar-h);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.35);
+}
+.navbar__inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.navbar__logo img { height: 38px; }
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--color-white);
+  letter-spacing: 2px;
+}
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.navbar__menu a,
+.navbar__dropdown > a {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+  white-space: nowrap;
+}
+.navbar__menu a:hover,
+.navbar__dropdown > a:hover { background: rgba(255,255,255,0.15); }
+
+/* Dropdown */
+.navbar__dropdown { position: relative; }
+.navbar__dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: var(--color-primary-dark);
+  border-radius: var(--radius-sm);
+  min-width: 160px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.navbar__dropdown:hover .navbar__dropdown-menu { display: block; }
+.navbar__dropdown-menu a {
+  display: block;
+  padding: 10px 16px;
+  font-size: 0.75rem;
+}
+.navbar__dropdown-menu a:hover { background: rgba(255,255,255,0.1); }
+
+/* Toggle móvil */
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  padding: 4px;
+}
+.navbar__toggle span {
+  display: block; width: 24px; height: 2px;
+  background: var(--color-white);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ============================================================
+   🦸 HERO
+   ============================================================ -->
+   🖼️ FONDO DE LA PÁGINA (HERO)
+   Para cambiar el fondo:
+   - Reemplaza el url() por la ruta a tu imagen
+   - O usa un color: background: var(--color-primary);
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding-top: var(--navbar-h);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* 🖼️ IMAGEN DE FONDO HERO — cambia esta URL */
+  background-image: url('../images/FONDOINI.png');
+  background-size: cover;
+  background-position: center;
+  background-color: #1a2a5e; /* fallback si no carga la imagen */
+}
+.hero__overlay {
+  position: absolute; inset: 0;
+  /* 🎨 Overlay del hero — cambia la opacidad o colores */
+  background: linear-gradient(
+    180deg,
+    rgba(10, 20, 60, 0.62) 0%,
+    rgba(0, 30, 90, 0.55) 60%,
+    rgba(0, 15, 50, 0.85) 100%
+  );
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px 20px;
+  width: 100%;
+}
+
+/* ✏️ TÍTULO HERO */
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+}
+.hero__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* 🔍 BUSCADOR */
+.search-box {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: 16px 20px 20px;
+  width: 100%;
+  max-width: 780px;
+  margin-top: 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+.search-box__tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.tab {
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--color-gray-light);
+  color: #555;
+  transition: var(--transition);
+  border: 2px solid transparent;
+}
+.tab.active {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.tab:hover:not(.active) { border-color: var(--color-primary); color: var(--color-primary); }
+
+.search-box__form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.search-field {
+  flex: 1;
+  min-width: 130px;
+}
+.search-field label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #888;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 5px;
+}
+.search-field__input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid #d8dde8;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  background: var(--color-white);
+}
+.search-field__input:focus-within { border-color: var(--color-primary); }
+.search-field__input input {
+  border: none; outline: none;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #222;
+  width: 100%;
+  background: transparent;
+}
+.icon-loc {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.btn-search {
+  background: var(--color-primary);
+  width: 52px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-search img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.btn-search:hover {
+  background: var(--color-primary-dark);
+  transform: scale(1.05);
+}
+
+/* 🚌 BANNER FLOTA 2026 */
+.hero__flota-banner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 780px;
+  margin-top: 24px;
+
+  /* 🎨 COLOR DEL BANNER — cámbialo aquí */
+  background: transparent;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.hero__flota-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  gap: 16px;
+}
+
+.flota-bus-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔥 llena todo sin deformar */
+  display: block;
+}
+
+/* ✅ BADGES HERO */
+.hero__badges {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 20px;
+  margin-top: 24px;
+  padding: 0 20px 40px;
+}
+.badge {
+  width: 110px;              /* 🔥 MISMO espacio para todos */
+  height: 60px;              /* altura uniforme */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge img {
+  height: 28px;       /* 🔥 TODAS MISMA ALTURA */
+  width: auto;        /* mantiene proporción */
+  object-fit: contain;
+
+}
+
+/* ============================================================
+   📍 SECCIÓN DESTINOS
+   ============================================================ */
+.destinos {
+  /* 🎨 COLOR FONDO DESTINOS */
+  background: #0d1629;
+  padding: 60px 0 70px;
+}
+.section-label {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: 32px;
+}
+
+.destinos__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* 🗺️ TARJETA DESTINO */
+.destino-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+}
+.destino-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.destino-card:hover img { transform: scale(1.06); }
+.destino-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  transition: var(--transition);
+}
+.badge-popular {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.07em;
+}
+.destino-card__overlay h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-white);
+}
+.destino-card__overlay .precio {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.85);
+  margin: 4px 0 10px;
+}
+.btn-reservar {
+  display: inline-block;
+  background: var(--color-white);
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 7px 16px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  transition: var(--transition);
+  align-self: flex-start;
+}
+.btn-reservar:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ============================================================
+   🚀 SECCIÓN MEJORAMOS
+   ============================================================ */
+.mejoramos {
+  /* 🎨 COLOR FONDO MEJORAMOS */
+  background: var(--color-mejoramos-bg);
+  padding: 70px 0;
+  text-align: center;
+}
+.mejoramos__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--color-white);
+}
+.mejoramos__sub {
+  font-size: 0.95rem;
+  color: var(--color-white);
+  margin-bottom: 48px;
+}
+.mejoramos__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.mejoramos__year img {
+  width: 120px; /* 🔥 ajusta tamaño */
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.mejoramos__year p {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-gray);
+}
+.mejoramos__year span {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  color: var(--color-white);
+  line-height: 1;
+}
+.mejoramos__features {
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 90px;
+}
+.feature-icon img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+.feature-item p {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--color-gray);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   🦶 FOOTER
+   ============================================================ */
+.footer {
+  /* 🎨 COLOR FONDO FOOTER */
+  background: var(--color-footer-bg);
+  padding: 48px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 40px;
+}
+.footer__logo { height: 36px; margin-bottom: 14px; }
+.footer-logo-text {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--color-white);
+}
+.footer__brand p {
+  font-size: 0.82rem;
+  color: var(--color-white);
+  line-height: 1.7;
+  max-width: 240px;
+}
+.footer__col h4 {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+}
+.footer__col a {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-white);
+  margin-bottom: 8px;
+  transition: color var(--transition);
+}
+.footer__col a:hover { color: var(--color-white); }
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer__bottom p {
+  font-size: 0.72rem;
+  color: var(--color-white);
+}
+.footer__social { display: flex; gap: 10px; }
+.footer__social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__social img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.footer__social a:hover { background: var(--color-primary); }
+.footer__payments {
+  display: flex;
+  gap: 8px;
+}
+
+.footer__payments span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+
+  font-weight: 400; /* 👈 quitar negrita */
+  background: none; /* 👈 quitar fondo */
+  color: var(--color-white);
+
+  padding: 0; /* 👈 quitar relleno tipo caja */
+  border-radius: 0; /* opcional */
+  letter-spacing: 0.04em;
+}
+
+
+.footer__payments img {
+  height: 14px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ============================================================
+   📱 RESPONSIVE
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .footer__grid { grid-template-columns: 1fr 1fr; }
+  .mejoramos__year { border-right: none; padding-right: 0; }
+}
+
+/* Móvil grande */
+@media (max-width: 680px) {
+  .navbar__menu {
+    display: none;
+    position: absolute;
+    top: var(--navbar-h);
+    left: 0; right: 0;
+    background: var(--color-primary-dark);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .navbar__menu.open { display: flex; }
+  .navbar__menu a { padding: 12px 24px; width: 100%; }
+  .navbar__toggle { display: flex; }
+
+  .search-box__form { flex-direction: column; }
+  .btn-search { width: 100%; height: 44px; }
+
+  .hero__flota-banner-inner { flex-direction: column; text-align: center; }
+  .flota-bus-img { max-height: 70px; }
+
+  .footer__grid { grid-template-columns: 1fr; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; }
+
+  .destinos__grid { grid-template-columns: 1fr; }
+}
+
+/* Móvil pequeño */
+@media (max-width: 400px) {
+  .hero__badges { gap: 8px 14px; }
+  .mejoramos__features { gap: 20px; }
+}
