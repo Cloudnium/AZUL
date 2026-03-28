@@ -1,9 +1,9 @@
 /* ============================================================
    🚛 CARGO.CSS — Estilos exclusivos de la página cargo.html
-   Los estilos del navbar y footer vienen de css/style.css
+   TOTALMENTE RESPONSIVO
    ============================================================ */
 
-   /* Solo cursiva, sin negrita */
+/* Solo cursiva, sin negrita */
 .italic-normal {
   font-style: italic;
   font-weight: normal;
@@ -18,9 +18,7 @@
    🦸 HERO CARGO
    ============================================================ */
 .cargo-hero {
-  /* 🎨 COLOR DE FONDO DEL HERO — cámbialo aquí */
   background: var(--color-primary);
-
   padding-top: var(--navbar-h);
   padding-bottom: 0;
   overflow: hidden;
@@ -35,41 +33,38 @@
   justify-content: space-between;
   gap: 24px;
   min-height: 280px;
+  flex-wrap: wrap; /* Para que se acomode en pantallas pequeñas */
 }
 
 /* IMAGEN DEL CAMIÓN */
 .cargo-hero__img-wrap {
-  flex: 1.2;
+  flex: 1 1 300px; /* flexible en móvil */
   display: flex;
   align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .cargo-hero__truck {
-  /*
-    🖼️ Tamaño del camión en el hero
-    Ajusta width/max-height según tu imagen
-  */
   width: 100%;
   max-width: 560px;
+  height: auto; /* se ajusta proporcionalmente */
   max-height: 350px;
   object-fit: contain;
   object-position: bottom left;
   display: block;
-  /* Sombra suave para que "descanse" sobre la superficie */
   filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
 }
 
 /* TEXTO HERO */
 .cargo-hero__text {
-  flex: 0 0 auto;
+  flex: 1 1 250px;
   text-align: left;
   padding-bottom: 40px;
 }
 
 .cargo-hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 900;
   color: var(--color-white);
   letter-spacing: 0.04em;
@@ -89,7 +84,6 @@
    🔍 BUSCADOR DE ORDEN
    ============================================================ */
 .cargo-search {
-  /* 🎨 COLOR DEL BUSCADOR — cambia aquí */
   background: var(--color-white);
   padding: 22px 24px;
 }
@@ -104,8 +98,7 @@
 }
 
 .cargo-search__input {
-  flex: 1;
-  min-width: 180px;
+  flex: 1 1 180px;
   height: 44px;
   border: 1.5px solid #d0d8e8;
   border-radius: var(--radius-sm);
@@ -117,15 +110,16 @@
   outline: none;
   transition: border-color var(--transition);
 }
+
 .cargo-search__input:focus {
   border-color: var(--color-primary);
 }
+
 .cargo-search__input::placeholder {
   color: #aab;
 }
 
 .cargo-search__btn {
-  /* 🎨 COLOR BOTÓN BUSCAR — cambia aquí */
   background: var(--color-primary);
   color: var(--color-white);
   font-family: var(--font-display);
@@ -140,6 +134,7 @@
   transition: background var(--transition), transform var(--transition);
   white-space: nowrap;
 }
+
 .cargo-search__btn:hover {
   background: var(--color-primary-dark);
   transform: scale(1.03);
@@ -149,48 +144,38 @@
    🚌 SECCIÓN NUESTROS BUSES
    ============================================================ */
 .buses-section {
-  /* 🎨 COLOR FONDO SECCIÓN — cambia aquí */
   background: var(--color-white);
-  padding: 60px 0 70px;
-}
-
-.buses-section__title .italic-normal {
-  font-style: italic;  /* cursiva */
-  font-weight: 400;    /* normal, sobrescribe el 900 del span */
-}
-
-.buses-section__title .bold-text {
-  font-weight: 900;    /* negrita para BUCES */
+  padding: 60px 24px 70px;
 }
 
 .buses-section__title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 400;           /* Parte normal */
+  font-weight: 400;
   color: var(--color-primary);
   text-align: center;
   margin-bottom: 40px;
   letter-spacing: 0.04em;
 }
 
-.buses-section__title span {
-  font-weight: 900;           /* Parte en negrita */
+.buses-section__title .italic-normal {
+  font-weight: 400;
 }
 
-/* Grid de buses */
+.buses-section__title .bold-text {
+  font-weight: 900;
+}
+
 .buses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 24px;
   margin-bottom: 52px;
 }
 
 .bus-card__img {
-  /*
-    🖼️ Tamaño de la imagen del bus dentro de la tarjeta
-    Ajusta max-height si tu imagen es más grande o pequeña
-  */
   width: 100%;
+  height: auto;
   max-height: 400px;
   object-fit: contain;
 }
@@ -205,60 +190,52 @@
 
 .servicios-bordo__title {
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
   font-weight: 700;
-  /* 🎨 COLOR DEL TÍTULO SERVICIOS */
   color: #333;
   margin-bottom: 28px;
   letter-spacing: 0.04em;
 }
 
 .servicios-bordo__grid {
-  display: flex;        /* pone los ítems en fila */
-  flex-wrap: wrap;      /* permite que los ítems bajen a otra línea si no caben */
-  justify-content: center; /* centra los ítems horizontalmente */
-  gap: 60px;            /* espacio horizontal y vertical entre los ítems */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(20px, 5vw, 60px);
 }
 
-/* ÍTEM DE SERVICIO */
 .servicio-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  width: 80px;
+  width: clamp(60px, 10%, 80px);
   text-align: center;
 }
 
 .servicio-item__icon {
-  width: 120px;
-  height: 120px;
+  width: clamp(60px, 15vw, 120px);
+  height: clamp(60px, 15vw, 120px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .servicio-item__icon img {
-  /*
-    🖼️ TAMAÑO DE ÍCONOS DE SERVICIO — ajusta aquí
-    width/height recomendado: 44-52px
-  */
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
-/* Fallback si no carga la imagen */
 .icon-fallback {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   line-height: 1;
 }
 
 .servicio-item p {
   font-family: var(--font-display);
-  font-size: 0.58rem;
+  font-size: clamp(0.5rem, 1.5vw, 0.58rem);
   font-weight: 700;
-  /* 🎨 COLOR DEL TEXTO DE SERVICIO */
   color: #444;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -266,7 +243,7 @@
 }
 
 /* ============================================================
-   🔗 ACTIVE LINK EN NAVBAR (página cargo activa)
+   🔗 ACTIVE LINK EN NAVBAR
    ============================================================ */
 .navbar__menu a.active {
   background: rgba(255,255,255,0.2);
@@ -288,7 +265,7 @@
     padding-bottom: 24px;
   }
   .cargo-hero__truck {
-    max-height: 200px;
+    max-height: 220px;
   }
   .cargo-search__inner {
     flex-direction: column;
@@ -308,9 +285,16 @@
 
 @media (max-width: 400px) {
   .buses-section__title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
   .servicio-item {
-    width: 66px;
+    width: 60px;
+  }
+  .servicio-item__icon {
+    width: 60px;
+    height: 60px;
+  }
+  .icon-fallback {
+    font-size: 1.5rem;
   }
 }
