@@ -149,6 +149,25 @@ if (btnSearch) {
   });
 }
 
+// ================================
+// 📢 CONTROL POPUP ANUNCIO
+// ================================
+document.addEventListener("DOMContentLoaded", function () {
+  const popup = document.getElementById("popupAnuncio");
+  const cerrar = document.getElementById("cerrarPopup");
+
+  cerrar.addEventListener("click", function () {
+    popup.style.display = "none";
+  });
+
+  // Cerrar si hace clic fuera de la imagen
+  popup.addEventListener("click", function (e) {
+    if (e.target === popup) {
+      popup.style.display = "none";
+    }
+  });
+});
+
 
 /* ============================================================
    6. 🚌 BOTONES RESERVAR
