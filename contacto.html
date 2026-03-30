@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azul - Contacto</title>
+  <link rel="icon" href="images/LOGO AZUL.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/contacto.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       🧭 NAVBAR — igual que index.html
+       ============================================================ -->
+  <header class="navbar">
+    <div class="navbar__inner">
+
+      <a href="index.html" class="navbar__logo">
+        <!-- 🖼️ LOGO NAVBAR — cambia src -->
+        <img src="images/LOGO.png" alt="Azul Logo"
+             onerror="this.outerHTML='<span class=\'logo-text\'>⚡ AZUL</span>'" />
+      </a>
+
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navbar__menu" id="navMenu">
+        <a href="index.html">INICIO</a>
+        <a href="cargo.html">CARGO</a>
+        <a href="index.html#destinos">DESTINOS</a>
+        <div class="navbar__dropdown">
+          <a href="#">SERVICIOS ▾</a>
+          <div class="navbar__dropdown-menu">
+            <a href="#">Bus Cama</a>
+            <a href="#">Semi Cama</a>
+            <a href="#">Encomiendas</a>
+          </div>
+        </div>
+        <a href="#">TERMINALES</a>
+        <a href="contacto.html" class="active">CONTACTO</a>
+        <a href="#">NOSOTROS</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       📞 HERO CALL CENTER
+       Imagen de fondo con texto encima
+       ============================================================ -->
+  <section class="callcenter-hero">
+
+    <!--
+      🖼️ IMAGEN DE FONDO DEL HERO — cambia en contacto.css
+      Busca: .callcenter-hero { background-image: url(...) }
+      Tamaño recomendado: 1400x500px JPG/PNG
+
+      🖼️ IMAGEN DE LA PERSONA (agente) — cambia src abajo
+      Tamaño recomendado: ~400x500px PNG con fondo transparente
+    -->
+    <div class="callcenter-hero__overlay"></div>
+
+    <div class="callcenter-hero__inner">
+
+      <!-- Imagen del agente / persona -->
+      <div class="callcenter-hero__agent">
+        <img
+          src="images/AGENTE.png"
+          alt="Agente Call Center"
+          onerror="this.style.opacity='0'"
+        />
+      </div>
+
+      <!-- Texto del hero -->
+      <div class="callcenter-hero__text">
+        <!--
+          ✏️ Cambia el título del hero
+          La primera línea es normal, la segunda en negrita grande
+        -->
+        <h1 class="callcenter-hero__title">
+          <em class="title-light">SERVICIO <em>DE</em></em>
+          <span class="title-bold">CALL CENTER</span>
+        </h1>
+        <!-- ✏️ Cambia el subtítulo -->
+        <p class="callcenter-hero__sub">
+          Estamos para atenderte,<br>
+          compra y reserva tus pasajes.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       💬 SECCIÓN PRINCIPAL: PREGUNTA + FORMULARIO
+       ============================================================ -->
+  <section class="contacto-main">
+    <div class="contacto-main__inner">
+
+      <!-- ── COLUMNA IZQUIERDA ── -->
+      <div class="contacto-info">
+
+        <!-- ✏️ Cambia el título de la columna izquierda -->
+        <h2 class="contacto-info__title">
+          Tienes alguna<br>
+          <strong>Pregunta</strong>
+        </h2>
+
+        <!-- ✏️ Cambia el texto de descripción -->
+        <p class="contacto-info__desc">
+          Estamos aquí para ayudarte.<br>
+          Escríbenos con confianza y nosotros te
+          responderemos lo antes posible.
+        </p>
+
+        <!-- Separador -->
+        <hr class="contacto-info__divider" />
+
+        <!-- DIRECCIÓN -->
+        <div class="contacto-info__dir">
+          <!-- ✏️ Cambia el título "Dirección:" -->
+          <h3>Dirección:</h3>
+          <!--
+            ✏️ Cambia la dirección aquí
+            Puedes añadir más líneas con <br>
+          -->
+          <p>
+            Agencias Av. Industrial 5000,<br>
+            Parque Tecnológico, Lima - Perú.
+          </p>
+        </div>
+
+        <!--
+          ➕ BLOQUE EXTRA OPCIONAL — descomenta para añadir teléfono, email, etc.
+
+        <div class="contacto-info__dir" style="margin-top:20px">
+          <h3>Teléfono:</h3>
+          <p>+51 800 000 000</p>
+        </div>
+
+        <div class="contacto-info__dir" style="margin-top:20px">
+          <h3>Correo:</h3>
+          <p>contacto@azul.com.pe</p>
+        </div>
+        -->
+
+      </div>
+
+      <!-- ── COLUMNA DERECHA: FORMULARIO ── -->
+      <div class="contacto-form-wrap">
+
+        <!-- ✏️ Cambia el título del formulario -->
+        <h2 class="contacto-form__title">Déjanos tus datos:</h2>
+
+        <div class="contacto-form">
+
+          <!-- CAMPO: Nombre -->
+          <div class="form-group">
+            <!-- ✏️ Cambia el label -->
+            <label for="nombre">Nombre:</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder=""
+              autocomplete="name"
+            />
+          </div>
+
+          <!-- CAMPO: E-mail -->
+          <div class="form-group">
+            <!-- ✏️ Cambia el label -->
+            <label for="email">E-mail:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder=""
+              autocomplete="email"
+            />
+          </div>
+
+          <!-- CAMPO: Asunto -->
+          <div class="form-group">
+            <!-- ✏️ Cambia el label -->
+            <label for="asunto">Asunto:</label>
+            <input
+              type="text"
+              id="asunto"
+              name="asunto"
+              placeholder=""
+            />
+          </div>
+
+          <!-- CAMPO: Detalle (textarea) -->
+          <div class="form-group">
+            <!-- ✏️ Cambia el label -->
+            <label for="detalle">Detalle:</label>
+            <textarea
+              id="detalle"
+              name="detalle"
+              rows="4"
+              placeholder=""
+            ></textarea>
+          </div>
+
+          <!--
+            🔵 BOTÓN ENVIAR
+            ✏️ Cambia el texto del botón
+            🔧 La lógica de envío está en js/contacto.js
+          -->
+          <button class="form-btn-enviar" id="btnEnviar">
+            ENVIAR
+          </button>
+
+          <!-- Mensaje de éxito / error (se muestra desde JS) -->
+          <div id="form-feedback" class="form-feedback" aria-live="polite"></div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       🦶 FOOTER — igual que index.html
+       ============================================================ -->
+  <footer class="footer" id="contacto-footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div class="footer__brand">
+          <!-- 🖼️ LOGO FOOTER — cambia src -->
+          <img src="images/LOGO.png" alt="Azul Logo" class="footer__logo"
+               onerror="this.outerHTML='<span class=\'footer-logo-text\'>⚡ AZUL</span>'" />
+          <p>Conectando el norte del Perú con seguridad, confort y la mejor tecnología. Viaja con nosotros.</p>
+        </div>
+
+        <div class="footer__col">
+          <h4>Enlaces</h4>
+          <a href="index.html">Inicio</a>
+          <a href="cargo.html">Cargo</a>
+          <a href="index.html#destinos">Destinos</a>
+          <a href="#">Terminales</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="#">Nosotros</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Ayuda</h4>
+          <a href="#">Preguntas frecuentes</a>
+          <a href="#">Libro de reclamaciones</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <!-- ✏️ Cambia los datos de contacto del footer -->
+          <a href="#">Agencias</a>
+          <a href="#">Av. bolognesi 817 Piura.</a>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2026 AZUL TODOS LOS DERECHOS RESERVADOS</p>
+        <div class="footer__social">
+          <!-- 🖼️ ICONOS REDES SOCIALES — cambia src -->
+          <a href="#"><img src="images/IN.png" alt="LinkedIn"></a>
+          <a href="#"><img src="images/X.png" alt="X"></a>
+          <a href="#"><img src="images/INSTA.png" alt="Instagram"></a>
+          <a href="#"><img src="images/TIKTOK.png" alt="TikTok"></a>
+        </div>
+        <div class="footer__payments">
+          <span>
+            <!-- 🖼️ LOGO PAGOS — cambia src -->
+            <img src="images/METODOSPAGO.png" alt="Pagos">
+            VISA / MASTERCARD
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/contacto.js"></script>
+
+</body>
+</html>
