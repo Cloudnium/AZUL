@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azul Económico - Servicio Estándar</title>
+  <link rel="icon" href="images/LOGO AZUL.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/servicios.css" />
+</head>
+<body class="economico-page">
+
+  <!-- ============================================================
+       🧭 NAVBAR — igual que index.html
+       ============================================================ -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <!-- 🖼️ LOGO NAVBAR — cambia src -->
+        <img src="images/LOGO.png" alt="Azul Logo"
+             onerror="this.outerHTML='<span class=\'logo-text\'>⚡ AZUL</span>'" />
+      </a>
+
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+
+     <nav class="navbar__menu" id="navMenu">
+        <!-- 🔗 ENLACES DEL MENÚ — edita textos y hrefs -->
+        <a href="index.html">INICIO</a>
+        <a href="cargo.html">CARGO</a>
+        <a href="#destinos">DESTINOS</a>
+        <div class="navbar__dropdown">
+          <a href="#servicios">SERVICIOS ▾</a>
+          <div class="navbar__dropdown-menu">
+            <a href="platino.html">Platino</a>
+            <a href="economico.html">Economico</a>
+          </div>
+        </div>
+        <a href="#terminales">TERMINALES</a>
+        <a href="contacto.html">CONTACTO</a>
+        <a href="#nosotros">NOSOTROS</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       🚌 HERO — FOTO GRANDE DEL BUS ECONÓMICO
+       ============================================================ -->
+  <section class="servicio-hero economico-hero">
+
+    <!--
+      🖼️ IMAGEN DE FONDO DEL HERO (foto del bus exterior)
+      Cambia en css/servicios.css → .economico-hero
+      Busca: background-image: url('../images/BUS-ECONOMICO-HERO.jpg')
+      Tamaño recomendado: 1400×700px
+    -->
+    <div class="servicio-hero__overlay"></div>
+
+    <!--
+      🖼️ IMAGEN DEL BUS ECONÓMICO — cambia src
+      PNG con fondo transparente recomendado
+    -->
+    <div class="servicio-hero__bus-wrap">
+      <img
+        src="images/BUS-ECONOMICO.png"
+        alt="Bus Azul Económico"
+        class="servicio-hero__bus"
+        onerror="this.style.opacity='0.15'"
+      />
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       ⭐ SECCIÓN SERVICIO A BORDO — fondo azul
+       ============================================================ -->
+  <section class="abordo-section economico-abordo">
+    <div class="abordo-section__inner">
+
+      <!-- LADO IZQUIERDO: logo + título + iconos -->
+      <div class="abordo-left">
+
+        <!-- 🖼️ LOGO "AZUL" (versión normal/económico) — cambia src -->
+        <div class="abordo-logo">
+          <img
+            src="images/LOGO.png"
+            alt="Azul Económico"
+            onerror="this.outerHTML='<span class=\'fallback-logo\'>⚡ AZUL</span>'"
+          />
+        </div>
+
+        <!-- ✏️ Cambia el título -->
+        <h2 class="abordo-title">
+          <span class="abordo-title__light">SERVICIO</span>
+          <span class="abordo-title__bold">A BORDO</span>
+        </h2>
+
+        <!-- ============================================================
+             🛎️ ICONOS DE SERVICIOS ECONÓMICO
+             Duplica un .servicio-icon para añadir más
+             ============================================================ -->
+        <div class="abordo-icons">
+
+          <div class="servicio-icon">
+            <!--
+              🖼️ ÍCONO — cambia src
+              Si no tienes imagen, el emoji aparece de respaldo
+            -->
+            <img src="images/ICON-CARGADOR.png" alt="Cargador"
+                 onerror="this.outerHTML='<span class=\'icon-emoji\'>🔌</span>'" />
+            <!-- ✏️ Cambia el texto -->
+            <p>Cargador<br>de Celular</p>
+          </div>
+
+          <div class="servicio-icon">
+            <img src="images/ICON-PELICULAS.png" alt="Películas"
+                 onerror="this.outerHTML='<span class=\'icon-emoji\'>🎬</span>'" />
+            <p>Películas<br>a Bordo</p>
+          </div>
+
+          <div class="servicio-icon">
+            <img src="images/ICON-AIRE.png" alt="Aire Acondicionado"
+                 onerror="this.outerHTML='<span class=\'icon-emoji\'>❄️</span>'" />
+            <p>Aire<br>Acondicionado</p>
+          </div>
+
+          <div class="servicio-icon">
+            <img src="images/ICON-SEMICAMA.png" alt="Semi Cama"
+                 onerror="this.outerHTML='<span class=\'icon-emoji\'>💺</span>'" />
+            <p>Semi cama<br>145°</p>
+          </div>
+
+          <div class="servicio-icon">
+            <img src="images/ICON-GPS.png" alt="Monitoreo GPS"
+                 onerror="this.outerHTML='<span class=\'icon-emoji\'>📍</span>'" />
+            <p>Monitoreo<br>GPS</p>
+          </div>
+
+          <div class="servicio-icon">
+            <img src="images/ICON-PAGO.png" alt="Pago Seguro"
+                 onerror="this.outerHTML='<span class=\'icon-emoji\'>💳</span>'" />
+            <p>Pago<br>seguro</p>
+          </div>
+
+          <!-- ➕ Para añadir más servicios, copia este bloque:
+          <div class="servicio-icon">
+            <img src="images/ICON-NUEVO.png" alt="Nuevo Servicio"
+                 onerror="this.outerHTML='<span class=\'icon-emoji\'>⭐</span>'" />
+            <p>Nuevo<br>Servicio</p>
+          </div>
+          -->
+
+        </div>
+      </div>
+
+      <!-- LADO DERECHO: imagen del asiento interior -->
+      <div class="abordo-right">
+        <!--
+          🖼️ IMAGEN DEL ASIENTO ECONÓMICO — cambia src
+          PNG con fondo transparente recomendado
+        -->
+        <img
+          src="images/ASIENTO-ECONOMICO.png"
+          alt="Asiento Económico"
+          class="abordo-seat-img"
+          onerror="this.style.opacity='0.1'"
+        />
+      </div>
+
+    </div>
+
+    <!-- ============================================================
+         📸 GALERÍA DE FOTOS INTERIORES
+         ============================================================ -->
+    <div class="abordo-galeria">
+
+      <div class="galeria-item">
+        <!--
+          🖼️ FOTO INTERIOR 1 — cambia src
+          Tamaño recomendado: 400×280px JPG
+        -->
+        <img
+          src="images/INTERIOR-ECONOMICO-1.jpg"
+          alt="Interior Económico 1"
+          onerror="this.src='https://placehold.co/400x280/0d1f4e/4a8cff?text=Interior+1'"
+        />
+      </div>
+
+      <div class="galeria-item">
+        <img
+          src="images/INTERIOR-ECONOMICO-2.jpg"
+          alt="Interior Económico 2"
+          onerror="this.src='https://placehold.co/400x280/0d1f4e/4a8cff?text=Interior+2'"
+        />
+      </div>
+
+      <div class="galeria-item">
+        <img
+          src="images/INTERIOR-ECONOMICO-3.jpg"
+          alt="Interior Económico 3"
+          onerror="this.src='https://placehold.co/400x280/0d1f4e/4a8cff?text=Interior+3'"
+        />
+      </div>
+
+      <!-- ➕ Para añadir más fotos, copia el bloque .galeria-item -->
+
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       🦶 FOOTER — igual que index.html
+       ============================================================ -->
+  <footer class="footer" id="contacto">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="images/LOGO.png" alt="Azul Logo" class="footer__logo"
+               onerror="this.outerHTML='<span class=\'footer-logo-text\'>⚡ AZUL</span>'" />
+          <p>Conectando el norte del Perú con seguridad, confort y la mejor tecnología. Viaja con nosotros.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Enlaces</h4>
+          <a href="index.html">Inicio</a>
+          <a href="cargo.html">Cargo</a>
+          <a href="index.html#destinos">Destinos</a>
+          <a href="#">Terminales</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="#">Nosotros</a>
+        </div>
+        <div class="footer__col">
+          <h4>Ayuda</h4>
+          <a href="#">Preguntas frecuentes</a>
+          <a href="#">Libro de reclamaciones</a>
+        </div>
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <a href="#">Agencias</a>
+          <a href="#">Av. bolognesi 817 Piura.</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 AZUL TODOS LOS DERECHOS RESERVADOS</p>
+        <div class="footer__social">
+          <a href="#"><img src="images/IN.png" alt="LinkedIn"></a>
+          <a href="#"><img src="images/X.png" alt="X"></a>
+          <a href="#"><img src="images/INSTA.png" alt="Instagram"></a>
+          <a href="#"><img src="images/TIKTOK.png" alt="TikTok"></a>
+        </div>
+        <div class="footer__payments">
+          <span><img src="images/METODOSPAGO.png" alt="Pagos"> VISA / MASTERCARD</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/servicios.js"></script>
+</body>
+</html>
