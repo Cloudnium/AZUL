@@ -1,7 +1,6 @@
-// ===== PASAJERO PAGE =====
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
@@ -40,7 +39,7 @@ function ResumenViaje({ asiento, piso }: { asiento: string; piso: string }) {
   );
 }
 
-export default function PasajeroPage() {
+function PasajeroContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const asiento = searchParams.get('asiento') || '20';
@@ -58,7 +57,6 @@ export default function PasajeroPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-5xl mx-auto px-4 py-6">
-        {/* Steps */}
         <div className="flex items-center justify-center mb-6 max-w-2xl mx-auto">
           {['RUTA','ASIENTOS','DATOS PASAJERO','PAGO'].map((s, i) => (
             <div key={s} className="flex items-center flex-1">
@@ -76,18 +74,13 @@ export default function PasajeroPage() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6 items-start">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
             <h2 className="text-xl font-black flex items-center gap-2 mb-5">👤 Registro de Pasajeros</h2>
-
             <div className="bg-gray-50 rounded-xl p-4">
               <p className="text-sm font-bold mb-4">Pasajero 1</p>
-
-              {/* DNI row */}
               <div className="grid grid-cols-[1fr_2fr] gap-3 mb-3">
                 <div>
                   <label className={label}>DOCUMENTO</label>
                   <select value={doc} onChange={e => setDoc(e.target.value)} className={input}>
-                    <option>DNI</option>
-                    <option>CE</option>
-                    <option>Pasaporte</option>
+                    <option>DNI</option><option>CE</option><option>Pasaporte</option>
                   </select>
                 </div>
                 <div>
@@ -98,14 +91,10 @@ export default function PasajeroPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Nombre */}
               <div className="mb-3">
                 <label className={label}>NOMBRE COMPLETO</label>
                 <input className={input} value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre Completo" />
               </div>
-
-              {/* Email + Edad */}
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <div>
                   <label className={label}>CORREO</label>
@@ -116,8 +105,6 @@ export default function PasajeroPage() {
                   <input type="number" className={input} value={edad} onChange={e => setEdad(e.target.value)} placeholder="Edad" />
                 </div>
               </div>
-
-              {/* Teléfono + Asiento */}
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <div>
                   <label className={label}>TELÉFONO</label>
@@ -128,8 +115,6 @@ export default function PasajeroPage() {
                   <input className={`${input} bg-gray-100`} value={asiento} readOnly />
                 </div>
               </div>
-
-              {/* Destino + Embarque */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className={label}>DESTINO</label>
@@ -141,17 +126,23 @@ export default function PasajeroPage() {
                 </div>
               </div>
             </div>
-
             <Link href={`/pago?asiento=${asiento}&piso=${piso}&nombre=${encodeURIComponent(nombre)}&email=${encodeURIComponent(email)}`}>
               <button className="mt-5 w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">
                 CONTINUAR
               </button>
             </Link>
           </div>
-
           <ResumenViaje asiento={asiento} piso={piso} />
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PasajeroPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center text-gray-400">Cargando...</div>}>
+      <PasajeroContent />
+    </Suspense>
   );
 }
