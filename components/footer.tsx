@@ -75,7 +75,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <p className="text-sm text-blue-200">
-            © 2024 DRAKORP TODOS LOS DERECHOS RESERVADOS
+            © 2026 CLOUDNIUM TODOS LOS DERECHOS RESERVADOS
           </p>
 
           {/* Iconos sociales */}
