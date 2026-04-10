@@ -1,3 +1,4 @@
+// app/page.tsx
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -156,10 +157,10 @@ export default function HomePage() {
           />
           <div className="relative z-10 max-w-7xl mx-auto px-6 pb-8 pt-40">
             <FadeIn direction="up">
-              <p id="destinos" className="text-sm sm:text-xl font-bold uppercase tracking-widest mb-2" style={{ color: '#0560c5', scrollMarginTop: '152px' }}>
+              <p id="destinos" className="text-sm sm:text-xl font-semibold uppercase tracking-widest mb-2" style={{ color: '#0560c5', scrollMarginTop: '152px' }}>
                 NUESTROS DESTINOS
               </p>
-              <h2 className="text-5xl sm:text-6xl font-black text-white">Destinos del Norte</h2>
+              <h2 className="text-5xl sm:text-6xl font-semibold text-white">Destinos del Norte</h2>
             </FadeIn>
           </div>
         </div>
@@ -200,16 +201,16 @@ export default function HomePage() {
                   <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
                     {d.badge && (
                       <span
-                        className="text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide block w-fit mb-2"
+                        className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wide block w-fit mb-2"
                         style={{ backgroundColor: '#0560c5' }}
                       >
                         {d.badge}
                       </span>
                     )}
-                    <div className="text-3xl font-black leading-tight">{d.name}</div>
+                    <div className="text-3xl font-semibold leading-tight">{d.name}</div>
                     <div className="text-sm mb-3 opacity-80">Desde S/ {d.price}</div>
                     <Link href={`/busqueda?origen=Lima&destino=${d.name}`}>
-                      <button className="text-white text-xs font-bold flex items-center gap-1 hover:opacity-75 transition-opacity">
+                      <button className="text-white text-xs font-semibold flex items-center gap-1 hover:opacity-75 transition-opacity">
                         RESERVAR →
                       </button>
                     </Link>
@@ -227,7 +228,7 @@ export default function HomePage() {
         style={{ borderBottom: '1px solid rgba(255,255,255,0.10)' }}
       >
         <FadeIn direction="up">
-          <h2 className="text-5xl font-black text-white uppercase tracking-wide">MEJORAMOS</h2>
+          <h2 className="text-5xl font-semibold text-white uppercase tracking-wide">MEJORAMOS</h2>
           <p className="text-white text-2xl mt-2 mb-14">Constantemente para ti</p>
         </FadeIn>
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-16">

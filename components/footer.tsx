@@ -28,7 +28,7 @@ export default function Footer() {
             {[
               { href: '/',           label: 'Inicio' },
               { href: '/cargo',      label: 'Cargo' },
-              { href: '/destinos',   label: 'Destinos' },
+              { href: '/#destinos',   label: 'Destinos' },
               { href: '/terminales', label: 'Terminales' },
               { href: '/contacto',   label: 'Contacto' },
               { href: '/nosotros',   label: 'Nosotros' },
