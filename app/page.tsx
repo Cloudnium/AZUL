@@ -223,7 +223,7 @@ export default function HomePage() {
 
       {/* ===== MEJORAMOS ===== */}
       <section
-        className="bg-black py-24 px-6 pb-24 text-center"
+        className="bg-black py-12 px-6 pb-12 text-center"
         style={{ borderBottom: '1px solid rgba(255,255,255,0.10)' }}
       >
         <FadeIn direction="up">
