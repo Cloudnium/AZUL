@@ -53,3 +53,10 @@
   background: transparent;
   cursor: default;
 }
+
+/* Platino page — contenedor azul overlap sobre el bus */
+@media (min-width: 768px) {
+  .platino-container {
+    margin-top: -80px !important;
+  }
+}
