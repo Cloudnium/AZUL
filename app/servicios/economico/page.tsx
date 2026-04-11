@@ -1,3 +1,4 @@
+// app/servicios/economico/page.tsx
 'use client';
 import Image from 'next/image';
 import FadeIn from '@/components/ui/FadeIn';

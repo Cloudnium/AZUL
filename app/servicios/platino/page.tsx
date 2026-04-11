@@ -148,7 +148,7 @@ export default function PlatinoPage() {
 
         {/* ── ÍCONOS ───────────────────────────────────────────── */}
         <FadeIn direction="up" delay={0.1}>
-          <div className="max-w-4xl mx-auto mb-6">
+          <div className="max-w-4xl mx-auto mb-14">
             {/* Desktop */}
             <div className="hidden md:grid grid-cols-8 gap-3">
               {SERVICIOS.map((s) => (
