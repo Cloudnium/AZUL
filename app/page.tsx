@@ -45,7 +45,7 @@ export default function HomePage() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative flex flex-col" style={{ minHeight: '100vh', marginTop: '-64px', paddingTop: '64px' }}>
+      <section className="relative flex flex-col" style={{ minHeight: '100vh', marginTop: '-68px', paddingTop: '68px' }}>
         <div className="absolute inset-0 w-full h-full">
           <Image src="/images/FONDOINI.png" alt="Fondo" fill sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 15%' }} priority />
           <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.15)' }} />
