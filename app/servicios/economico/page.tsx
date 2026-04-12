@@ -5,14 +5,14 @@ import FadeIn from '@/components/ui/FadeIn';
 import Lightbox from '@/components/ui/Lightbox';
 
 const SERVICIOS = [
-  { icon: '/images/platino/CARGADOR.png',        alt: 'Cargador de Celular' },
-  { icon: '/images/platino/PELICULASABORDO.png',  alt: 'Películas a Bordo' },
-  { icon: '/images/platino/AIREACON.png',         alt: 'Aire Acondicionado' },
-  { icon: '/images/platino/BUSCAMA.png',          alt: 'Bus cama 160°' },
-  { icon: '/images/platino/SEMICAMA.png',         alt: 'Semi cama 160°' },
-  { icon: '/images/platino/GPS.png',              alt: 'Monitoreo GPS' },
-  { icon: '/images/platino/PAGOSEGURO.png',       alt: 'Pago seguro' },
-  { icon: '/images/platino/BANOQUIMICO.png',      alt: 'Baño químico' },
+  { icon: '/images/platino/CARGADOR.png'},
+  { icon: '/images/platino/PELICULASABORDO.png'},
+  { icon: '/images/platino/AIREACON.png'},
+  { icon: '/images/platino/BUSCAMA.png'},
+  { icon: '/images/platino/SEMICAMA.png'},
+  { icon: '/images/platino/GPS.png'},
+  { icon: '/images/platino/PAGOSEGURO.png'},
+  { icon: '/images/platino/BANOQUIMICO.png'},
 ];
 
 const FOTOS_INTERIOR = [
