@@ -35,7 +35,7 @@ export default function EconomicoPage() {
       {/* ── HERO BUS ─────────────────────────────────────────── */}
       <div className="relative w-full overflow-hidden">
         <Image
-          src="/images/BUSPLATINO.png"       // ← cambia esta ruta
+          src="/images/BUSECONOMICO.png"       // ← cambia esta ruta
           alt="Bus Azul"
           width={1920}
           height={1080}
