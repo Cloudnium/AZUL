@@ -6,6 +6,9 @@ import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { HiArrowRight } from 'react-icons/hi';
 import { Pencil } from 'lucide-react';
+import { MdVerified, MdAirlineSeatReclineExtra } from 'react-icons/md';
+import { IoLocationSharp } from 'react-icons/io5';
+import { BsFillBusFrontFill } from 'react-icons/bs';
 
 const DIAS = [
   { day: 'DOM', num: 14, month: 'Jul' },
@@ -25,7 +28,8 @@ const VIAJES = [
     horaLlegada: '06:00', ampmLlegada: 'am',
     ciudadLlegada: 'TRUJILLO',
     terminal: 'Av. Bolognesi 817 Piura',
-    piso1: 50, piso2: 35,
+    piso1: { precio: 50, grados: 160, tipo: 'Sofá cama' },
+    piso2: { precio: 35, grados: 160, tipo: 'Sofá cama' },
   },
   {
     id: 2,
@@ -36,18 +40,20 @@ const VIAJES = [
     horaLlegada: '06:00', ampmLlegada: 'am',
     ciudadLlegada: 'PIURA',
     terminal: 'Terrapuerto Trujillo',
-    piso1: 50, piso2: 35,
+    piso1: { precio: 50, grados: 160, tipo: 'Sofá cama' },
+    piso2: { precio: 35, grados: 145, tipo: 'Semi cama' },
   },
   {
     id: 3,
-    logo: '/images/LOGO.png',
+    logo: '/images/AZULPLATINO.png',
     horaSalida: '09:30', ampmSalida: 'pm',
     ciudadSalida: 'SULLANA',
     duracion: '14h 30m',
     horaLlegada: '06:30', ampmLlegada: 'am',
     ciudadLlegada: 'TRUJILLO',
     terminal: 'Terminal Perla del Chira Sullana',
-    piso1: 50, piso2: 35,
+    piso1: { precio: 50, grados: 160, tipo: 'Sofá cama' },
+    piso2: { precio: 35, grados: 160, tipo: 'Sofá cama' },
   },
 ];
 
@@ -110,9 +116,9 @@ function BusquedaContent() {
       </div>
 
       <div className="max-w-5xl mx-auto px-2">
-        {/* Date selector — sin card, directo */}
+        {/* Date selector */}
         <div className="flex items-center gap-2 overflow-x-auto pb-8">
-          <button className={`flex flex-col items-center justify-center px-3 py-1 rounded-lg border-2 border-gray-200 bg-white text-gray-800 text-4xl shrink-0 hover:border-blue-300 transition-all`} style={{ minWidth: 48, minHeight: 80 }}>‹</button>
+          <button className="flex flex-col items-center justify-center px-3 py-1 rounded-lg border-2 border-gray-200 bg-white text-gray-800 text-4xl shrink-0 hover:border-blue-300 transition-all" style={{ minWidth: 48, minHeight: 80 }}>‹</button>
           {DIAS.map((d, i) => (
             <button
               key={i}
@@ -129,10 +135,10 @@ function BusquedaContent() {
               <span className="text-xs font-normal" style={{ opacity: 0.95 }}>{d.month}</span>
             </button>
           ))}
-          <button className={`flex flex-col items-center justify-center px-3 py-1 rounded-lg border-2 border-gray-200 bg-white text-gray-800 text-4xl shrink-0 hover:border-blue-300 transition-all`} style={{ minWidth: 48, minHeight: 80 }}>›</button>
+          <button className="flex flex-col items-center justify-center px-3 py-1 rounded-lg border-2 border-gray-200 bg-white text-gray-800 text-4xl shrink-0 hover:border-blue-300 transition-all" style={{ minWidth: 48, minHeight: 80 }}>›</button>
         </div>
 
-        {/* Steps — su propia sección con borde */}
+        {/* Steps */}
         <div className="border border-gray-200 rounded-2xl bg-white px-8 py-5 mb-6">
           <StepsBar active={1} />
         </div>
@@ -140,63 +146,107 @@ function BusquedaContent() {
         {/* Trip cards */}
         <div className="space-y-4 mb-12">
           {VIAJES.map(v => (
-            <div key={v.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-5">
-              <div className="flex flex-col sm:grid gap-4 sm:items-center" style={{ gridTemplateColumns: '180px 1fr auto auto' }}>
-                {/* Operador */}
-                <div className="flex sm:flex-col gap-3 sm:gap-1 items-center sm:items-start">
-                  <div>
-                    <p className="text-sm font-black">TRANSPORTES AZUL</p>
-                    <p className="text-[10px] text-blue-700 font-bold">✔ Operador verificado</p>
+            <div key={v.id} className="bg-white rounded-2xl border border-gray-200 px-5 py-4">
+
+              {/* Fila superior: bus+nombre | logo centro | mas rapido */}
+              <div className="flex items-center mb-3">
+                <div className="flex items-center gap-2.5 w-1/3">
+                  <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+                    <BsFillBusFrontFill className="w-5 h-5 text-blue-600" />
                   </div>
+                  <div>
+                    <p className="text-lg font-bold text-gray-900">TRANSPORTES AZUL</p>
+                    <p className="text-xs text-blue-600 font-semibold flex items-center gap-1">
+                      <MdVerified className="w-3.5 h-3.5" /> Operador verificado
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex-1 flex justify-center">
                   <Image
                     src={v.logo}
                     alt="Logo"
-                    width={90}
-                    height={28}
-                    style={{ width: 'auto', height: 28, objectFit: 'contain' }}
+                    width={160}
+                    height={34}
+                    style={{
+                      width: 'auto',
+                      height: 34,
+                      objectFit: 'contain',
+                      filter: v.logo.includes('AZULPLATINO')
+                        ? 'brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) brightness(50%)'
+                        : 'brightness(0) saturate(100%) invert(22%) sepia(97%) saturate(1200%) hue-rotate(200deg) brightness(90%)',
+                    }}
                   />
                 </div>
 
-                {/* Ruta */}
-                <div>
-                  <div className="flex items-center gap-3">
+                <div className="w-1/3 flex justify-end">
+                  <span className="bg-blue-50 text-blue-600 text-[11px] font-bold px-3 py-1 rounded-full border border-blue-200">MÁS RÁPIDO</span>
+                </div>
+              </div>
+
+              {/* Fila inferior: horario+salida | línea | precios+botón */}
+              <div className="flex items-stretch gap-0">
+
+                {/* Izquierda */}
+                <div className="flex-1 pr-5">
+                  <div className="flex items-center gap-4 mb-3">
                     <div>
-                      <span className="text-xl font-black">{v.horaSalida}<sup className="text-xs font-semibold">{v.ampmSalida}</sup></span>
-                      <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wide">{v.ciudadSalida}</p>
+                      <span className="text-xl font-bold text-gray-900">
+                        {v.horaSalida}<span className="text-xs font-semibold text-gray-900 ml-0.5">{v.ampmSalida}</span>
+                      </span>
+                      <p className="text-[12px] text-gray-500 font-semibold uppercase tracking-wide">{v.ciudadSalida}</p>
                     </div>
                     <div className="flex-1 flex flex-col items-center">
-                      <span className="text-[10px] text-gray-400 font-semibold">{v.duracion}</span>
+                      <span className="text-[12px] text-gray-600 font-semibold mb-0.5">{v.duracion}</span>
                       <div className="flex items-center w-full gap-1">
-                        <div className="w-2 h-2 rounded-full bg-blue-700" style={{ flexShrink: 0 }} />
-                        <div className="flex-1 h-px bg-gray-200" />
-                        <div className="w-2 h-2 rounded-full bg-blue-700" style={{ flexShrink: 0 }} />
+                        <div className="flex-1 h-0.5 bg-gray-200" />
+                        <div className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
                       </div>
                     </div>
                     <div>
-                      <span className="text-xl font-black">{v.horaLlegada}<sup className="text-xs font-semibold">{v.ampmLlegada}</sup></span>
-                      <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wide">{v.ciudadLlegada}</p>
+                      <span className="text-xl font-bold text-gray-900">
+                        {v.horaLlegada}<span className="text-xs font-semibold text-gray-900 ml-0.5">{v.ampmLlegada}</span>
+                      </span>
+                      <p className="text-[12px] text-gray-500 font-semibold uppercase tracking-wide">{v.ciudadLlegada}</p>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">📍 <strong>SALIDA</strong> {v.terminal}</p>
+                  <div className="flex items-start gap-1.5">
+                    <IoLocationSharp className="w-6 h-6 text-gray-500 mt-1 shrink-0" />
+                    <div>
+                      <p className="text-lg font-bold text-gray-500 uppercase tracking-wide">SALIDA</p>
+                      <p className="text-xl font-semibold text-gray-800">{v.terminal}</p>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Precios */}
-                <div className="flex flex-row sm:flex-col gap-4 sm:gap-1">
-                  <span className="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded w-fit">MÁS RÁPIDO</span>
-                  <p className="text-[10px] text-gray-400">Desde</p>
-                  <div className="text-xs text-gray-600 space-y-0.5">
-                    <p>Piso 2: Sofá cama <strong>S/.{v.piso2}</strong></p>
-                    <p>Piso 1: Sofá cama <strong>S/.{v.piso1}</strong></p>
+                {/* Línea vertical */}
+                <div className="w-0.5 bg-gray-200 mx-2 self-stretch" />
+
+                {/* Derecha */}
+                <div className="flex flex-col items-end gap-1.5 pl-5 shrink-0">
+                  <p className="text-shadow-xs text-gray-400 font-semibold self-end">Desde</p>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs text-gray-900 font-semibold">Piso 2: {v.piso2.tipo}</span>
+                      <MdAirlineSeatReclineExtra className="w-4 h-4 text-gray-400" />
+                      <span className={`text-xs font-bold ${v.piso2.grados === 160 ? 'text-blue-500' : 'text-gray-400'}`}>{v.piso2.grados}°</span>
+                      <span className="text-sm font-bold text-gray-900">S/.{v.piso2.precio}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs text-gray-900 font-semibold">Piso 1: {v.piso1.tipo}</span>
+                      <MdAirlineSeatReclineExtra className="w-4 h-4 text-gray-400" />
+                      <span className={`text-xs font-bold ${v.piso1.grados === 160 ? 'text-blue-500' : 'text-gray-400'}`}>{v.piso1.grados}°</span>
+                      <span className="text-sm font-bold text-gray-900">S/.{v.piso1.precio}</span>
+                    </div>
                   </div>
                   <p className="text-[10px] text-gray-400">Incluye tasas e impuestos</p>
+                  <Link href={`/asientos?viajeId=${v.id}`}>
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-8 py-2.5 rounded-full transition-colors tracking-wide mt-1">
+                      ELEGIR
+                    </button>
+                  </Link>
                 </div>
 
-                {/* Botón */}
-                <Link href={`/asientos?viajeId=${v.id}`}>
-                  <button className="bg-blue-700 hover:bg-blue-800 text-white font-bold text-sm px-6 py-3 rounded-lg transition-colors w-full sm:w-auto">
-                    ELEGIR
-                  </button>
-                </Link>
               </div>
             </div>
           ))}
