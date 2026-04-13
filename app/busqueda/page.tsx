@@ -1,8 +1,11 @@
+// app/busqueda/page.tsx
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { HiArrowRight } from 'react-icons/hi';
+import { Pencil } from 'lucide-react';
 
 const DIAS = [
   { day: 'DOM', num: 14, month: 'Jul' },
@@ -51,16 +54,24 @@ const VIAJES = [
 function StepsBar({ active }: { active: number }) {
   const steps = ['SELECCIÓN', 'ASIENTOS', 'PASAJERO', 'PAGO'];
   return (
-    <div className="flex items-center justify-center gap-0 my-6 mx-auto" style={{ maxWidth: 600 }}>
+    <div className="flex items-center justify-center gap-0 mx-auto w-full">
       {steps.map((s, i) => (
         <div key={s} className="flex items-center flex-1">
-          <div className="flex items-center gap-2" style={{ flexShrink: 0 }}>
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${i + 1 <= active ? 'bg-blue-700 text-white' : 'bg-white border-2 border-gray-200 text-gray-400'}`}>
+          <div className="flex items-center gap-3" style={{ flexShrink: 0 }}>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 ${
+              i + 1 <= active
+                ? 'bg-blue-600 text-white border-blue-200'
+                : 'bg-white border-gray-300 text-gray-400'
+            }`}>
               {i + 1 < active ? '✓' : i + 1}
             </div>
-            <span className={`text-[10px] font-bold uppercase tracking-wider hidden sm:block ${i + 1 <= active ? 'text-blue-700' : 'text-gray-400'}`}>{s}</span>
+            <span className={`text-sm font-bold uppercase tracking-wider hidden sm:block ${
+              i + 1 <= active ? 'text-black' : 'text-gray-400'
+            }`}>{s}</span>
           </div>
-          {i < steps.length - 1 && <div className={`flex-1 h-px mx-2 ${i + 1 < active ? 'bg-blue-700' : 'bg-gray-200'}`} />}
+          {i < steps.length - 1 && (
+            <div className={`flex-1 h-0.5 mx-3 ${i + 1 < active ? 'bg-blue-600' : 'bg-gray-300'}`} />
+          )}
         </div>
       ))}
     </div>
@@ -74,44 +85,56 @@ function BusquedaContent() {
   const [diaActivo, setDiaActivo] = useState(1);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-white border-b border-gray-100 px-4 py-4">
+      <div className="bg-white px-4 py-8">
         <div className="max-w-5xl mx-auto">
-          <p className="text-xs text-gray-400 mb-1">Inicio &rsaquo; Búsqueda</p>
+          <p className="text-sm text-gray-500 mb-5 font-semibold mt-10">
+            Inicio <span className="mx-2">›</span> Búsqueda
+          </p>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
-              <h1 className="text-2xl font-black flex items-center gap-2">
-                {origen} <span className="text-blue-700">→</span> {destino}
+              <h1 className="text-4xl font-semibold flex items-center gap-3 text-gray-900">
+                {origen}
+                <HiArrowRight className="text-blue-700 w-8 h-8 stroke-2" />
+                {destino}
               </h1>
-              <p className="text-xs text-gray-400">Ida • 1 Pasajero</p>
+              <p className="text-sm text-gray-500 mt-1 font-semibold">Ida • 1 Pasajero</p>
             </div>
-            <button className="border-2 border-blue-700 text-blue-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-700 hover:text-white transition-all w-fit">
-              ✏ MODIFICAR BÚSQUEDA
+            <button className="flex items-center gap-2 border border-blue-300 bg-blue-50 text-blue-700 px-6 py-3 rounded-full text-xs font-bold tracking-widest hover:bg-gray-50 transition-all w-fit shadow-sm">
+              MODIFICAR BÚSQUEDA
+              <Pencil className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4">
-        <StepsBar active={1} />
-
-        {/* Date selector */}
-        <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2">
-          <button className="text-gray-400 text-xl px-1" style={{ flexShrink: 0 }}>‹</button>
+      <div className="max-w-5xl mx-auto px-2">
+        {/* Date selector — sin card, directo */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-8">
+          <button className={`flex flex-col items-center justify-center px-3 py-1 rounded-lg border-2 border-gray-200 bg-white text-gray-800 text-4xl shrink-0 hover:border-blue-300 transition-all`} style={{ minWidth: 48, minHeight: 80 }}>‹</button>
           {DIAS.map((d, i) => (
             <button
               key={i}
               onClick={() => setDiaActivo(i)}
-              className={`flex flex-col items-center px-4 py-3 rounded-xl border-2 transition-all ${diaActivo === i ? 'bg-blue-700 text-white border-blue-700' : 'bg-white text-gray-700 border-gray-200'}`}
-              style={{ minWidth: 70, flexShrink: 0 }}
+              className={`flex flex-col items-center px-6 py-1 rounded-lg border-2 transition-all shrink-0 ${
+                diaActivo === i
+                  ? 'bg-blue-600 text-white border-blue-600'
+                  : 'bg-white text-gray-600 border-gray-200 hover:border-blue-300'
+              }`}
+              style={{ minWidth: 80 }}
             >
-              <span className="text-[10px] font-bold uppercase tracking-wide">{d.day}</span>
-              <span className="text-2xl font-black leading-tight">{d.num}</span>
-              <span className="text-[10px]" style={{ opacity: 0.8 }}>{d.month}</span>
+              <span className="text-[14px] font-bold uppercase tracking-widest">{d.day}</span>
+              <span className="text-2xl font-semibold leading-tight">{d.num}</span>
+              <span className="text-xs font-normal" style={{ opacity: 0.95 }}>{d.month}</span>
             </button>
           ))}
-          <button className="text-gray-400 text-xl px-1" style={{ flexShrink: 0 }}>›</button>
+          <button className={`flex flex-col items-center justify-center px-3 py-1 rounded-lg border-2 border-gray-200 bg-white text-gray-800 text-4xl shrink-0 hover:border-blue-300 transition-all`} style={{ minWidth: 48, minHeight: 80 }}>›</button>
+        </div>
+
+        {/* Steps — su propia sección con borde */}
+        <div className="border border-gray-200 rounded-2xl bg-white px-8 py-5 mb-6">
+          <StepsBar active={1} />
         </div>
 
         {/* Trip cards */}
@@ -185,7 +208,7 @@ function BusquedaContent() {
 
 export default function BusquedaPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center text-gray-400">Cargando...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center text-gray-400">Cargando...</div>}>
       <BusquedaContent />
     </Suspense>
   );
