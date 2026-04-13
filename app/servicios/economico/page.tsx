@@ -115,7 +115,7 @@ export default function EconomicoPage() {
             {/* Desktop: 8 columnas */}
             <div className="hidden md:grid grid-cols-8 gap-3">
               {SERVICIOS.map((s) => (
-                <div key={s.alt} className="flex justify-center items-center">
+                <div key={s.icon} className="flex justify-center items-center">
                   <div style={{ width: 'clamp(48px, 7vw, 88px)', height: 'clamp(48px, 7vw, 88px)', position: 'relative' }}>
                     <Image src={s.icon} alt={s.alt} fill sizes="88px"
                       style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
@@ -127,7 +127,7 @@ export default function EconomicoPage() {
             {/* Mobile: 2 columnas × 4 filas */}
             <div className="grid md:hidden grid-cols-2 gap-x-4 gap-y-6">
               {SERVICIOS.map((s) => (
-                <div key={s.alt} className="flex flex-col items-center gap-2">
+                <div key={s.icon} className="flex flex-col items-center gap-2">
                   <div style={{ width: '18vw', height: '18vw', position: 'relative' }}>
                     <Image src={s.icon} alt={s.alt} fill sizes="18vw"
                       style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
