@@ -1,8 +1,11 @@
+// app/pago/page.tsx
 'use client';
+
 import Image from 'next/image';
 import { Suspense } from 'react';
 import { useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { StepsBar } from '@/components/StepsBar';
 
 const METODOS = ['Yape', 'Interbank', 'VISA', 'AMEX', 'Diners', 'UnionPay'];
 
@@ -37,20 +40,10 @@ function PagoContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 py-6">
+      <div className="max-w-5xl mx-auto px-4 py-24">
         {/* Steps */}
-        <div className="flex items-center justify-center mb-6 max-w-2xl mx-auto">
-          {['RUTA','ASIENTOS','DATOS PASAJERO','PAGO'].map((s, i) => (
-            <div key={s} className="flex items-center flex-1">
-              <div className="flex items-center gap-1.5 flex-shrink-0">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${i <= 3 ? 'bg-blue-700 text-white' : 'bg-white border-2 border-gray-200 text-gray-400'}`}>
-                  {i < 3 ? '✓' : i + 1}
-                </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider hidden sm:block text-blue-700">{s}</span>
-              </div>
-              {i < 3 && <div className="flex-1 h-0.5 mx-2 bg-blue-700" />}
-            </div>
-          ))}
+        <div className="border border-gray-200 rounded-2xl bg-white px-8 py-5 mb-6">
+          <StepsBar active={4} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6 items-start">

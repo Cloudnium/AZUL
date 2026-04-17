@@ -1,8 +1,11 @@
+// app/pasajero/page.tsx
 'use client';
+
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { StepsBar } from '@/components/StepsBar';
 
 function ResumenViaje({ asiento, piso }: { asiento: string; piso: string }) {
   return (
@@ -41,7 +44,6 @@ function ResumenViaje({ asiento, piso }: { asiento: string; piso: string }) {
 
 function PasajeroContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const asiento = searchParams.get('asiento') || '20';
   const piso = searchParams.get('piso') || '1';
   const [doc, setDoc] = useState('DNI');
@@ -56,19 +58,10 @@ function PasajeroContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 py-6">
-        <div className="flex items-center justify-center mb-6 max-w-2xl mx-auto">
-          {['RUTA','ASIENTOS','DATOS PASAJERO','PAGO'].map((s, i) => (
-            <div key={s} className="flex items-center flex-1">
-              <div className="flex items-center gap-1.5 flex-shrink-0">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${i < 2 ? 'bg-blue-700 text-white' : i === 2 ? 'bg-blue-700 text-white' : 'bg-white border-2 border-gray-200 text-gray-400'}`}>
-                  {i < 2 ? '✓' : i + 1}
-                </div>
-                <span className={`text-[10px] font-bold uppercase tracking-wider hidden sm:block ${i <= 2 ? 'text-blue-700' : 'text-gray-400'}`}>{s}</span>
-              </div>
-              {i < 3 && <div className={`flex-1 h-0.5 mx-2 ${i < 2 ? 'bg-blue-700' : 'bg-gray-200'}`} />}
-            </div>
-          ))}
+      <div className="max-w-5xl mx-auto px-4 py-24">
+        {/* Steps */}
+        <div className="border border-gray-200 rounded-2xl bg-white px-8 py-5 mb-6">
+          <StepsBar active={3} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6 items-start">

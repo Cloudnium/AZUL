@@ -1,4 +1,6 @@
+// app/asientos/page.tsx
 'use client';
+
 import { StepsBar } from '@/components/StepsBar';
 import Image from 'next/image';
 import Link from 'next/link';
