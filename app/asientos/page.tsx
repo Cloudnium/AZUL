@@ -1,4 +1,5 @@
 'use client';
+import { StepsBar } from '@/components/StepsBar';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -88,20 +89,10 @@ export default function AsientosPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 py-6">
+      <div className="max-w-5xl mx-auto px-4 py-24">
         {/* Steps */}
-        <div className="flex items-center justify-center gap-0 mb-6 mx-auto" style={{ maxWidth: 600 }}>
-          {['SELECCIÓN', 'ASIENTOS', 'PASAJERO', 'PAGO'].map((s, i) => (
-            <div key={s} className="flex items-center flex-1">
-              <div className="flex items-center gap-1.5" style={{ flexShrink: 0 }}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${i <= 1 ? 'bg-blue-700 text-white' : 'bg-white border-2 border-gray-200 text-gray-400'}`}>
-                  {i === 0 ? '✓' : i + 1}
-                </div>
-                <span className={`text-[10px] font-bold uppercase tracking-wider hidden sm:block ${i <= 1 ? 'text-blue-700' : 'text-gray-400'}`}>{s}</span>
-              </div>
-              {i < 3 && <div className={`flex-1 h-px mx-2 ${i === 0 ? 'bg-blue-700' : 'bg-gray-200'}`} />}
-            </div>
-          ))}
+        <div className="border border-gray-200 rounded-2xl bg-white px-8 py-5 mb-6">
+          <StepsBar active={2} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6 items-start">
