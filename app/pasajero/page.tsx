@@ -12,13 +12,10 @@ function ResumenViaje({ asiento, piso }: { asiento: string; piso: string }) {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sticky top-20">
       <h3 className="text-lg font-bold flex items-center gap-2 mb-5 text-gray-900">
-        <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[#185adb]/10">
-          {/* Receipt / invoice icon */}
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#185adb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M4 2h16a1 1 0 0 1 1 1v17l-3-2-2 2-2-2-2 2-2-2-3 2V3a1 1 0 0 1 1-1z" />
-            <line x1="8" y1="8" x2="16" y2="8" />
-            <line x1="8" y1="12" x2="16" y2="12" />
-            <line x1="8" y1="16" x2="13" y2="16" />
+        <span className="inline-flex items-center justify-center w-8 h-8">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#185adb">
+            <path d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2L7.5 3.5L6 2v14H3v3c0 1.66 1.34 3 3 3h12c1.66 0 3-1.34 3-3V2zM19 19c0 .55-.45 1-1 1s-1-.45-1-1v-2H8V5h11z"/>
+            <path d="M15 9H9v2h6zm3 0h-2v2h2zM15 12H9v2h6zm3 0h-2v2h2z"/>
           </svg>
         </span>
         Resumen del viaje
@@ -140,15 +137,13 @@ function PasajeroContent() {
 
         {/* Grid: (title + form) left | sidebar right — top-aligned */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5 items-start">
-
           {/* ── LEFT: Title + Form card ── */}
           <div>
             {/* Title — on gray background, above white card */}
             <h2 className="text-2xl font-bold flex items-center gap-2.5 mb-4 text-gray-900">
               <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-[#185adb]/10">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#185adb" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" >
+                  <path fill="currentColor" d="m12 23l-3-3H3V2h18v18h-6zm0-11q1.45 0 2.475-1.025T15.5 8.5t-1.025-2.475T12 5T9.525 6.025T8.5 8.5t1.025 2.475T12 12m-7 6h14v-1.15q-1.35-1.325-3.137-2.087T12 14t-3.863.763T5 16.85z"/>
                 </svg>
               </span>
               Registro de Pasajeros
