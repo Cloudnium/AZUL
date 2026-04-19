@@ -5,20 +5,20 @@ import FadeIn from '@/components/ui/FadeIn';
 import Lightbox from '@/components/ui/Lightbox';
 
 const SERVICIOS = [
-  { icon: '/images/platino/CARGADOR.png',        alt: '' },
-  { icon: '/images/platino/PELICULASABORDO.png',  alt: '' },
-  { icon: '/images/platino/AIREACON.png',         alt: '' },
-  { icon: '/images/platino/BUSCAMA.png',          alt: '' },
-  { icon: '/images/platino/SEMICAMA.png',         alt: '' },
-  { icon: '/images/platino/GPS.png',              alt: '' },
-  { icon: '/images/platino/PAGOSEGURO.png',       alt: '' },
-  { icon: '/images/platino/BANOQUIMICO.png',      alt: '' },
+  { icon: '/images/SERVICIO NORMAL/Recurso 515.png',   alt: '' },
+  { icon: '/images/SERVICIO NORMAL/Recurso 513.png',   alt: '' },
+  { icon: '/images/SERVICIO NORMAL/Recurso 512.png',   alt: '' },
+  { icon: '/images/SERVICIO NORMAL/Recurso 510.png',   alt: '' },
+  { icon: '/images/SERVICIO NORMAL/Recurso 511.png',   alt: '' },
+  { icon: '/images/SERVICIO NORMAL/Recurso 514.png',   alt: '' },
+  { icon: '/images/SERVICIO NORMAL/Recurso 516.png',   alt: '' },
+  { icon: '/images/SERVICIO NORMAL/Recurso 509.png',   alt: '' },
 ];
 
 const FOTOS_INTERIOR = [
-  '/images/INTERIORPLATINO1.png',
-  '/images/INTERIORPLATINO2.png',
-  '/images/INTERIORPLATINO3.png',
+  '/images/SERVICIO NORMAL/Recurso 517.png',
+  '/images/SERVICIO NORMAL/Recurso 519.png',
+  '/images/SERVICIO NORMAL/Recurso 518.png',
 ];
 
 
@@ -35,7 +35,7 @@ export default function EconomicoPage() {
       {/* ── HERO BUS ─────────────────────────────────────────── */}
       <div className="relative w-full overflow-hidden">
         <Image
-          src="/images/BUSECONOMICO.png"       // ← cambia esta ruta
+          src="/images/SERVICIO NORMAL/Recurso 520.png"       // ← cambia esta ruta
           alt="Bus Azul"
           width={1920}
           height={1080}
@@ -63,7 +63,7 @@ export default function EconomicoPage() {
             {/* Logo */}
             <FadeIn direction="up" delay={0.1}>
               <Image
-                src="/images/LOGO.png"     // ← cambia esta ruta
+                src="/images/SERVICIO NORMAL/Recurso 508.png"     // ← cambia esta ruta
                 alt="Logo Servicio"
                 width={500}
                 height={130}

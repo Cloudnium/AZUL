@@ -5,13 +5,13 @@ import { useState } from 'react';
 import FadeIn from '@/components/ui/FadeIn';
 
 const SERVICIOS = [
-  { icon: '/images/ICON-CARGADOR.png',  label: 'CARGADOR\nDE CELULAR' },
-  { icon: '/images/ICON-PELICULAS.png', label: 'PELÍCULAS\nA BORDO' },
-  { icon: '/images/ICON-AIRE.png',      label: 'AIRE\nACONDICIONADO' },
-  { icon: '/images/ICON-BUSCAMA.png',   label: 'BUS CAMA\n160°' },
-  { icon: '/images/ICON-SEMICAMA.png',  label: 'SEMI CAMA\n145°' },
-  { icon: '/images/ICON-GPS.png',       label: 'MONITOREO\nGPS' },
-  { icon: '/images/ICON-BANIO.png',     label: 'BAÑO\nQUÍMICO' },
+  { icon: '/images/CARGO/Recurso 489.png',  label: 'CARGADOR\nDE CELULAR' },
+  { icon: '/images/CARGO/Recurso 488.png', label: 'PELÍCULAS\nA BORDO' },
+  { icon: '/images/CARGO/Recurso 487.png',      label: 'AIRE\nACONDICIONADO' },
+  { icon: '/images/CARGO/Recurso 485.png',   label: 'BUS CAMA\n160°' },
+  { icon: '/images/CARGO/Recurso 486.png',  label: 'SEMI CAMA\n145°' },
+  { icon: '/images/CARGO/Recurso 483.png',       label: 'MONITOREO\nGPS' },
+  { icon: '/images/CARGO/Recurso 484.png',     label: 'BAÑO\nQUÍMICO' },
 ];
 
 export default function CargoPage() {
@@ -142,10 +142,10 @@ export default function CargoPage() {
               style={{ marginTop: -8, marginBottom: 0 }}
             >
               <div className="relative w-full" style={{ paddingBottom: '42%' }}>
-                <Image src="/images/BUS1.png" alt="Bus Azul" fill className="object-contain object-center" />
+                <Image src="/images/CARGO/Recurso 491.png" alt="Bus Azul" fill className="object-contain object-center" />
               </div>
               <div className="relative w-full" style={{ paddingBottom: '42%' }}>
-                <Image src="/images/BUS2.png" alt="Bus Azul 2" fill className="object-contain object-center" />
+                <Image src="/images/CARGO/Recurso 490.png" alt="Bus Azul 2" fill className="object-contain object-center" />
               </div>
             </div>
           </FadeIn>

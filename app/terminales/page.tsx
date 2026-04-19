@@ -16,21 +16,21 @@ export default function TerminalesPage() {
               padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem) clamp(2rem, 6vw, 5rem)',
             }}
           >
-            <div className="flex items-center mb-4" style={{ gap: 'clamp(0.5rem, 2vw, 1rem)' }}>
+            <div className="flex items-center mb-4" style={{ gap: 'clamp(0.5rem, 2vw, 0.5rem)' }}>
               <Image
-                src="/images/STORE.png"
+                src="/images/TERMINALES/Recurso 613.png"
                 alt="Terminal icon"
-                width={95}
+                width={110}
                 height={95}
                 style={{
                   filter: 'brightness(0) invert(1)',
                   flexShrink: 0,
-                  width: 'clamp(52px, 10vw, 95px)',
+                  width: 'clamp(52px, 10vw, 110px)',
                   height: 'clamp(52px, 10vw, 95px)',
                 }}
               />
               <div>
-                <p style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3.4rem)', fontStyle: 'italic', fontWeight: 300, opacity: 0.9, lineHeight: 1, margin: 0 }}>
+                <p style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3.4rem)', fontStyle: 'italic', fontWeight: 300, lineHeight: 1, margin: 0 }}>
                   Terminal
                 </p>
                 <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 3.1rem)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
@@ -49,13 +49,22 @@ export default function TerminalesPage() {
                 lineHeight: 1.4,
               }}
             >
-              <div className="flex items-center" style={{ gap: '0.4rem' }}>
-                <svg viewBox="0 0 24 24" fill="white"
-                  style={{ flexShrink: 0, width: 'clamp(16px, 2.5vw, 28px)', height: 'clamp(16px, 2.5vw, 28px)', marginLeft: 'clamp(-22px, -2.8vw, -36px)' }}>
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                </svg>
-                <span style={{ fontWeight: 400 }}>TERRAPUERTO TRUJILLO</span>
-              </div>
+            <div className="flex items-center" style={{ gap: '0.2rem' }}>
+              <Image
+                src="/images/TERMINALES/Recurso 564.png"
+                alt="Ubicación"
+                width={28}
+                height={36}
+                style={{
+                  flexShrink: 0,
+                  filter: 'brightness(0) invert(1)',
+                  width: 'clamp(16px, 2.5vw, 28px)',
+                  height: 'clamp(16px, 2.5vw, 36px)',
+                  marginLeft: 'clamp(-30px, -2.8vw, -36px)',
+                }}
+              />
+              <span style={{ fontWeight: 400 }}>TERRAPUERTO TRUJILLO</span>
+            </div>
               <span>953078321</span>
               <span>Lunes a Domingo</span>
               <span>De 8:00am a 11:00pm</span>
@@ -66,29 +75,15 @@ export default function TerminalesPage() {
         {/* Imagen */}
         <FadeIn direction="left" delay={0.15} className="relative" style={{ minHeight: 445 }}>
           <Image
-            src="/images/TRUJILLO.png"
+            src="/images/TERMINALES/Recurso 614.png"
             alt="Trujillo"
             fill
             sizes="(max-width: 640px) 100vw, 50vw"
             style={{
               objectFit: 'cover',
               objectPosition: 'center center',
-              filter: 'brightness(1.15) contrast(1.1) saturate(1.4)',
             }}
           />
-          <div className="absolute inset-x-0 flex items-start justify-center" style={{ top: '1.5rem' }}>
-            <span
-              className="text-white font-black"
-              style={{
-                fontSize: 'clamp(2.5rem, 8vw, 6rem)',
-                letterSpacing: '0.08em',
-                textShadow: '2px 2px 0px rgba(0,0,0,0.15), 3px 4px 16px rgba(0,0,0,0.35)',
-                lineHeight: 1,
-              }}
-            >
-              TRUJILLO
-            </span>
-          </div>
         </FadeIn>
       </div>
 

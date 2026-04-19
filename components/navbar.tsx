@@ -41,7 +41,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="shrink-0">
-          <Image src="/images/LOGO.png" alt="Azul" width={150} height={52} className="h-12 w-auto" priority />
+          <Image src="/images/inicio/Recurso 541.png" alt="Azul" width={150} height={52} className="h-12 w-auto" priority />
         </Link>
 
         {/* Links desktop */}

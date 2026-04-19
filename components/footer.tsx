@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <Image
-            src="/images/LOGO.png"
+            src="/images/CIERRE/Recurso 607.png"
             alt="Azul"
             width={200}
             height={70}
@@ -81,10 +81,10 @@ export default function Footer() {
           {/* Iconos sociales */}
           <div className="flex gap-4">
             {[
-              { src: '/images/IN.png',     alt: 'LinkedIn',  href: '#' },
-              { src: '/images/X.png',      alt: 'X',         href: '#' },
-              { src: '/images/INSTA.png',  alt: 'Instagram', href: '#' },
-              { src: '/images/TIKTOK.png', alt: 'TikTok',    href: '#' },
+              { src: '/images/CIERRE/Recurso 609.png',     alt: 'LinkedIn',  href: '#' },
+              { src: '/images/CIERRE/Recurso 608.png',      alt: 'X',         href: '#' },
+              { src: '/images/CIERRE/Recurso 611.png',  alt: 'Instagram', href: '#' },
+              { src: '/images/CIERRE/Recurso 610.png', alt: 'TikTok',    href: '#' },
             ].map(s => (
               <Link key={s.alt} href={s.href} aria-label={s.alt}>
                 <Image
@@ -101,7 +101,7 @@ export default function Footer() {
           {/* Métodos de pago */}
           <div className="flex items-center gap-2">
             <Image
-              src="/images/METODOSPAGO.png"
+              src="/images/CIERRE/Recurso 612.png"
               alt="Visa / Master"
               width={40}
               height={28}

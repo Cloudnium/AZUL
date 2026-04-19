@@ -5,20 +5,20 @@ import FadeIn from '@/components/ui/FadeIn';
 import Lightbox from '@/components/ui/Lightbox';
 
 const SERVICIOS = [
-  { icon: '/images/platino/CARGADOR.png',        alt: '' },
-  { icon: '/images/platino/PELICULASABORDO.png',  alt: '' },
-  { icon: '/images/platino/AIREACON.png',         alt: '' },
-  { icon: '/images/platino/BUSCAMA.png',          alt: '' },
-  { icon: '/images/platino/SEMICAMA.png',         alt: '' },
-  { icon: '/images/platino/GPS.png',              alt: '' },
-  { icon: '/images/platino/PAGOSEGURO.png',       alt: '' },
-  { icon: '/images/platino/BANOQUIMICO.png',      alt: '' },
+  { icon: '/images/SERVICIO PLATINO/Recurso 499.png',   alt: '' },
+  { icon: '/images/SERVICIO PLATINO/Recurso 497.png',   alt: '' },
+  { icon: '/images/SERVICIO PLATINO/Recurso 496.png',   alt: '' },
+  { icon: '/images/SERVICIO PLATINO/Recurso 495.png',   alt: '' },
+  { icon: '/images/SERVICIO PLATINO/Recurso 494.png',   alt: '' },
+  { icon: '/images/SERVICIO PLATINO/Recurso 498.png',   alt: '' },
+  { icon: '/images/SERVICIO PLATINO/Recurso 500.png',   alt: '' },
+  { icon: '/images/SERVICIO PLATINO/Recurso 493.png',   alt: '' },
 ];
 
 const FOTOS_INTERIOR = [
-  '/images/INTERIORPLATINO1.png',
-  '/images/INTERIORPLATINO2.png',
-  '/images/INTERIORPLATINO3.png',
+  '/images/SERVICIO PLATINO/Recurso 503.png',
+  '/images/SERVICIO PLATINO/Recurso 505.png',
+  '/images/SERVICIO PLATINO/Recurso 504.png',
 ];
 
 const FOTOS_ALTS = [
@@ -34,7 +34,7 @@ export default function PlatinoPage() {
       {/* ── HERO BUS ─────────────────────────────────────────── */}
       <div className="relative w-full overflow-hidden">
         <Image
-          src="/images/BUSPLATINO.png"
+          src="/images/SERVICIO PLATINO/Recurso 507.png"
           alt="Bus Azul Platino"
           width={1920}
           height={1080}
@@ -71,7 +71,7 @@ export default function PlatinoPage() {
             >
               <FadeIn direction="left" delay={0.1}>
                 <Image
-                  src="/images/AZULPLATINO.png"
+                  src="/images/SERVICIO PLATINO/Recurso 501.png"
                   alt="Azul Platino"
                   width={500}
                   height={130}

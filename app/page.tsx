@@ -4,30 +4,28 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { TbCalendarRepeat } from 'react-icons/tb';
-import { FaRegCalendar } from 'react-icons/fa6';
 import FadeIn from '@/components/ui/FadeIn';
 
 const DESTINOS = [
-  { name: 'Trujillo', price: '35.00', img: '/images/TRUJILLO.png', badge: 'POPULAR' },
-  { name: 'Piura',    price: '35.00', img: '/images/PIURA.png',    badge: null },
-  { name: 'Sullana',  price: '35.00', img: '/images/SULLANA.png',  badge: null },
+  { name: 'Trujillo', price: '35.00', img: '/images/inicio/Recurso 549.png', badge: 'POPULAR' },
+  { name: 'Piura',    price: '35.00', img: '/images/inicio/Recurso 551.png',    badge: null },
+  { name: 'Sullana',  price: '35.00', img: '/images/inicio/Recurso 550.png',  badge: null },
 ];
 
 const SERVICIOS_STRIP = [
-  { icon: '/images/PAGO.png',     h: 22 },
-  { icon: '/images/CAMA.png',     h: 20 },
-  { icon: '/images/ASIENTO.png',  h: 20 },
-  { icon: '/images/CARGADOR.png', h: 24 },
-  { icon: '/images/AIRE.png',     h: 22 },
-  { icon: '/images/GPS.png',      h: 22 },
+  { icon: '/images/inicio/Recurso 545.png',     h: 22 },
+  { icon: '/images/inicio/Recurso 568.png',     h: 20 },
+  { icon: '/images/inicio/Recurso 543.png',  h: 20 },
+  { icon: '/images/inicio/Recurso 546.png', h: 24 },
+  { icon: '/images/inicio/Recurso 547.png',     h: 22 },
+  { icon: '/images/inicio/Recurso 544.png',      h: 22 },
 ];
 
 const MEJORAMOS = [
-  { icon: '/images/FLOTAMODER.png' },
-  { icon: '/images/MANTENIMIENTO.png' },
-  { icon: '/images/MONITOREO.png' },
-  { icon: '/images/AIREACON.png' },
+  { icon: '/images/inicio/Recurso 557.png' },
+  { icon: '/images/inicio/Recurso 556.png' },
+  { icon: '/images/inicio/Recurso 555.png' },
+  { icon: '/images/inicio/Recurso 548.png' },
 ];
 
 export default function HomePage() {
@@ -47,7 +45,7 @@ export default function HomePage() {
       {/* ===== HERO ===== */}
       <section className="relative flex flex-col" style={{ minHeight: '100vh', marginTop: '-68px', paddingTop: '68px' }}>
         <div className="absolute inset-0 w-full h-full">
-          <Image src="/images/FONDOINI.png" alt="Fondo" fill sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 15%' }} priority />
+          <Image src="/images/inicio/Recurso 570.png" alt="Fondo" fill sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 15%' }} priority />
           <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.15)' }} />
         </div>
 
@@ -77,7 +75,7 @@ export default function HomePage() {
               <div className="flex-1 min-w-30">
                 <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 text-left">ORIGEN</label>
                 <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 h-11">
-                  <Image src="/images/UBICACION.png" alt="" width={18} height={18} style={{ width: 18, height: 18, objectFit: 'contain' }} />
+                  <Image src="/images/inicio/Recurso 559.png" alt="" width={18} height={18} style={{ width: 18, height: 18, objectFit: 'contain' }} />
                   <input className="w-full text-sm outline-none bg-transparent text-gray-700" value={origen} onChange={e => setOrigen(e.target.value)} placeholder="Lima" />
                 </div>
               </div>
@@ -85,7 +83,7 @@ export default function HomePage() {
               <div className="flex-1 min-w-30">
                 <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 text-left">DESTINO</label>
                 <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 h-11">
-                  <Image src="/images/DESTINO.png" alt="" width={18} height={18} style={{ width: 18, height: 18, objectFit: 'contain' }} />
+                  <Image src="/images/inicio/Recurso 564.png" alt="" width={18} height={18} style={{ width: 18, height: 18, objectFit: 'contain' }} />
                   <input className="w-full text-sm outline-none bg-transparent text-gray-700" value={destino} onChange={e => setDestino(e.target.value)} placeholder="Piura" />
                 </div>
               </div>
@@ -93,7 +91,7 @@ export default function HomePage() {
               <div className="flex-1 min-w-30">
                 <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 text-left">SALIDA</label>
                 <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 h-11 overflow-hidden">
-                  <FaRegCalendar size={17} style={{ color: '#0560c5', flexShrink: 0 }} />
+                  <Image src="/images/inicio/Recurso 562.png" alt="" width={17} height={17} style={{ width: 17, height: 17, objectFit: 'contain' }} />
                   <input type="date" className="w-full text-sm outline-none bg-transparent text-gray-700 cursor-pointer" value={salida} onChange={e => setSalida(e.target.value)} style={{ colorScheme: 'light', minWidth: 0 }} />
                 </div>
               </div>
@@ -102,7 +100,7 @@ export default function HomePage() {
                 <div className="flex-1 min-w-30">
                   <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 text-left">REGRESO</label>
                   <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 h-11 overflow-hidden">
-                    <TbCalendarRepeat size={18.5} style={{ color: '#0560c5', flexShrink: 0 }} />
+                    <Image src="/images/inicio/Recurso 560.png" alt="" width={18} height={18} style={{ width: 18, height: 18, objectFit: 'contain' }} />
                     <input type="date" className="w-full text-sm outline-none bg-transparent text-gray-700 cursor-pointer" value={regreso} onChange={e => setRegreso(e.target.value)} style={{ colorScheme: 'light', minWidth: 0 }} />
                   </div>
                 </div>
@@ -110,7 +108,7 @@ export default function HomePage() {
 
               <div className={`self-end ${tab === 'ida-vuelta' ? 'w-full sm:w-auto' : 'shrink-0'}`}>
                 <button onClick={handleSearch} className={`h-11 rounded-xl flex items-center justify-center transition-colors hover:opacity-90 ${tab === 'ida-vuelta' ? 'w-full sm:w-12' : 'w-12'}`} style={{ backgroundColor: '#0560c5' }}>
-                  <Image src="/images/BUSCAR.png" alt="Buscar" width={22} height={22} style={{ width: 22, height: 22, filter: 'brightness(0) invert(1)' }} />
+                  <Image src="/images/inicio/Recurso 558.png" alt="Buscar" width={22} height={22} style={{ width: 22, height: 22, filter: 'brightness(0) invert(1)' }} />
                 </button>
               </div>
             </div>
@@ -120,11 +118,11 @@ export default function HomePage() {
           <div className="rounded-2xl w-full max-w-5xl mt-8 overflow-hidden">
             {/* Móvil: altura automática para no recortar */}
             <div className="block sm:hidden w-full">
-              <Image src="/images/NUEVAFLOTA2026.png" alt="Nueva Flota 2026" width={800} height={200} style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <Image src="/images/inicio/Recurso 565.png" alt="Nueva Flota 2026" width={800} height={200} style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>
             {/* PC: altura fija como antes */}
             <div className="hidden sm:block w-full" style={{ height: 'clamp(100px, 28vw, 200px)' }}>
-              <Image src="/images/NUEVAFLOTA2026.png" alt="Nueva Flota 2026" width={800} height={200} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+              <Image src="/images/inicio/Recurso 565.png" alt="Nueva Flota 2026" width={800} height={200} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
             </div>
           </div>
         </div>
@@ -235,7 +233,7 @@ export default function HomePage() {
           {/* NUEVA FLOTA 2026 */}
           <div className="shrink-0 flex items-center justify-center">
             <Image
-              src="/images/NV2026.png"
+              src="/images/inicio/Recurso 569.png"
               alt="Nueva Flota 2026"
               width={170}
               height={170}
