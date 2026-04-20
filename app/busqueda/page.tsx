@@ -367,7 +367,7 @@ function BusquedaContent() {
                     </div>
                   </div>
                   <p className="text-[11px] text-gray-500">Incluye tasas e impuestos</p>
-                  <Link href={`/asientos?viajeId=${v.id}`} className="w-full sm:w-auto">
+                  <Link href={`/asientos?viajeId=${v.id}&logo=${encodeURIComponent(v.logo)}`} className="w-full sm:w-auto">
                     <button
                       className="w-full sm:w-auto text-white font-bold text-sm px-8 py-2.5 rounded-full transition-all tracking-wide mt-1"
                       style={{ backgroundColor: 'var(--brand)', boxShadow: '0 4px 14px 0 rgba(24,90,219,0.45)' }}
