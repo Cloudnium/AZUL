@@ -4,11 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { HiArrowRight } from 'react-icons/hi';
 import { Pencil } from 'lucide-react';
-import { MdVerified, MdAirlineSeatReclineExtra } from 'react-icons/md';
-import { IoLocationSharp } from 'react-icons/io5';
-import { BsFillBusFrontFill } from 'react-icons/bs';
 import { StepsBar } from '@/components/StepsBar';
 
 const styles = `
@@ -33,7 +29,7 @@ const DIAS = [
 const VIAJES = [
   {
     id: 1,
-    logo: '/images/AZULPLATINO.png',
+    logo: '/images/ELIGE SERVICIO/Recurso 575.png',
     horaSalida: '10:00', ampmSalida: 'pm',
     ciudadSalida: 'PIURA',
     duracion: '8h 00m',
@@ -45,7 +41,7 @@ const VIAJES = [
   },
   {
     id: 2,
-    logo: '/images/LOGO.png',
+    logo: '/images/ELIGE SERVICIO/Recurso 572.png',
     horaSalida: '10:30', ampmSalida: 'pm',
     ciudadSalida: 'TRUJILLO',
     duracion: '14h 30m',
@@ -57,7 +53,7 @@ const VIAJES = [
   },
   {
     id: 3,
-    logo: '/images/AZULPLATINO.png',
+    logo: '/images/ELIGE SERVICIO/Recurso 575.png',
     horaSalida: '09:30', ampmSalida: 'pm',
     ciudadSalida: 'SULLANA',
     duracion: '14h 30m',
@@ -89,7 +85,14 @@ function BusquedaContent() {
             <div>
               <h1 className="text-4xl font-semibold flex items-center gap-3 text-gray-900">
                 {origen}
-                <HiArrowRight className="w-8 h-8 stroke-2" style={{ color: 'var(--brand)' }} />
+                {/* Flecha recurso 583 */}
+                <Image
+                  src="/images/ELIGE SERVICIO/Recurso 583.png"
+                  alt="flecha"
+                  width={32}
+                  height={32}
+                  style={{ width: 32, height: 32, objectFit: 'contain' }}
+                />
                 {destino}
               </h1>
               <p className="text-sm text-gray-500 mt-1 font-semibold">Ida • 1 Pasajero</p>
@@ -164,23 +167,37 @@ function BusquedaContent() {
         <div className="space-y-4 mb-12">
           {VIAJES.map(v => (
             <div key={v.id} className="bg-white rounded-2xl border border-gray-200 px-5 py-4">
-
               {/* ===== CABECERA PC (oculta en móvil) ===== */}
               <div className="hidden sm:flex items-center mb-3">
                 <div className="flex items-center gap-2.5 w-1/3">
+                  {/* Bus icon recurso 582 */}
                   <div
                     className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
                     style={{ backgroundColor: 'var(--brand-light)' }}
                   >
-                    <BsFillBusFrontFill className="w-5 h-5" style={{ color: 'var(--brand)' }} />
+                    <Image
+                      src="/images/ELIGE SERVICIO/Recurso 582.png"
+                      alt="bus"
+                      width={38}
+                      height={38}
+                      style={{ width: 38, height: 38, objectFit: 'contain' }}
+                    />
                   </div>
                   <div>
                     <p className="text-lg font-bold text-gray-900">TRANSPORTES AZUL</p>
-                    <p className="text-xs font-semibold flex items-center gap-1" style={{ color: 'var(--brand)' }}>
-                      <MdVerified className="w-3.5 h-3.5" /> Operador verificado
-                    </p>
+                    {/* Operador verificado recurso 581 */}
+                    <div className="flex items-center gap-1">
+                      <Image
+                        src="/images/ELIGE SERVICIO/Recurso 581.png"
+                        alt="Operador verificado"
+                        width={160}
+                        height={24}
+                        style={{ width: 'auto', height: 13.8, objectFit: 'contain' }}
+                      />
+                    </div>
                   </div>
                 </div>
+                {/* Logo sin filtro */}
                 <div className="flex-1 flex justify-start">
                   <Image
                     src={v.logo}
@@ -192,9 +209,6 @@ function BusquedaContent() {
                       width: 'auto',
                       height: 34,
                       objectFit: 'contain',
-                      filter: v.logo.includes('AZULPLATINO')
-                        ? 'brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) brightness(50%)'
-                        : 'brightness(0) saturate(100%) invert(22%) sepia(97%) saturate(1200%) hue-rotate(200deg) brightness(90%)',
                     }}
                   />
                 </div>
@@ -214,20 +228,31 @@ function BusquedaContent() {
 
               {/* ===== CABECERA MÓVIL (oculta en pc) ===== */}
               <div className="flex sm:hidden flex-col gap-2 mb-3">
-                {/* Fila: icono + nombre + más rápido */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div
                       className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
                       style={{ backgroundColor: 'var(--brand-light)' }}
                     >
-                      <BsFillBusFrontFill className="w-4 h-4" style={{ color: 'var(--brand)' }} />
+                      <Image
+                        src="/images/ELIGE SERVICIO/Recurso 582.png"
+                        alt="bus"
+                        width={38}
+                        height={38}
+                        style={{ width: 38, height: 38, objectFit: 'contain' }}
+                      />
                     </div>
                     <div>
                       <p className="text-sm font-bold text-gray-900">TRANSPORTES AZUL</p>
-                      <p className="text-xs font-semibold flex items-center gap-1" style={{ color: 'var(--brand)' }}>
-                        <MdVerified className="w-3 h-3" /> Operador verificado
-                      </p>
+                      <div className="flex items-center gap-1">
+                        <Image
+                          src="/images/ELIGE SERVICIO/Recurso 581.png"
+                          alt="Operador verificado"
+                          width={160}
+                          height={24}
+                          style={{ width: 'auto', height: 12, objectFit: 'contain' }}
+                        />
+                      </div>
                     </div>
                   </div>
                   <span
@@ -241,7 +266,7 @@ function BusquedaContent() {
                     MÁS RÁPIDO
                   </span>
                 </div>
-                {/* Logo centrado */}
+                {/* Logo centrado sin filtro */}
                 <div className="flex justify-center pt-1">
                   <Image
                     src={v.logo}
@@ -252,17 +277,13 @@ function BusquedaContent() {
                       width: 'auto',
                       height: 30,
                       objectFit: 'contain',
-                      filter: v.logo.includes('AZULPLATINO')
-                        ? 'brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) brightness(50%)'
-                        : 'brightness(0) saturate(100%) invert(22%) sepia(97%) saturate(1200%) hue-rotate(200deg) brightness(90%)',
                     }}
                   />
                 </div>
               </div>
 
-              {/* ===== CUERPO: pc fila | móvil columna ===== */}
+              {/* ===== CUERPO ===== */}
               <div className="flex flex-col sm:flex-row sm:items-stretch gap-0">
-
                 {/* Izquierda */}
                 <div className="flex-1 sm:pr-5">
                   <div className="flex items-center gap-4 mb-3 mt-5">
@@ -286,8 +307,15 @@ function BusquedaContent() {
                       <p className="text-[12px] text-gray-500 font-semibold uppercase tracking-wide">{v.ciudadLlegada}</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-1.5">
-                    <IoLocationSharp className="w-6 h-6 text-gray-500 mt-1 shrink-0" />
+                  {/* Pin ubicación recurso 580 */}
+                  <div className="flex items-center gap-1.5">
+                    <Image
+                      src="/images/ELIGE SERVICIO/Recurso 580.png"
+                      alt="ubicación"
+                      width={22}
+                      height={22}
+                      style={{ width: 22, height: 22, objectFit: 'contain', marginTop: 2 }}
+                    />
                     <div>
                       <p className="text-lg font-bold text-gray-500 uppercase tracking-wide">SALIDA</p>
                       <p className="text-xl font-semibold text-gray-800">{v.terminal}</p>
@@ -295,30 +323,47 @@ function BusquedaContent() {
                   </div>
                 </div>
 
-                {/* Línea vertical en pc, horizontal en móvil */}
-                <div className="hidden sm:block w-0.5 bg-gray-200 mx-2 self-stretch" />
+                {/* Separador */}
+                <div className="hidden sm:block w-0.5 bg-gray-200 mx-2" style={{ alignSelf: 'stretch', marginTop: '-48px', marginBottom: '10px' }} />
                 <div className="block sm:hidden h-0.5 bg-gray-200 my-3" />
 
-                {/* Derecha */}
+                {/* Derecha: precios */}
                 <div className="flex flex-col sm:items-end gap-1.5 sm:pl-5 shrink-0">
                   <p className="text-shadow-xs text-gray-400 sm:self-end">Desde</p>
                   <div className="space-y-1">
+                    {/* Piso 2 */}
                     <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-base text-gray-900"><span className="font-bold text-sm">Piso 2:</span> {v.piso2.tipo}</span>
-                      <MdAirlineSeatReclineExtra className="w-5 h-5 text-gray-400" />
-                      <span className="text-sm font-extrabold text-gray-400">{v.piso2.grados}°</span>
-                      <span className="text-base font-bold text-gray-900">S/.{v.piso2.precio}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-base text-gray-900"><span className="font-bold text-sm">Piso 1:</span> {v.piso1.tipo}</span>
-                      <MdAirlineSeatReclineExtra className="w-5 h-5 text-gray-400" />
-                      <span
-                        className="text-sm font-extrabold"
-                        style={{ color: v.piso1.grados === 160 ? 'var(--brand)' : '#9ca3af' }}
-                      >
-                        {v.piso1.grados}°
+                      <span className="text-xs font-base text-gray-900">
+                        <span className="font-bold text-sm">Piso 2:</span> {v.piso2.tipo}
                       </span>
-                      <span className="text-base font-bold text-gray-900">S/.{v.piso1.precio}</span>
+                      <Image
+                        src={
+                          v.piso2.grados === 145
+                            ? '/images/ELIGE SERVICIO/Recurso 571.png'
+                            : '/images/ELIGE SERVICIO/Recurso 574.png'
+                        }
+                        alt={`${v.piso2.grados}°`}
+                        width={290}
+                        height={140}
+                        style={{
+                          width: 'auto',
+                          height: v.piso2.grados === 145 ? 30 : 20, objectFit: 'contain' }}
+                      />
+                      <span className="text-xl sm:text-base font-bold text-gray-900 w-14 sm:w-12 text-right">S/.{v.piso2.precio}</span>
+                    </div>
+                    {/* Piso 1 */}
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-base text-gray-900">
+                        <span className="font-bold text-sm">Piso 1:</span> {v.piso1.tipo}
+                      </span>
+                      <Image
+                        src="/images/ELIGE SERVICIO/Recurso 573.png"
+                        alt="160°"
+                        width={290}
+                        height={140}
+                        style={{ width: 'auto', height: 20, objectFit: 'contain' }}
+                      />
+                      <span className="text-xl sm:text-base font-bold text-gray-900 w-14 sm:w-12 text-right">S/.{v.piso1.precio}</span>
                     </div>
                   </div>
                   <p className="text-[11px] text-gray-500">Incluye tasas e impuestos</p>
