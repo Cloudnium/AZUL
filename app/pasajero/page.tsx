@@ -35,7 +35,7 @@ function PasajeroContent() {
           <StepsBar active={3} />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-5 items-start">
 
           {/* LEFT */}
           <div className="order-2 lg:order-1">

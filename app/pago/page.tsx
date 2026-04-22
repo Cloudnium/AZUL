@@ -1,11 +1,11 @@
 // app/pago/page.tsx
 'use client';
 
-import Image from 'next/image';
 import { Suspense } from 'react';
 import { useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { StepsBar } from '@/components/StepsBar';
+import { ResumenViaje } from '@/components/ResumenViaje';
 
 const METODOS = ['Yape', 'Interbank', 'VISA', 'AMEX', 'Diners', 'UnionPay'];
 
@@ -14,6 +14,7 @@ function PagoContent() {
   const router = useRouter();
   const asiento = searchParams.get('asiento') || '20';
   const nombreParam = searchParams.get('nombre') || '';
+  const logoParam = searchParams.get('logo') || '/images/AZULPLATINO.png';
 
   const [comprobante, setComprobante] = useState<'boleta' | 'factura'>('boleta');
   const [metodo, setMetodo] = useState('Yape');
@@ -46,7 +47,7 @@ function PagoContent() {
           <StepsBar active={4} />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6 items-start">
           {/* Form */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
             <h2 className="text-xl font-black flex items-center gap-2 mb-5">💳 Pago</h2>
@@ -100,40 +101,15 @@ function PagoContent() {
           </div>
 
           {/* Resumen */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 sticky top-20">
-            <h3 className="text-sm font-black flex items-center gap-2 mb-4">🚌 Resumen del viaje</h3>
-            <div className="space-y-3 pb-4 border-b border-gray-100 mb-4">
-              <div className="flex gap-2 items-start">
-                <div className="w-2.5 h-2.5 rounded-full bg-blue-700 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-[10px] text-gray-400 uppercase font-bold">ORIGEN</p>
-                  <p className="text-sm font-bold">Piura</p>
-                  <p className="text-xs text-gray-400">Av. Bolognesi 817 Piura</p>
-                </div>
-              </div>
-              <div className="flex gap-2 items-start">
-                <div className="w-2.5 h-2.5 rounded-full border-2 border-gray-400 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-[10px] text-gray-400 uppercase font-bold">DESTINO</p>
-                  <p className="text-sm font-bold">Trujillo</p>
-                  <p className="text-xs text-gray-400">Terminal Terrestre</p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-3 mb-4">
-              <Image src="/images/AZULPLATINO.png" alt="Platino" width={80} height={22} style={{ width: 'auto', height: 22 }} />
-              <div className="flex gap-4 mt-2 text-xs">
-                <div><p className="text-[10px] text-gray-400 uppercase">HORA</p><p className="font-black">🕙 10:00 PM</p></div>
-                <div><p className="text-[10px] text-gray-400 uppercase">FECHA</p><p className="font-black">📅 13/02/2026</p></div>
-                <div><p className="text-[10px] text-gray-400 uppercase">ASIENTO</p><p className="font-black">🪑 #{asiento}</p></div>
-              </div>
-            </div>
-            <p className="text-3xl font-black text-blue-700">S/ 35.00</p>
-            <p className="text-[10px] text-gray-400 mb-4">Incluye impuestos y tasas</p>
-            <button onClick={handleFinalizar} disabled={loading} className="w-full bg-blue-700 hover:bg-blue-800 disabled:bg-gray-300 text-white font-bold py-3 rounded-lg transition-colors uppercase tracking-wide">
-              {loading ? 'PROCESANDO...' : 'FINALIZAR'}
-            </button>
-          </div>
+          <ResumenViaje
+            variante="pago"
+            asiento={asiento}
+            logo={logoParam}          // ← antes era hardcodeado
+            hora="10:00 PM"
+            fecha="13/02/2026"
+            onFinalizar={handleFinalizar}
+            loadingFinalizar={loading}
+          />
         </div>
       </div>
     </div>
