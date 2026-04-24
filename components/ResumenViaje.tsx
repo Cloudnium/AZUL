@@ -14,10 +14,25 @@ interface ResumenViajeProps {
   destino?: string;
   terminal?: string;
   fecha?: string;
+  fechaLlegada?: string; 
   hora?: string;         // hora de salida
   horaLlegada?: string;  // hora de llegada
   onFinalizar?: () => void;
   loadingFinalizar?: boolean;
+}
+
+// Agrega esta función arriba del componente, antes del return
+function formatearFechaCorta(fecha?: string): string {
+  if (!fecha) return '';
+  const MESES: Record<string, string> = {
+    '01':'Ene','02':'Feb','03':'Mar','04':'Abr','05':'May','06':'Jun',
+    '07':'Jul','08':'Ago','09':'Sep','10':'Oct','11':'Nov','12':'Dic'
+  };
+  const partes = fecha.split('/');
+  if (partes.length === 3) {
+    return `${partes[0]}/${MESES[partes[1]] ?? partes[1]}`;
+  }
+  return fecha;
 }
 
 export function ResumenViaje({
@@ -31,6 +46,7 @@ export function ResumenViaje({
   destino = 'Trujillo',
   terminal = 'Av. Bolognesi 817',
   fecha,
+  fechaLlegada,
   hora,
   horaLlegada,
   onFinalizar,
@@ -79,7 +95,7 @@ export function ResumenViaje({
                 </p>
                 {hora && (
                   <p className="text-sm text-gray-500 mt-0.5">
-                    {hora}{fecha ? ` - ${fecha}` : ''}
+                    {hora}{fecha ? ` - ${formatearFechaCorta(fecha)}` : ''}
                   </p>
                 )}
               </>
@@ -114,10 +130,10 @@ export function ResumenViaje({
             {/* Selección: horaLlegada + fecha. Pago: solo horaLlegada */}
             {variante === 'seleccion' ? (
               <p className="text-sm text-gray-500 mt-0.5">
-                {horaLlegada ?? '6:00 PM'}{fecha ? ` - ${fecha}` : ''}
+                {horaLlegada ?? '6:00 PM'}{fechaLlegada ? ` - ${formatearFechaCorta(fechaLlegada)}` : fecha ? ` - ${formatearFechaCorta(fecha)}` : ''}
               </p>
               ) : (
-                <p className="text-sm text-gray-500 mt-0.5">{terminal}</p>
+                <p className="text-sm text-gray-500 mt-0.5">Terminal Terrestre</p> // AÑADIR LA PPROP ACA, SOLAMETNE VISUAL
               )}
             <div className="flex items-center gap-1 mt-1">
               <Image

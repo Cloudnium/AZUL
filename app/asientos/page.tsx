@@ -44,6 +44,7 @@ function AsientosContent() {
   const tipo2        = searchParams.get('tipo2')       || 'Sofá cama';
   const grados2      = searchParams.get('grados2')     || '160';
   const fecha        = searchParams.get('fecha')       || '';
+  const fechaLlegada = searchParams.get('fechaLlegada') || '';
 
   const [piso, setPiso]       = useState<1 | 2>(1);
   const [selected, setSelected] = useState<string[]>(['08']);
@@ -80,6 +81,7 @@ function AsientosContent() {
         precio:      precioActual,
         tipo:        piso === 1 ? tipo1 : tipo2,
         fecha,
+        fechaLlegada,
       }).toString()}`
     : '#';
 
@@ -192,6 +194,7 @@ function AsientosContent() {
               hora={horaSalida}
               horaLlegada={horaLlegada}
               fecha={fecha}
+              fechaLlegada={fechaLlegada}
             />
           </div>
         </div>

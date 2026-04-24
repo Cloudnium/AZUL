@@ -70,6 +70,7 @@ function BusquedaContent() {
   const origen  = searchParams.get('origen')  || 'Lima';
   const destino = searchParams.get('destino') || 'Piura';
   const salida  = searchParams.get('salida')  || '';
+  const regreso = searchParams.get('regreso') || '';
   const [diaActivo, setDiaActivo] = useState(1);
   const diaSeleccionado = DIAS[diaActivo];
   const MESES: Record<string, string> = {
@@ -95,6 +96,7 @@ function BusquedaContent() {
       tipo2:        v.piso2.tipo,
       grados2:      String(v.piso2.grados),
       fecha:        salida || fechaActiva,
+      fechaLlegada: regreso,
     });
     return `/asientos?${params.toString()}`;
   }

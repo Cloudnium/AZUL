@@ -39,10 +39,15 @@ export default function HomePage() {
   const handleSearch = () => {
     let fechaFormateada = salida;
     if (salida) {
-      const [, mes, dia] = salida.split('-');
-      fechaFormateada = `${dia}/${mes}/2026`;
+      const [anio, mes, dia] = salida.split('-');
+      fechaFormateada = `${dia}/${mes}/${anio}`;
     }
-    router.push(`/busqueda?origen=${origen}&destino=${destino}&salida=${fechaFormateada}`);
+    let fechaRegresoFormateada = regreso;
+    if (regreso) {
+      const [anio, mes, dia] = regreso.split('-');
+      fechaRegresoFormateada = `${dia}/${mes}/${anio}`;
+    }
+    router.push(`/busqueda?origen=${origen}&destino=${destino}&salida=${fechaFormateada}&regreso=${fechaRegresoFormateada}`);
   };
 
   return (

@@ -24,7 +24,6 @@ function validarEmail(email: string) {
 function PagoContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-
   // Datos del viaje y pasajero (vienen de pasajero/page)
   const asiento     = searchParams.get('asiento')     || '20';
   const piso        = searchParams.get('piso')        || '1';
@@ -36,7 +35,7 @@ function PagoContent() {
   const horaLlegada = searchParams.get('horaLlegada') || '06:00 am';
   const precio      = searchParams.get('precio')      || '35';
   const fecha       = searchParams.get('fecha')       || '—';
-
+  const fechaLlegada = searchParams.get('fechaLlegada') || '—';
   // Datos del pasajero pre-cargados
   const nombreParam   = searchParams.get('nombre')   || '';
   const emailParam    = searchParams.get('email')    || '';
@@ -46,7 +45,6 @@ function PagoContent() {
   const [comprobante, setComprobante] = useState<'boleta' | 'factura'>('boleta');
   const [metodo, setMetodo]           = useState('Yape');
   const [terminos, setTerminos]       = useState(false);
-
   // Form — pre-cargado con datos del pasajero
   const [nombre, setNombre]           = useState(nombreParam);
   const [doc, setDoc]                 = useState(docParam);
@@ -288,6 +286,7 @@ function PagoContent() {
               hora={horaSalida}
               horaLlegada={horaLlegada}
               fecha={fecha}
+              fechaLlegada={fechaLlegada}
               onFinalizar={handleFinalizar}
               loadingFinalizar={loading}
             />

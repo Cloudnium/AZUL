@@ -41,6 +41,7 @@ function PasajeroContent() {
   const precio      = searchParams.get('precio')      || '35';
   const tipo        = searchParams.get('tipo')        || 'Sofá cama';
   const fecha       = searchParams.get('fecha')       || '';
+  const fechaLlegada = searchParams.get('fechaLlegada') || '';
 
   // Estado del formulario
   const [doc, setDoc]           = useState('D.N.I.');
@@ -116,6 +117,7 @@ function PasajeroContent() {
       precio,
       tipo,
       fecha,
+      fechaLlegada,
       // Datos del pasajero
       nombre,
       email,
@@ -316,6 +318,7 @@ function PasajeroContent() {
               hora={horaSalida}
               horaLlegada={horaLlegada}
               fecha={fecha}
+              fechaLlegada={fechaLlegada}
             />
           </div>
         </div>
