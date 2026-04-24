@@ -35,7 +35,7 @@ function PasajeroContent() {
   const logo        = searchParams.get('logo')        || '/images/ELIGE SERVICIO/Recurso 575.png';
   const origen      = searchParams.get('origen')      || 'Piura';
   const destino     = searchParams.get('destino')     || 'Trujillo';
-  const terminal    = searchParams.get('terminal')    || 'Av. Bolognesi 817 Piura';
+  const terminal    = searchParams.get('terminal')    || 'Av. Bolognesi 817';
   const horaSalida  = searchParams.get('horaSalida')  || '10:00 pm';
   const horaLlegada = searchParams.get('horaLlegada') || '06:00 am';
   const precio      = searchParams.get('precio')      || '35';
@@ -135,7 +135,11 @@ function PasajeroContent() {
     'w-full border-2 border-gray-400 rounded-lg px-3.5 py-2 text-sm bg-gray-50 text-gray-700 outline-none cursor-default font-semibold';
   const labelBase = 'block text-xs font-bold uppercase tracking-widest text-gray-600 mb-1.5';
 
-  const href = `/pago?asiento=${asiento}&piso=${piso}&logo=${encodeURIComponent(logo)}`;
+  const href = `/pago?${new URLSearchParams({
+    asiento, piso, logo, origen, destino,
+    terminal, horaSalida, horaLlegada,
+    precio, tipo, fecha,
+  }).toString()}`;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -309,6 +313,7 @@ function PasajeroContent() {
               origen={origen}
               destino={destino}
               terminal={terminal}
+              hora={horaSalida}
               horaLlegada={horaLlegada}
               fecha={fecha}
             />

@@ -31,11 +31,11 @@ const VIAJES = [
     id: 1,
     logo: '/images/ELIGE SERVICIO/Recurso 575.png',
     horaSalida: '10:00', ampmSalida: 'pm',
-    ciudadSalida: 'PIURA',
+    ciudadSalida: 'Piura',
     duracion: '8h 00m',
     horaLlegada: '06:00', ampmLlegada: 'am',
-    ciudadLlegada: 'TRUJILLO',
-    terminal: 'Av. Bolognesi 817 Piura',
+    ciudadLlegada: 'Trujillo',
+    terminal: 'Av. Bolognesi 817',
     piso1: { precio: 50, grados: 160, tipo: 'Sofá cama' },
     piso2: { precio: 35, grados: 160, tipo: 'Sofá cama' },
   },
@@ -43,10 +43,10 @@ const VIAJES = [
     id: 2,
     logo: '/images/ELIGE SERVICIO/Recurso 572.png',
     horaSalida: '10:30', ampmSalida: 'pm',
-    ciudadSalida: 'TRUJILLO',
+    ciudadSalida: 'Trujillo',
     duracion: '14h 30m',
     horaLlegada: '06:00', ampmLlegada: 'am',
-    ciudadLlegada: 'PIURA',
+    ciudadLlegada: 'Piura',
     terminal: 'Terrapuerto Trujillo',
     piso1: { precio: 50, grados: 160, tipo: 'Sofá cama' },
     piso2: { precio: 35, grados: 145, tipo: 'Semi cama' },
@@ -55,10 +55,10 @@ const VIAJES = [
     id: 3,
     logo: '/images/ELIGE SERVICIO/Recurso 575.png',
     horaSalida: '09:30', ampmSalida: 'pm',
-    ciudadSalida: 'SULLANA',
+    ciudadSalida: 'Sullana',
     duracion: '14h 30m',
     horaLlegada: '06:30', ampmLlegada: 'am',
-    ciudadLlegada: 'TRUJILLO',
+    ciudadLlegada: 'Trujillo',
     terminal: 'Terminal Perla del Chira Sullana',
     piso1: { precio: 50, grados: 160, tipo: 'Sofá cama' },
     piso2: { precio: 35, grados: 160, tipo: 'Sofá cama' },
@@ -71,6 +71,12 @@ function BusquedaContent() {
   const destino = searchParams.get('destino') || 'Piura';
   const salida  = searchParams.get('salida')  || '';
   const [diaActivo, setDiaActivo] = useState(1);
+  const diaSeleccionado = DIAS[diaActivo];
+  const MESES: Record<string, string> = {
+    'Ene':'01','Feb':'02','Mar':'03','Abr':'04','May':'05','Jun':'06',
+    'Jul':'07','Ago':'08','Sep':'09','Oct':'10','Nov':'11','Dic':'12'
+  };
+  const fechaActiva = `${String(diaSeleccionado.num).padStart(2,'0')}/${MESES[diaSeleccionado.month]}/2026`;
 
   // Construye la URL de asientos con TODOS los datos del viaje
   function buildAsientosUrl(v: typeof VIAJES[0]) {
@@ -88,7 +94,7 @@ function BusquedaContent() {
       tipo1:        v.piso1.tipo,
       tipo2:        v.piso2.tipo,
       grados2:      String(v.piso2.grados),
-      fecha:        salida || '15/Jul',
+      fecha:        salida || fechaActiva,
     });
     return `/asientos?${params.toString()}`;
   }

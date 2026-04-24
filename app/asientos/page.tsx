@@ -34,7 +34,7 @@ function AsientosContent() {
   const logo         = searchParams.get('logo')        || '/images/ELIGE SERVICIO/Recurso 575.png';
   const origen       = searchParams.get('origen')      || 'Piura';
   const destino      = searchParams.get('destino')     || 'Trujillo';
-  const terminal     = searchParams.get('terminal')    || 'Av. Bolognesi 817 Piura';
+  const terminal     = searchParams.get('terminal')    || 'Av. Bolognesi 817';
   const horaSalida   = searchParams.get('horaSalida')  || '10:00 pm';
   const horaLlegada  = searchParams.get('horaLlegada') || '06:00 am';
   const duracion     = searchParams.get('duracion')    || '8h 00m';

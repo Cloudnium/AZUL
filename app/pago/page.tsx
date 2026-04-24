@@ -35,7 +35,7 @@ function PagoContent() {
   const horaSalida  = searchParams.get('horaSalida')  || '10:00 PM';
   const horaLlegada = searchParams.get('horaLlegada') || '06:00 am';
   const precio      = searchParams.get('precio')      || '35';
-  const fecha       = searchParams.get('fecha')       || '';
+  const fecha       = searchParams.get('fecha')       || '—';
 
   // Datos del pasajero pre-cargados
   const nombreParam   = searchParams.get('nombre')   || '';

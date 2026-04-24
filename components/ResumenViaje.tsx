@@ -29,7 +29,7 @@ export function ResumenViaje({
   variante = 'seleccion',
   origen = 'Piura',
   destino = 'Trujillo',
-  terminal = 'Av. Bolognesi 817 Piura',
+  terminal = 'Av. Bolognesi 817',
   fecha,
   hora,
   horaLlegada,
@@ -40,16 +40,16 @@ export function ResumenViaje({
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 lg:sticky lg:top-20 w-full">
       {/* Título */}
-      <h3 className="text-lg font-bold flex items-center gap-2 mb-4 text-gray-900">
+      <h3 className="text-lg font-bold flex items-center gap-2 mb-5 text-gray-900">
         <Image
           src="/images/REGISTRO/Recurso 526.png"
           alt="resumen"
-          width={28} height={28}
+          width={20} height={20}
           style={{ objectFit: 'contain' }}
         />
         Resumen del viaje
       </h3>
-      <div className="border-t border-gray-200 mb-4" />
+      <div className="border-t border-gray-200 mb-5" />
 
       {/* Origen + Destino */}
       <div className="mb-4">
@@ -116,11 +116,9 @@ export function ResumenViaje({
               <p className="text-sm text-gray-500 mt-0.5">
                 {horaLlegada ?? '6:00 PM'}{fecha ? ` - ${fecha}` : ''}
               </p>
-            ) : (
-              horaLlegada && (
-                <p className="text-sm text-gray-500 mt-0.5">{horaLlegada}</p>
-              )
-            )}
+              ) : (
+                <p className="text-sm text-gray-500 mt-0.5">{terminal}</p>
+              )}
             <div className="flex items-center gap-1 mt-1">
               <Image
                 src="/images/REGISTRO/Recurso 522.png"
@@ -193,7 +191,7 @@ export function ResumenViaje({
                 <p className="text-[10px] text-gray-500 uppercase font-bold tracking-widest mb-2">FECHA</p>
                 <div className="flex items-center gap-1.5">
                   <Image src="/images/PAGO/Recurso 482.png" alt="fecha" width={14} height={14} style={{ objectFit: 'contain' }} />
-                  <span className="text-xs font-bold text-gray-900">{fecha ?? '—'}</span>
+                  <span className="text-xs font-bold text-gray-900">{fecha || '—'}</span>
                 </div>
               </div>
               <div>

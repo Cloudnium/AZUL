@@ -37,7 +37,12 @@ export default function HomePage() {
   const [regreso, setRegreso] = useState('');
 
   const handleSearch = () => {
-    router.push(`/busqueda?origen=${origen}&destino=${destino}&salida=${salida}`);
+    let fechaFormateada = salida;
+    if (salida) {
+      const [, mes, dia] = salida.split('-');
+      fechaFormateada = `${dia}/${mes}/2026`;
+    }
+    router.push(`/busqueda?origen=${origen}&destino=${destino}&salida=${fechaFormateada}`);
   };
 
   return (
