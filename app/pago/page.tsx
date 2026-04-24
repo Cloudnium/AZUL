@@ -198,7 +198,7 @@ function PagoContent() {
           </div>
 
           {/* RIGHT — el sticky está dentro de ResumenViaje, necesita este div con self-start */}
-          <div className="self-start sticky top-28">
+          <div className="order-2 lg:order-2">
             <ResumenViaje
               variante="pago"
               asiento={asiento}

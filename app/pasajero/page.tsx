@@ -55,7 +55,7 @@ function PasajeroContent() {
               <p className="text-lg sm:text-xl font-bold text-gray-700 mb-5">Pasajero 1</p>
 
               {/* DOCUMENTO + NÚMERO — fix responsive */}
-              <div className="grid grid-cols-[80px_1fr] sm:grid-cols-[1fr_2fr] gap-3 mb-3">
+              <div className="flex flex-col sm:grid sm:grid-cols-[1fr_2fr] gap-3 mb-3">
                 <div>
                   <label className={labelBase}>DOCUMENTO</label>
                   <div className="relative">
@@ -78,7 +78,7 @@ function PasajeroContent() {
 
                 <div>
                   <label className={labelBase}>NÚMERO</label>
-                  <div className="flex border-2 border-gray-400 rounded-lg overflow-hidden focus-within:border-[#185adb] focus-within:ring-1 focus-within:ring-[#185adb]/20 transition-all">
+                  <div className="flex border-2 border-gray-400 rounded-lg overflow-hidden focus-within:border-[#185adb] focus-within:ring-1 focus-within:ring-[#185adb]/20 transition-all w-full min-w-0">
                     <button
                       type="button"
                       className="bg-[#BC171E] hover:bg-[#dc2626] text-white text-sm font-extrabold px-3 sm:px-5 shrink-0 tracking-wide transition-colors"
@@ -86,7 +86,7 @@ function PasajeroContent() {
                       Buscar
                     </button>
                     <input
-                      className="flex-1 min-w-0 px-2 py-2.5 sm:px-3.5 sm:py-3 text-sm outline-none bg-white text-gray-900 placeholder-gray-300"
+                      className="flex-1 min-w-0 w-0 px-2 py-2.5 sm:px-3.5 sm:py-3 text-sm outline-none bg-white text-gray-900 placeholder-gray-300"
                       value={dni}
                       onChange={(e) => setDni(e.target.value)}
                       placeholder="00000000"
@@ -142,7 +142,7 @@ function PasajeroContent() {
           </div>
 
           {/* RIGHT */}
-          <div className="order-1 lg:order-2">
+          <div className="order-2 lg:order-2">
             <ResumenViaje asiento={asiento} piso={piso} logo={logo} href={href} />
           </div>
 

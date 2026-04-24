@@ -130,7 +130,7 @@ function AsientosContent() {
           </div>
 
           {/* RIGHT */}
-          <div className="order-1 lg:order-2">
+          <div className="order-2 lg:order-2">
             <ResumenViaje asiento={selected} piso={piso} logo={logo} href={href} />
           </div>
 
