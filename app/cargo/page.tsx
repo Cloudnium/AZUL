@@ -37,7 +37,7 @@ export default function CargoPage() {
         <div className="relative flex flex-row items-center w-full h-full" style={{ zIndex: 1 }}>
           <div className="relative shrink-0 w-[55%] self-end" style={{ marginBottom: -50 }}>
             <div className="relative w-full" style={{ paddingBottom: '60%' }}>
-              <Image src="/images/CAMION.png" alt="Camión Azul Cargo" fill priority className="object-contain object-bottom" />
+              <Image src="/images/CARGO/Recurso 492.png" alt="Camión Azul Cargo" fill priority className="object-contain object-bottom" />
             </div>
           </div>
           <div className="flex flex-col justify-center flex-1 pr-6 sm:pr-12 lg:pr-20 h-full">
@@ -74,7 +74,7 @@ export default function CargoPage() {
           {/* Camión izquierda */}
           <div className="shrink-0" style={{ width: '52%' }}>
             <Image
-              src="/images/CAMION.png"
+              src="/images/CARGO/Recurso 492.png"
               alt="Camión Azul Cargo"
               width={400}
               height={300}
