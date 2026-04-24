@@ -36,7 +36,6 @@ function PasajeroContent() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-5 items-start">
-
           {/* LEFT */}
           <div className="order-2 lg:order-1">
             <h2 className="text-xl sm:text-2xl font-bold flex items-center gap-2.5 mb-4 text-gray-900">
