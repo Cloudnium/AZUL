@@ -3,16 +3,11 @@
 
 import { StepsBar } from '@/components/StepsBar';
 import { ResumenViaje } from '@/components/ResumenViaje';
-import {
-  BusMap,
-  LAYOUT_AZUL_P1,    TV_AZUL_P1,
-  LAYOUT_AZUL_P2,    TV_AZUL_P2,
-  LAYOUT_PLATINO_P1, TV_PLATINO_P1,
-  LAYOUT_PLATINO_P2, TV_PLATINO_P2,
-} from '@/components/asientos/BusMap';
 import Image from 'next/image';
 import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { BusAzulPlatino } from '@/components/asientos/BusAzulPlatino';
+import { BusAzul } from '@/components/asientos/BusAzul';
 
 function getServicios(platino: boolean): string[] {
   return [
@@ -34,25 +29,30 @@ function isPlatino(logo: string) {
 
 function AsientosContent() {
   const searchParams = useSearchParams();
-  const logo = searchParams.get('logo') || '/images/ELIGE SERVICIO/Recurso 575.png';
 
-  const [piso, setPiso] = useState<1 | 2>(1);
+  // Datos del viaje que vienen de búsqueda
+  const logo         = searchParams.get('logo')        || '/images/ELIGE SERVICIO/Recurso 575.png';
+  const origen       = searchParams.get('origen')      || 'Piura';
+  const destino      = searchParams.get('destino')     || 'Trujillo';
+  const terminal     = searchParams.get('terminal')    || 'Av. Bolognesi 817 Piura';
+  const horaSalida   = searchParams.get('horaSalida')  || '10:00 pm';
+  const horaLlegada  = searchParams.get('horaLlegada') || '06:00 am';
+  const duracion     = searchParams.get('duracion')    || '8h 00m';
+  const precio1      = searchParams.get('precio1')     || '50';
+  const precio2      = searchParams.get('precio2')     || '35';
+  const tipo1        = searchParams.get('tipo1')       || 'Sofá cama';
+  const tipo2        = searchParams.get('tipo2')       || 'Sofá cama';
+  const grados2      = searchParams.get('grados2')     || '160';
+  const fecha        = searchParams.get('fecha')       || '';
+
+  const [piso, setPiso]       = useState<1 | 2>(1);
   const [selected, setSelected] = useState<string[]>(['08']);
 
   const platino = isPlatino(logo);
 
-  // ── Elige layout y tvRows según boleto + piso ──────────────────────────────
-  const layout   = platino
-    ? (piso === 1 ? LAYOUT_PLATINO_P1 : LAYOUT_PLATINO_P2)
-    : (piso === 1 ? LAYOUT_AZUL_P1    : LAYOUT_AZUL_P2);
-
-  const tvRows   = platino
-    ? (piso === 1 ? TV_PLATINO_P1 : TV_PLATINO_P2)
-    : (piso === 1 ? TV_AZUL_P1    : TV_AZUL_P2);
-
   const tab2Label = platino
     ? 'Segundo Piso Bus cama 160°'
-    : 'Segundo Piso Semi cama 145°';
+    : `Segundo Piso Semi cama ${grados2}°`;
 
   function handleSelect(num: string) {
     setSelected(prev =>
@@ -61,8 +61,26 @@ function AsientosContent() {
   }
 
   const firstSelected = selected[0] ?? null;
+
+  // Precio según piso seleccionado
+  const precioActual = piso === 1 ? precio1 : precio2;
+
+  // URL hacia pasajero con TODOS los datos
   const href = firstSelected
-    ? `/pasajero?asiento=${selected.join(',')}&piso=${piso}&logo=${encodeURIComponent(logo)}`
+    ? `/pasajero?${new URLSearchParams({
+        asiento:     selected.join(','),
+        piso:        String(piso),
+        logo,
+        origen,
+        destino,
+        terminal,
+        horaSalida,
+        horaLlegada,
+        duracion,
+        precio:      precioActual,
+        tipo:        piso === 1 ? tipo1 : tipo2,
+        fecha,
+      }).toString()}`
     : '#';
 
   return (
@@ -90,7 +108,7 @@ function AsientosContent() {
               Elige tus asientos
             </h2>
 
-            {/* CONTENEDOR 1: Info importante */}
+            {/* Info importante */}
             <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-4">
               <div className="flex items-center gap-2 mb-2">
                 <Image
@@ -117,7 +135,7 @@ function AsientosContent() {
               </div>
             </div>
 
-            {/* CONTENEDOR 2: Bus */}
+            {/* Bus */}
             <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-5 mb-4"
               style={{ boxShadow: 'inset 0 2px 12px 0 rgba(255,255,255,0.7)' }}>
 
@@ -144,22 +162,37 @@ function AsientosContent() {
                 </button>
               </div>
 
-              {/* Croquis del bus */}
-              <BusMap
-                piso={piso}
-                layout={layout}
-                selected={selected}
-                onSelect={handleSelect}
-                tvRows={tvRows}
-                platino={platino}
-              />
+              {platino ? (
+                <BusAzulPlatino
+                  piso={piso}
+                  selected={selected}
+                  onSelect={handleSelect}
+                />
+              ) : (
+                <BusAzul
+                  piso={piso}
+                  selected={selected}
+                  onSelect={handleSelect}
+                />
+              )}
             </div>
           </div>
-          {/* ===== FIN LEFT ===== */}
 
           {/* ===== RIGHT ===== */}
           <div className="order-2 lg:order-2">
-            <ResumenViaje asiento={firstSelected} piso={piso} logo={logo} href={href} />
+            <ResumenViaje
+              asiento={firstSelected}
+              piso={piso}
+              logo={logo}
+              href={href}
+              precio={Number(precioActual)}
+              origen={origen}
+              destino={destino}
+              terminal={terminal}
+              hora={horaSalida}
+              horaLlegada={horaLlegada}
+              fecha={fecha}
+            />
           </div>
         </div>
 

@@ -67,9 +67,31 @@ const VIAJES = [
 
 function BusquedaContent() {
   const searchParams = useSearchParams();
-  const origen = searchParams.get('origen') || 'Lima';
+  const origen  = searchParams.get('origen')  || 'Lima';
   const destino = searchParams.get('destino') || 'Piura';
+  const salida  = searchParams.get('salida')  || '';
   const [diaActivo, setDiaActivo] = useState(1);
+
+  // Construye la URL de asientos con TODOS los datos del viaje
+  function buildAsientosUrl(v: typeof VIAJES[0]) {
+    const params = new URLSearchParams({
+      viajeId:      String(v.id),
+      logo:         v.logo,
+      origen:       v.ciudadSalida,
+      destino:      v.ciudadLlegada,
+      terminal:     v.terminal,
+      horaSalida:   `${v.horaSalida} ${v.ampmSalida}`,
+      horaLlegada:  `${v.horaLlegada} ${v.ampmLlegada}`,
+      duracion:     v.duracion,
+      precio1:      String(v.piso1.precio),
+      precio2:      String(v.piso2.precio),
+      tipo1:        v.piso1.tipo,
+      tipo2:        v.piso2.tipo,
+      grados2:      String(v.piso2.grados),
+      fecha:        salida || '15/Jul',
+    });
+    return `/asientos?${params.toString()}`;
+  }
 
   return (
     <div className="min-h-screen bg-white pb-8">
@@ -85,7 +107,6 @@ function BusquedaContent() {
             <div>
               <h1 className="text-4xl font-semibold flex items-center gap-3 text-gray-900">
                 {origen}
-                {/* Flecha recurso 583 */}
                 <Image
                   src="/images/ELIGE SERVICIO/Recurso 583.png"
                   alt="flecha"
@@ -95,21 +116,25 @@ function BusquedaContent() {
                 />
                 {destino}
               </h1>
-              <p className="text-sm text-gray-500 mt-1 font-semibold">Ida • 1 Pasajero</p>
+              <p className="text-sm text-gray-500 mt-1 font-semibold">
+                Ida • 1 Pasajero{salida ? ` • ${salida}` : ''}
+              </p>
             </div>
-            <button
-              className="flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold tracking-widest transition-all w-fit shadow-sm"
-              style={{
-                border: '1px solid var(--brand-mid)',
-                backgroundColor: 'var(--brand-light)',
-                color: 'var(--brand)',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#f9fafb')}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'var(--brand-light)')}
-            >
-              MODIFICAR BÚSQUEDA
-              <Pencil className="w-3.5 h-3.5" />
-            </button>
+            <Link href={`/?origen=${origen}&destino=${destino}`}>
+              <button
+                className="flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold tracking-widest transition-all w-fit shadow-sm"
+                style={{
+                  border: '1px solid var(--brand-mid)',
+                  backgroundColor: 'var(--brand-light)',
+                  color: 'var(--brand)',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#f9fafb')}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'var(--brand-light)')}
+              >
+                MODIFICAR BÚSQUEDA
+                <Pencil className="w-3.5 h-3.5" />
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -167,10 +192,9 @@ function BusquedaContent() {
         <div className="space-y-4 mb-12">
           {VIAJES.map(v => (
             <div key={v.id} className="bg-white rounded-2xl border border-gray-200 px-5 py-4">
-              {/* ===== CABECERA PC (oculta en móvil) ===== */}
+              {/* ===== CABECERA PC ===== */}
               <div className="hidden sm:flex items-center mb-3">
                 <div className="flex items-center gap-2.5 w-1/3">
-                  {/* Bus icon recurso 582 */}
                   <div
                     className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
                     style={{ backgroundColor: 'var(--brand-light)' }}
@@ -185,7 +209,6 @@ function BusquedaContent() {
                   </div>
                   <div>
                     <p className="text-lg font-bold text-gray-900">TRANSPORTES AZUL</p>
-                    {/* Operador verificado recurso 581 */}
                     <div className="flex items-center gap-1">
                       <Image
                         src="/images/ELIGE SERVICIO/Recurso 581.png"
@@ -197,19 +220,13 @@ function BusquedaContent() {
                     </div>
                   </div>
                 </div>
-                {/* Logo sin filtro */}
                 <div className="flex-1 flex justify-start">
                   <Image
                     src={v.logo}
                     alt="Logo"
                     width={160}
                     height={34}
-                    style={{
-                      marginLeft: '-45px',
-                      width: 'auto',
-                      height: 34,
-                      objectFit: 'contain',
-                    }}
+                    style={{ marginLeft: '-45px', width: 'auto', height: 34, objectFit: 'contain' }}
                   />
                 </div>
                 <div className="w-1/3 flex justify-end">
@@ -226,7 +243,7 @@ function BusquedaContent() {
                 </div>
               </div>
 
-              {/* ===== CABECERA MÓVIL (oculta en pc) ===== */}
+              {/* ===== CABECERA MÓVIL ===== */}
               <div className="flex sm:hidden flex-col gap-2 mb-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -266,18 +283,13 @@ function BusquedaContent() {
                     MÁS RÁPIDO
                   </span>
                 </div>
-                {/* Logo centrado sin filtro */}
                 <div className="flex justify-center pt-1">
                   <Image
                     src={v.logo}
                     alt="Logo"
                     width={140}
                     height={30}
-                    style={{
-                      width: 'auto',
-                      height: 30,
-                      objectFit: 'contain',
-                    }}
+                    style={{ width: 'auto', height: 30, objectFit: 'contain' }}
                   />
                 </div>
               </div>
@@ -307,7 +319,6 @@ function BusquedaContent() {
                       <p className="text-[12px] text-gray-500 font-semibold uppercase tracking-wide">{v.ciudadLlegada}</p>
                     </div>
                   </div>
-                  {/* Pin ubicación recurso 580 */}
                   <div className="flex items-center gap-1.5">
                     <Image
                       src="/images/ELIGE SERVICIO/Recurso 580.png"
@@ -345,9 +356,7 @@ function BusquedaContent() {
                         alt={`${v.piso2.grados}°`}
                         width={290}
                         height={140}
-                        style={{
-                          width: 'auto',
-                          height: v.piso2.grados === 145 ? 30 : 20, objectFit: 'contain' }}
+                        style={{ width: 'auto', height: v.piso2.grados === 145 ? 30 : 20, objectFit: 'contain' }}
                       />
                       <span className="text-xl sm:text-base font-bold text-gray-900 w-14 sm:w-12 text-right">S/.{v.piso2.precio}</span>
                     </div>
@@ -367,7 +376,7 @@ function BusquedaContent() {
                     </div>
                   </div>
                   <p className="text-[11px] text-gray-500">Incluye tasas e impuestos</p>
-                  <Link href={`/asientos?viajeId=${v.id}&logo=${encodeURIComponent(v.logo)}`} className="w-full sm:w-auto">
+                  <Link href={buildAsientosUrl(v)} className="w-full sm:w-auto">
                     <button
                       className="w-full sm:w-auto text-white font-bold text-sm px-8 py-2.5 rounded-full transition-all tracking-wide mt-1"
                       style={{ backgroundColor: 'var(--brand)', boxShadow: '0 4px 14px 0 rgba(24,90,219,0.45)' }}
@@ -378,7 +387,6 @@ function BusquedaContent() {
                     </button>
                   </Link>
                 </div>
-
               </div>
             </div>
           ))}

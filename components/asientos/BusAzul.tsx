@@ -1,22 +1,19 @@
-// components/asientos/BusMap.tsx
+// app/asientos/BusAzul.tsx
 'use client';
 
 import Image from 'next/image';
 
 type S = 'A' | 'R';
 
-interface BusMapProps {
+interface BusProps {
   piso: 1 | 2;
-  layout: (S | null)[][];
   selected: string[];
   onSelect: (num: string) => void;
-  tvRows: number[];
-  platino: boolean;
 }
 
-// ─── Layouts ──────────────────────────────────────────────────────────────────
-
-export const LAYOUT_AZUL_P1: (S | null)[][] = [
+// ─── Azul Piso 1 — asientos 1.png ────────────────────────────────────────────
+// 11 filas, layout [2 + pasillo + 1]
+const LAYOUT_P1: (S | null)[][] = [
   ['A','A',null,'A'],
   ['R','R',null,'A'],
   ['R','A',null,'A'],
@@ -29,9 +26,11 @@ export const LAYOUT_AZUL_P1: (S | null)[][] = [
   ['A','A',null,'A'],
   ['A','A',null,'R'],
 ];
-export const TV_AZUL_P1 = [0, 4, 7];
+const TV_P1 = [0, 4, 7];
 
-export const LAYOUT_AZUL_P2: (S | null)[][] = [
+// ─── Azul Piso 2 — asientos 2.png ────────────────────────────────────────────
+// 9 filas, layout [2 + pasillo + 1]
+const LAYOUT_P2: (S | null)[][] = [
   ['A','A',null,'A'],
   ['R','R',null,'A'],
   ['R','A',null,'R'],
@@ -42,34 +41,21 @@ export const LAYOUT_AZUL_P2: (S | null)[][] = [
   ['A','A',null,'A'],
   ['A','A',null,'R'],
 ];
-export const TV_AZUL_P2 = [0, 4];
+const TV_P2 = [0, 4];
 
-export const LAYOUT_PLATINO_P2: (S | null)[][] = [
-  ['R','R',null,'R'],
-  ['A','A',null,'A'],
-  ['R','R',null,'A'],
-  ['A','A',null,'R'],
-];
-export const TV_PLATINO_P2 = [0];
-
-export const LAYOUT_PLATINO_P1: (S | null)[][] = [
-  ['R','R',null,'R'],
-  ['A','A',null,'A'],
-  ['R','A',null,'A'],
-  ['R','R',null,'R'],
-  ['R','A',null,'R'],
-  ['A','A',null,'A'],
-  ['A','A',null,'A'],
-  ['A','A',null,'R'],
-];
-export const TV_PLATINO_P1 = [0, 4];
-
-// ─── Componente ───────────────────────────────────────────────────────────────
-export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: BusMapProps) {
-  const busImg = platino
-    ? (piso === 1 ? '/images/ASIENTOS/asientos 4.png' : '/images/ASIENTOS/asientos 3.png')
-    : (piso === 1 ? '/images/ASIENTOS/asientos 1.png' : '/images/ASIENTOS/asientos 2.png');
-
+function BusMap({
+  layout,
+  tvRows,
+  selected,
+  onSelect,
+  busImg,
+}: {
+  layout: (S | null)[][];
+  tvRows: number[];
+  selected: string[];
+  onSelect: (num: string) => void;
+  busImg: string;
+}) {
   let seatCounter = 0;
   const seatNumbers: (string | null)[][] = layout.map(row =>
     row.map(seat => {
@@ -78,6 +64,8 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
       return String(seatCounter).padStart(2, '0');
     })
   );
+
+  const colCount = layout[0]?.length ?? 4;
 
   return (
     <>
@@ -97,45 +85,27 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
 
         <div className="relative" style={{ maxWidth: 240, width: '100%' }}>
 
-          {/* 1️⃣ Imagen del bus */}
-          <Image
-            src={busImg}
-            alt="bus"
-            width={240}
-            height={500}
+          {/* Imagen del bus */}
+          <Image src={busImg} alt="bus" width={240} height={500}
             style={{ width: '100%', height: 'auto', objectFit: 'contain', display: 'block' }}
-            priority
-          />
+            priority />
 
-          {/* 2️⃣ Parche blanco sobre los asientos de la imagen */}
-          <div
-            className="absolute"
-            style={{
-              top:    platino ? '22%' : '18%',
-              bottom: '7%',
-              left:   '14%',
-              right:  '8%',
-              backgroundColor: '#ffffff',
-              zIndex: 1,
-            }}
-          />
+          {/* Parche blanco */}
+          <div className="absolute" style={{
+            top: '18%', bottom: '7%', left: '14%', right: '8%',
+            backgroundColor: '#ffffff', zIndex: 1,
+          }} />
 
-          {/* 3️⃣ Grid con imágenes propias de asientos */}
-          <div
-            className="absolute"
-            style={{
-              top:    platino ? '22%' : '18%',
-              bottom: '7%',
-              left:   '14%',
-              right:  '8%',
-              zIndex: 2,
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '2px',
-              alignContent: 'start',
-              padding: '3px 2px',
-            }}
-          >
+          {/* Grid de asientos */}
+          <div className="absolute" style={{
+            top: '18%', bottom: '7%', left: '14%', right: '8%',
+            zIndex: 2,
+            display: 'grid',
+            gridTemplateColumns: `repeat(${colCount}, 1fr)`,
+            gap: '2px',
+            alignContent: 'start',
+            padding: '3px 2px',
+          }}>
             {layout.map((row, ri) =>
               row.map((seat, ci) => {
                 if (seat === null) {
@@ -143,12 +113,9 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
                     <div key={`${ri}-${ci}`}
                       style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 32 }}>
                       {tvRows.includes(ri) && (
-                        <Image
-                          src="/images/ASIENTOS/Recurso 598.png"
-                          alt="tv"
+                        <Image src="/images/ASIENTOS/Recurso 598.png" alt="tv"
                           width={14} height={14}
-                          style={{ width: 14, height: 14, objectFit: 'contain' }}
-                        />
+                          style={{ width: 14, height: 14, objectFit: 'contain' }} />
                       )}
                     </div>
                   );
@@ -158,7 +125,6 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
                 const isSel = selected.includes(num);
                 const isReserved = seat === 'R';
 
-                // ✅ Imágenes propias para el interior del bus
                 const imgSrc = isSel
                   ? '/images/ASIENTOS/tu asiento.png'
                   : isReserved
@@ -166,8 +132,7 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
                   : '/images/ASIENTOS/asiento libre.png';
 
                 return (
-                  <button
-                    key={`${ri}-${ci}`}
+                  <button key={`${ri}-${ci}`}
                     onClick={() => !isReserved && onSelect(num)}
                     disabled={isReserved}
                     className="flex items-center justify-center bg-transparent border-0 outline-none p-0"
@@ -178,25 +143,21 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
                     }}
                     aria-label={`Asiento ${num}`}
                   >
-                    <Image
-                      src={imgSrc}
-                      alt={`Asiento ${num}`}
+                    <Image src={imgSrc} alt={`Asiento ${num}`}
                       width={44} height={44}
-                      style={{ width: '100%', maxWidth: 44, height: 'auto', objectFit: 'contain' }}
-                    />
+                      style={{ width: '100%', maxWidth: 44, height: 'auto', objectFit: 'contain' }} />
                   </button>
                 );
               })
             )}
           </div>
-
         </div>
       </div>
 
       {/* Separador */}
       <div style={{ width: '100%', height: 2, backgroundColor: '#ffffff', borderRadius: 2, margin: '8px 0 0 0' }} />
 
-      {/* Leyenda — Recurso originales, sin cambios */}
+      {/* Leyenda */}
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 24, marginTop: 20 }}>
         <Image src="/images/ASIENTOS/Recurso 603.png" alt="Disponible"
           width={0} height={0} sizes="100vw"
@@ -209,5 +170,23 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
           style={{ height: 78, width: 'auto', display: 'block', marginTop: 15 }} />
       </div>
     </>
+  );
+}
+
+export function BusAzul({ piso, selected, onSelect }: BusProps) {
+  const layout = piso === 1 ? LAYOUT_P1 : LAYOUT_P2;
+  const tvRows = piso === 1 ? TV_P1     : TV_P2;
+  const busImg = piso === 1
+    ? '/images/ASIENTOS/asientos 1.png'
+    : '/images/ASIENTOS/asientos 2.png';
+
+  return (
+    <BusMap
+      layout={layout}
+      tvRows={tvRows}
+      selected={selected}
+      onSelect={onSelect}
+      busImg={busImg}
+    />
   );
 }

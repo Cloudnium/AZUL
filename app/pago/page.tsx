@@ -17,37 +17,97 @@ const METODOS = [
   { label: 'UnionPay',  img: '/images/PAGO/Recurso 532.png' },
 ];
 
+function validarEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
 function PagoContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const asiento = searchParams.get('asiento') || '20';
-  const nombreParam = searchParams.get('nombre') || '';
-  const logoParam = searchParams.get('logo') || '/images/AZULPLATINO.png';
+
+  // Datos del viaje y pasajero (vienen de pasajero/page)
+  const asiento     = searchParams.get('asiento')     || '20';
+  const piso        = searchParams.get('piso')        || '1';
+  const logoParam   = searchParams.get('logo')        || '/images/ELIGE SERVICIO/Recurso 575.png';
+  const origen      = searchParams.get('origen')      || 'Piura';
+  const destino     = searchParams.get('destino')     || 'Trujillo';
+  const terminal    = searchParams.get('terminal')    || 'Terminal Terrestre';
+  const horaSalida  = searchParams.get('horaSalida')  || '10:00 PM';
+  const horaLlegada = searchParams.get('horaLlegada') || '06:00 am';
+  const precio      = searchParams.get('precio')      || '35';
+  const fecha       = searchParams.get('fecha')       || '';
+
+  // Datos del pasajero pre-cargados
+  const nombreParam   = searchParams.get('nombre')   || '';
+  const emailParam    = searchParams.get('email')    || '';
+  const docParam      = searchParams.get('doc')      || 'DNI';
+  const numDocParam   = searchParams.get('dni')      || '';
 
   const [comprobante, setComprobante] = useState<'boleta' | 'factura'>('boleta');
-  const [metodo, setMetodo] = useState('Yape');
-  const [terminos, setTerminos] = useState(false);
-  const [nombre, setNombre] = useState(nombreParam);
-  const [doc, setDoc] = useState('DNI');
-  const [numDoc, setNumDoc] = useState('');
-  const [email, setEmail] = useState('');
-  const [confirmEmail, setConfirmEmail] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [metodo, setMetodo]           = useState('Yape');
+  const [terminos, setTerminos]       = useState(false);
 
-  const input =
-    'w-full border-2 border-gray-400 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-[#185adb] focus:ring-1 focus:ring-[#185adb]/20 bg-white text-gray-900 placeholder-gray-300 transition-all';
-  const labelCls =
-    'block text-xs font-bold uppercase tracking-widest text-gray-600 mb-1.5';
+  // Form — pre-cargado con datos del pasajero
+  const [nombre, setNombre]           = useState(nombreParam);
+  const [doc, setDoc]                 = useState(docParam);
+  const [numDoc, setNumDoc]           = useState(numDocParam);
+  const [email, setEmail]             = useState(emailParam);
+  const [confirmEmail, setConfirmEmail] = useState('');
+  const [loading, setLoading]         = useState(false);
+
+  // Errores
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  function marcarTocado(campo: string) {
+    setTouched(prev => ({ ...prev, [campo]: true }));
+  }
+
+  function getError(campo: string): string {
+    if (!touched[campo]) return '';
+    switch (campo) {
+      case 'nombre':
+        return !nombre.trim() ? 'El nombre es requerido' : '';
+      case 'numDoc':
+        return !numDoc.trim() ? 'El número de documento es requerido' : '';
+      case 'email':
+        if (!email.trim()) return 'El correo es requerido';
+        if (!validarEmail(email)) return 'Correo inválido';
+        return '';
+      case 'confirmEmail':
+        if (!confirmEmail.trim()) return 'Confirma tu correo';
+        if (email !== confirmEmail) return 'Los correos no coinciden';
+        return '';
+      default:
+        return '';
+    }
+  }
 
   const handleFinalizar = async () => {
-    if (!terminos) { alert('Debes aceptar los términos y condiciones'); return; }
-    if (!nombre || !email || !numDoc) { alert('Completa todos los campos'); return; }
-    if (email !== confirmEmail) { alert('Los emails no coinciden'); return; }
+    // Marcar todos tocados
+    setTouched({ nombre: true, numDoc: true, email: true, confirmEmail: true });
+
+    if (!terminos) {
+      alert('Debes aceptar los términos y condiciones');
+      return;
+    }
+    if (!nombre.trim() || !email.trim() || !numDoc.trim() || !confirmEmail.trim()) {
+      return; // Los errores inline ya muestran el problema
+    }
+    if (!validarEmail(email)) return;
+    if (email !== confirmEmail) return;
+
     setLoading(true);
     setTimeout(() => {
       router.push('/confirmacion?orden=AZ-2026-0001');
     }, 1500);
   };
+
+  const input =
+    'w-full border-2 border-gray-400 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-[#185adb] focus:ring-1 focus:ring-[#185adb]/20 bg-white text-gray-900 placeholder-gray-300 transition-all';
+  const inputErr =
+    'w-full border-2 border-red-400 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-red-500 bg-white text-gray-900 placeholder-gray-300 transition-all';
+  const labelCls =
+    'block text-xs font-bold uppercase tracking-widest text-gray-600 mb-1.5';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -58,10 +118,9 @@ function PagoContent() {
           <StepsBar active={4} />
         </div>
 
-        {/* grid — items-start es OBLIGATORIO para que sticky funcione */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6 items-start">
 
-          {/* LEFT — título + form */}
+          {/* LEFT */}
           <div>
             <h2 className="text-xl sm:text-2xl font-bold flex items-center gap-2.5 mb-4 text-gray-900">
               <span className="inline-flex items-center justify-center w-9 h-9 shrink-0">
@@ -77,17 +136,20 @@ function PagoContent() {
             </h2>
 
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6">
-
               <p className="text-lg sm:text-xl font-bold text-gray-700 mb-5">Datos del Comprador</p>
 
               <div className="mb-3">
                 <label className={labelCls}>NOMBRE COMPLETO</label>
                 <input
-                  className={input}
+                  className={touched['nombre'] && getError('nombre') ? inputErr : input}
                   value={nombre}
                   onChange={e => setNombre(e.target.value)}
+                  onBlur={() => marcarTocado('nombre')}
                   placeholder="Nombre Completo"
                 />
+                {touched['nombre'] && getError('nombre') && (
+                  <p className="text-red-500 text-[11px] mt-1">{getError('nombre')}</p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-3 mb-3">
@@ -113,11 +175,15 @@ function PagoContent() {
                 <div>
                   <label className={labelCls}>NÚMERO</label>
                   <input
-                    className={input}
+                    className={touched['numDoc'] && getError('numDoc') ? inputErr : input}
                     value={numDoc}
                     onChange={e => setNumDoc(e.target.value)}
+                    onBlur={() => marcarTocado('numDoc')}
                     placeholder="00000000"
                   />
+                  {touched['numDoc'] && getError('numDoc') && (
+                    <p className="text-red-500 text-[11px] mt-1">{getError('numDoc')}</p>
+                  )}
                 </div>
               </div>
 
@@ -126,25 +192,33 @@ function PagoContent() {
                   <label className={labelCls}>EMAIL</label>
                   <input
                     type="email"
-                    className={input}
+                    className={touched['email'] && getError('email') ? inputErr : input}
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                    onBlur={() => marcarTocado('email')}
                     placeholder="Email"
                   />
+                  {touched['email'] && getError('email') && (
+                    <p className="text-red-500 text-[11px] mt-1">{getError('email')}</p>
+                  )}
                 </div>
                 <div>
                   <label className={labelCls}>CONFIRMAR EMAIL</label>
                   <input
                     type="email"
-                    className={input}
+                    className={touched['confirmEmail'] && getError('confirmEmail') ? inputErr : input}
                     value={confirmEmail}
                     onChange={e => setConfirmEmail(e.target.value)}
+                    onBlur={() => marcarTocado('confirmEmail')}
                     placeholder="Email"
                   />
+                  {touched['confirmEmail'] && getError('confirmEmail') && (
+                    <p className="text-red-500 text-[11px] mt-1">{getError('confirmEmail')}</p>
+                  )}
                 </div>
               </div>
 
-              {/* Comprobante — toggle pill */}
+              {/* Comprobante toggle */}
               <p className="text-xs font-bold text-gray-500 mb-2">Elige el tipo de comprobante</p>
               <div className="relative flex bg-gray-100 rounded-full p-1 mb-5 w-full max-w-xs">
                 <span
@@ -161,7 +235,7 @@ function PagoContent() {
                 ))}
               </div>
 
-              {/* Métodos de pago — mismo tamaño forzado */}
+              {/* Métodos de pago */}
               <p className="text-xs font-bold text-gray-500 mb-3">Paga con Yape, Tarjeta de Crédito o Débito</p>
               <div className="flex flex-wrap gap-3 mb-5">
                 {METODOS.map(m => (
@@ -194,22 +268,30 @@ function PagoContent() {
                 />
                 <a href="#" className="font-bold underline text-gray-700">Términos y condiciones</a>
               </label>
+              {!terminos && touched['nombre'] && (
+                <p className="text-red-500 text-[11px] mt-1">Debes aceptar los términos y condiciones</p>
+              )}
             </div>
           </div>
 
-          {/* RIGHT — el sticky está dentro de ResumenViaje, necesita este div con self-start */}
+          {/* RIGHT */}
           <div className="order-2 lg:order-2">
             <ResumenViaje
               variante="pago"
               asiento={asiento}
+              piso={piso}
               logo={logoParam}
-              hora="10:00 PM"
-              fecha="13/02/2026"
+              precio={Number(precio)}
+              origen={origen}
+              destino={destino}
+              terminal={terminal}
+              hora={horaSalida}
+              horaLlegada={horaLlegada}
+              fecha={fecha}
               onFinalizar={handleFinalizar}
               loadingFinalizar={loading}
             />
           </div>
-
         </div>
       </div>
     </div>
