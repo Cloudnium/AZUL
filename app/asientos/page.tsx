@@ -35,23 +35,24 @@ const PISO2: (S | null)[][] = [
   ['A','A',null,'A'],
 ];
 
-// Imágenes de servicios — ya incluyen su propio texto, NO se agrega texto extra
-const SERVICIOS = [
-  '/images/ASIENTOS/Recurso 591.png',
-  '/images/ASIENTOS/Recurso 590.png',
-  '/images/ASIENTOS/Recurso 589.png',
-  '/images/ASIENTOS/Recurso 587.png',
-  '/images/ASIENTOS/Recurso 588.png',
-  '/images/ASIENTOS/Recurso 586.png',
-  '/images/ASIENTOS/Recurso 584.png',
-];
+function getServicios(platino: boolean): string[] {
+  return [
+    '/images/ASIENTOS/Recurso 591.png',
+    '/images/ASIENTOS/Recurso 590.png',
+    '/images/ASIENTOS/Recurso 589.png',
+    '/images/ASIENTOS/Recurso 587.png',
+    platino
+      ? '/images/ASIENTOS/Recurso 588.png'
+      : '/images/CARGO/Recurso 486.png',
+    '/images/ASIENTOS/Recurso 586.png',
+    '/images/ASIENTOS/Recurso 584.png',
+  ];
+}
 
-// Platino = logo 575, normal = logo 572
 function isPlatino(logo: string) {
   return logo.includes('575') || logo.toLowerCase().includes('platino');
 }
 
-// Filas del pasillo que muestran icono TV
 const TV_ROWS_P1 = [0, 4, 7];
 const TV_ROWS_P2 = [0, 4];
 
@@ -65,12 +66,10 @@ function AsientosContent() {
   const platino = isPlatino(logo);
   const tvRows = piso === 1 ? TV_ROWS_P1 : TV_ROWS_P2;
 
-  // Imagen del bus según tipo y piso
   const busImg = platino
     ? (piso === 1 ? '/images/ASIENTOS/asientos 3.png' : '/images/ASIENTOS/asientos 4.png')
     : (piso === 1 ? '/images/ASIENTOS/asientos 1.png' : '/images/ASIENTOS/asientos 2.png');
 
-  // Platino: ambos 160° | Normal: piso1=160°, piso2=145°
   const tab2Label = platino
     ? 'Segundo Piso bus cama 160°'
     : 'Segundo Piso semi cama 145°';
@@ -94,9 +93,9 @@ function AsientosContent() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6 items-start">
 
           {/* ===== LEFT ===== */}
-          <div className="order-2 lg:order-1">
+          <div className="order-2 lg:order-1 flex flex-col">
 
-            {/* ── TÍTULO: fuera de contenedor ── */}
+            {/* TÍTULO */}
             <h2 className="text-2xl font-bold flex items-center gap-2.5 mb-4 text-gray-900">
               <Image
                 src="/images/ASIENTOS/Recurso 594.png"
@@ -107,7 +106,7 @@ function AsientosContent() {
               Elige tus asientos
             </h2>
 
-            {/* ── CONTENEDOR 1: Info importante ── */}
+            {/* CONTENEDOR 1: Info importante */}
             <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-4">
               <div className="flex items-center gap-2 mb-2">
                 <Image
@@ -134,9 +133,8 @@ function AsientosContent() {
               </div>
             </div>
 
-            {/* ── CONTENEDOR 2: Bus ── */}
+            {/* CONTENEDOR 2: Bus */}
             <div className="bg-white border border-gray-200 rounded-2xl p-5 mb-4">
-              {/* Tabs de piso */}
               <div className="flex gap-2 mb-5 flex-wrap">
                 <button
                   onClick={() => setPiso(1)}
@@ -160,10 +158,7 @@ function AsientosContent() {
                 </button>
               </div>
 
-              {/* Área del bus con iconos fuera a los lados */}
               <div className="relative flex justify-center items-start mb-20">
-
-                {/* Icono baños — fuera del bus, esquina sup-izq */}
                 <div className="absolute left-0 top-0 z-10">
                   <Image
                     src="/images/ASIENTOS/Recurso 592.png"
@@ -172,8 +167,6 @@ function AsientosContent() {
                     style={{ width: 22, height: 22, objectFit: 'contain' }}
                   />
                 </div>
-
-                {/* Icono escaleras — fuera del bus, esquina sup-der */}
                 <div className="absolute right-0 top-0 z-10">
                   <Image
                     src="/images/ASIENTOS/Recurso 596.png"
@@ -183,7 +176,6 @@ function AsientosContent() {
                   />
                 </div>
 
-                {/* Bus + overlay de asientos */}
                 <div className="relative" style={{ maxWidth: 240, width: '100%' }}>
                   <Image
                     src={busImg}
@@ -193,8 +185,6 @@ function AsientosContent() {
                     style={{ width: '100%', height: 'auto', objectFit: 'contain', display: 'block' }}
                     priority
                   />
-
-                  {/* Overlay de asientos sobre la imagen del bus */}
                   <div
                     className="absolute inset-0"
                     style={{
@@ -215,13 +205,9 @@ function AsientosContent() {
                     >
                       {layout.map((row, ri) =>
                         row.map((seat, ci) => {
-                          // Pasillo
                           if (seat === null) {
                             return (
-                              <div
-                                key={`${ri}-${ci}`}
-                                className="flex items-center justify-center"
-                              >
+                              <div key={`${ri}-${ci}`} className="flex items-center justify-center">
                                 {tvRows.includes(ri) && (
                                   <Image
                                     src="/images/ASIENTOS/Recurso 598.png"
@@ -236,9 +222,6 @@ function AsientosContent() {
 
                           const num = seatNum(ri, ci);
                           const isSel = num === selected;
-
-                          // 603 = disponible, 604 = reservado, 606 = seleccionado
-                          // Las imágenes ya incluyen número y etiqueta — NO se agrega texto
                           const imgSrc = isSel
                             ? '/images/ASIENTOS/Recurso 606.png'
                             : seat === 'R'
@@ -269,7 +252,7 @@ function AsientosContent() {
                 </div>
               </div>
 
-              {/* Leyenda — imágenes ya incluyen texto, NO se agrega texto extra */}
+              {/* Leyenda */}
               <div className="flex justify-center gap-6 mt-5 flex-wrap">
                 <Image
                   src="/images/ASIENTOS/Recurso 603.png"
@@ -290,29 +273,28 @@ function AsientosContent() {
                   style={{ width: 160, height: 'auto', objectFit: 'contain' }}
                 />
               </div>
-
             </div>
-            {/* ── FIN CONTENEDOR 2 ── */}
 
-            {/* ── Servicios a Bordo: fuera de contenedor, imágenes ya tienen texto ── */}
+            {/* Servicios a Bordo */}
             <div className="mt-2">
               <h4 className="text-base font-bold mb-4 text-gray-900">Servicios a Bordo</h4>
-              <div className="flex flex-wrap gap-3">
-                {SERVICIOS.map((src, i) => (
+              <div className="flex flex-nowrap gap-3 overflow-x-auto pb-2">
+                {getServicios(platino).map((src, i) => (
                   <Image
                     key={i}
                     src={src}
                     alt="servicio"
-                    width={92} height={92}
-                    style={{ width: 92, height: 92, objectFit: 'contain' }}
+                    width={72} height={72}
+                    style={{ width: 72, height: 72, objectFit: 'contain', flexShrink: 0 }}
                   />
                 ))}
               </div>
             </div>
 
           </div>
+          {/* ===== FIN LEFT ===== */}
 
-          {/* ===== RIGHT ===== */}
+          {/* ===== RIGHT — sticky, se queda fijo mientras el left hace scroll ===== */}
           <div className="order-2 lg:order-2">
             <ResumenViaje asiento={selected} piso={piso} logo={logo} href={href} />
           </div>
