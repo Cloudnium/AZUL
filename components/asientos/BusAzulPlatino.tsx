@@ -32,7 +32,7 @@ const LAYOUT_P2: (S | null)[][] = [
   ['A', 'A', null, 'A'],
 ];
 const TV_P2: number[] = [0, 4, 8];
-const ESCALERA_ROW_P2 = 2; // ← subida una fila (era 2)
+const ESCALERA_ROW_P2 = 2;
 
 function BusMap({
   layout,
@@ -59,7 +59,6 @@ function BusMap({
     })
   );
 
-  // Tus valores corregidos — no se tocan
   const patchLeft   = isPiso1 ? '12.5%' : '12.5%';
   const patchRight  = isPiso1 ? '12.5%' : '12.5%';
   const patchTop    = isPiso1 ? '15.5%' : '9.5%';
@@ -90,7 +89,7 @@ function BusMap({
             zIndex: 1,
           }} />
 
-          {/* PISO 1: bloque subido — justifyContent flex-start con paddingTop */}
+          {/* PISO 1 */}
           {isPiso1 && (
             <div style={{
               position: 'absolute',
@@ -101,8 +100,8 @@ function BusMap({
               zIndex: 2,
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'flex-start',  // ← sube el bloque
-              padding: '32% 6px 8px 6px',     // ← paddingTop empuja hasta la línea
+              justifyContent: 'flex-start',
+              padding: '32% 6px 8px 6px',
               gap: 25,
             }}>
               {/* Íconos baño + escalera */}
@@ -117,13 +116,13 @@ function BusMap({
                   src="/images/ASIENTOS/banio.png"
                   alt="baños"
                   width={28} height={28}
-                  style={{ width: 28, height: 28, objectFit: 'contain' }}
+                  style={{ width: 'clamp(18px, 5vw, 28px)', height: 'clamp(18px, 5vw, 28px)', objectFit: 'contain' }}
                 />
                 <Image
                   src="/images/ASIENTOS/escalera.png"
                   alt="escaleras"
                   width={32} height={32}
-                  style={{ width: 32, height: 32, objectFit: 'contain' }}
+                  style={{ width: 'clamp(20px, 5vw, 32px)', height: 'clamp(20px, 5vw, 32px)', objectFit: 'contain' }}
                 />
               </div>
 
@@ -131,7 +130,7 @@ function BusMap({
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: '12px 3px',
+                gap: 'clamp(4px, 2vw, 12px) 3px',
               }}>
                 {layout.map((row, ri) =>
                   row.map((seat, ci) => {
@@ -143,7 +142,7 @@ function BusMap({
                           {tvRows.includes(ri) && (
                             <Image src="/images/ASIENTOS/televisor.png" alt="tv"
                               width={30} height={30}
-                              style={{ width: 30, height: 30, objectFit: 'contain' }} />
+                              style={{ width: 'clamp(20px, 5vw, 30px)', height: 'clamp(20px, 5vw, 30px)', objectFit: 'contain' }} />
                           )}
                         </div>
                       );
@@ -183,7 +182,7 @@ function BusMap({
             </div>
           )}
 
-          {/* PISO 2: grid completo */}
+          {/* PISO 2 */}
           {!isPiso1 && (
             <div style={{
               position: 'absolute',
@@ -209,13 +208,12 @@ function BusMap({
                         {showTv && (
                           <Image src="/images/ASIENTOS/televisor.png" alt="tv"
                             width={30} height={30}
-                            style={{ width: 30, height: 30, objectFit: 'contain' }} />
+                            style={{ width: 'clamp(20px, 5vw, 30px)', height: 'clamp(20px, 5vw, 30px)', objectFit: 'contain' }} />
                         )}
                       </div>
                     );
                   }
 
-                  // Escalera en col 3, fila 1 (subida)
                   if (ci === 3 && ri === ESCALERA_ROW_P2 && seat === null) {
                     return (
                       <div key={`${ri}-${ci}`} style={{
@@ -223,7 +221,7 @@ function BusMap({
                       }}>
                         <Image src="/images/ASIENTOS/escalera.png" alt="escaleras"
                           width={32} height={32}
-                          style={{ width: 32, height: 32, objectFit: 'contain' }} />
+                          style={{ width: 'clamp(20px, 5vw, 32px)', height: 'clamp(20px, 5vw, 32px)', objectFit: 'contain' }} />
                       </div>
                     );
                   }
@@ -269,16 +267,23 @@ function BusMap({
       <div style={{ width: '100%', height: 2, backgroundColor: '#ffffff', borderRadius: 2, margin: '8px 0 0 0' }} />
 
       {/* Leyenda */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 24, marginTop: 20 }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 'clamp(8px, 4vw, 24px)',
+        marginTop: 20,
+        flexWrap: 'wrap',
+      }}>
         <Image src="/images/ASIENTOS/Recurso 603.png" alt="Disponible"
           width={0} height={0} sizes="100vw"
-          style={{ height: 50, width: 'auto', display: 'block' }} />
+          style={{ height: 'clamp(36px, 8vw, 50px)', width: 'auto', display: 'block' }} />
         <Image src="/images/ASIENTOS/Recurso 604.png" alt="Reservado"
           width={0} height={0} sizes="100vw"
-          style={{ height: 50, width: 'auto', display: 'block' }} />
+          style={{ height: 'clamp(36px, 8vw, 50px)', width: 'auto', display: 'block' }} />
         <Image src="/images/ASIENTOS/Recurso 606.png" alt="Tu Asiento"
           width={0} height={0} sizes="100vw"
-          style={{ height: 78, width: 'auto', display: 'block', marginTop: 15 }} />
+          style={{ height: 'clamp(55px, 12vw, 78px)', width: 'auto', display: 'block', marginTop: 15 }} />
       </div>
     </>
   );

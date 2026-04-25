@@ -84,20 +84,20 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
       <div className="relative flex justify-center items-start mb-10">
 
         {/* Iconos laterales */}
-        <div className="absolute left-0 top-0 z-10">
+        <div className="absolute left-0 top-0 z-10" style={{ lineHeight: 0 }}>
           <Image src="/images/ASIENTOS/Recurso 592.png" alt="baños"
             width={22} height={22}
-            style={{ width: 22, height: 22, objectFit: 'contain' }} />
+            style={{ width: 'clamp(16px, 4vw, 22px)', height: 'clamp(16px, 4vw, 22px)', objectFit: 'contain' }} />
         </div>
-        <div className="absolute right-0 top-0 z-10">
+        <div className="absolute right-0 top-0 z-10" style={{ lineHeight: 0 }}>
           <Image src="/images/ASIENTOS/Recurso 596.png" alt="escaleras"
             width={22} height={22}
-            style={{ width: 22, height: 22, objectFit: 'contain' }} />
+            style={{ width: 'clamp(16px, 4vw, 22px)', height: 'clamp(16px, 4vw, 22px)', objectFit: 'contain' }} />
         </div>
 
         <div className="relative" style={{ maxWidth: 240, width: '100%' }}>
 
-          {/* 1️⃣ Imagen del bus */}
+          {/* Imagen del bus */}
           <Image
             src={busImg}
             alt="bus"
@@ -107,7 +107,7 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
             priority
           />
 
-          {/* 2️⃣ Parche blanco sobre los asientos de la imagen */}
+          {/* Parche blanco */}
           <div
             className="absolute"
             style={{
@@ -120,7 +120,7 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
             }}
           />
 
-          {/* 3️⃣ Grid con imágenes propias de asientos */}
+          {/* Grid asientos */}
           <div
             className="absolute"
             style={{
@@ -147,7 +147,7 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
                           src="/images/ASIENTOS/Recurso 598.png"
                           alt="tv"
                           width={14} height={14}
-                          style={{ width: 14, height: 14, objectFit: 'contain' }}
+                          style={{ width: 'clamp(10px, 3vw, 14px)', height: 'clamp(10px, 3vw, 14px)', objectFit: 'contain' }}
                         />
                       )}
                     </div>
@@ -158,7 +158,6 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
                 const isSel = selected.includes(num);
                 const isReserved = seat === 'R';
 
-                // ✅ Imágenes propias para el interior del bus
                 const imgSrc = isSel
                   ? '/images/ASIENTOS/tu asiento.png'
                   : isReserved
@@ -196,17 +195,24 @@ export function BusMap({ piso, layout, selected, onSelect, tvRows, platino }: Bu
       {/* Separador */}
       <div style={{ width: '100%', height: 2, backgroundColor: '#ffffff', borderRadius: 2, margin: '8px 0 0 0' }} />
 
-      {/* Leyenda — Recurso originales, sin cambios */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 24, marginTop: 20 }}>
+      {/* Leyenda */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 'clamp(8px, 4vw, 24px)',
+        marginTop: 20,
+        flexWrap: 'wrap',
+      }}>
         <Image src="/images/ASIENTOS/Recurso 603.png" alt="Disponible"
           width={0} height={0} sizes="100vw"
-          style={{ height: 50, width: 'auto', display: 'block' }} />
+          style={{ height: 'clamp(36px, 8vw, 50px)', width: 'auto', display: 'block' }} />
         <Image src="/images/ASIENTOS/Recurso 604.png" alt="Reservado"
           width={0} height={0} sizes="100vw"
-          style={{ height: 50, width: 'auto', display: 'block' }} />
+          style={{ height: 'clamp(36px, 8vw, 50px)', width: 'auto', display: 'block' }} />
         <Image src="/images/ASIENTOS/Recurso 606.png" alt="Tu Asiento"
           width={0} height={0} sizes="100vw"
-          style={{ height: 78, width: 'auto', display: 'block', marginTop: 15 }} />
+          style={{ height: 'clamp(55px, 12vw, 78px)', width: 'auto', display: 'block', marginTop: 15 }} />
       </div>
     </>
   );

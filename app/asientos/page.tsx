@@ -202,8 +202,9 @@ function AsientosContent() {
         {/* Servicios a Bordo */}
         <div className="mt-2" style={{ clear: 'both', position: 'relative', zIndex: 0 }}>
           <h4 className="text-base font-bold mb-4 text-gray-900">Servicios a Bordo</h4>
-          <div style={{
-            display: 'flex',
+
+          {/* PC: fila horizontal con scroll — intacto */}
+          <div className="hidden sm:flex" style={{
             flexWrap: 'nowrap',
             gap: 16,
             overflowX: 'auto',
@@ -219,8 +220,17 @@ function AsientosContent() {
               </div>
             ))}
           </div>
-        </div>
 
+          {/* Móvil: 2 columnas con imágenes más pequeñas */}
+          <div className="grid grid-cols-2 gap-3 sm:hidden">
+            {getServicios(platino).map((src, i) => (
+              <div key={i} className="flex justify-center items-center">
+                <Image src={src} alt="servicio" width={80} height={80}
+                  style={{ width: 80, height: 80, objectFit: 'contain', display: 'block' }} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
