@@ -1,6 +1,7 @@
 // components/footer.tsx
 import Image from 'next/image';
 import Link from 'next/link';
+import LibroReclamaciones from '@/components/LibroReclamaciones';
 
 export default function Footer() {
   return (
@@ -52,9 +53,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/reclamos" className="hover:text-white transition-colors">
-                Libro de reclamaciones
-              </Link>
+              <LibroReclamaciones />
             </li>
           </ul>
         </div>
