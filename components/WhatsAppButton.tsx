@@ -9,7 +9,7 @@ import { useState } from 'react';
 // ──────────────────────────────────────────────
 const WHATSAPP_CONFIG = {
   /** Número con código de país, sin espacios ni guiones */
-  phone: '51991887406',
+  phones: ['51991723671', '51949188240'], // ← tus 2 números
 
   /** Mensaje predeterminado que aparecerá en WhatsApp */
   message: '¡Hola! Quiero información sobre los servicios de Transportes Azul 🚌',
@@ -41,11 +41,16 @@ function WhatsAppIcon() {
 export default function WhatsAppButton() {
   const [hovered, setHovered] = useState(false);
 
-  const handleClick = () => {
-    const encoded = encodeURIComponent(WHATSAPP_CONFIG.message);
-    const url = `https://wa.me/${WHATSAPP_CONFIG.phone}?text=${encoded}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
+const handleClick = () => {
+  const encoded = encodeURIComponent(WHATSAPP_CONFIG.message);
+
+  // Elegir número aleatorio
+  const phones = WHATSAPP_CONFIG.phones;
+  const randomPhone = phones[Math.floor(Math.random() * phones.length)];
+
+  const url = `https://wa.me/${randomPhone}?text=${encoded}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+};
 
   const isCustomLogo = WHATSAPP_CONFIG.logo !== 'whatsapp';
 
