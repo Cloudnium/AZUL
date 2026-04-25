@@ -308,8 +308,8 @@ export function BusAzul({ piso, selected, onSelect }: BusProps) {
   const layout = piso === 1 ? LAYOUT_P1 : LAYOUT_P2;
   const tvRows = piso === 1 ? TV_P1     : TV_P2;
   const busImg = piso === 1
-    ? '/images/ASIENTOS/asientos 1.png'
-    : '/images/ASIENTOS/asientos 2.png';
+    ? '/images/ASIENTOS/asientos 4.png'
+    : '/images/ASIENTOS/asientos 3.png';
 
   return (
     <BusMap
