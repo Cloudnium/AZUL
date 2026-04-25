@@ -40,22 +40,50 @@ export default function ContactoPage() {
 
         {/* DESKTOP */}
         <div className="absolute inset-0 hidden md:flex items-center">
-          <div className="absolute left-1/2 right-0 top-0 bottom-0 flex items-center pl-6 sm:pl-10">
+          <div className="absolute left-1/2 right-0 top-0 bottom-0 flex items-center pl-6 sm:pl-2">
             <div className="text-left w-full">
               <FadeIn direction="left" delay={0.1}>
-                <p className="italic uppercase leading-tight" style={{ color: '#ffffff', fontSize: 'clamp(2.5rem, 5vw, 5.5rem)', fontWeight: 100, letterSpacing: '0.12em', opacity: 0.88 }}>
-                  SERVICIO DE
-                </p>
-              </FadeIn>
-              <FadeIn direction="left" delay={0.25}>
-                <h1 className="uppercase leading-none" style={{ color: '#ffffff', fontSize: 'clamp(2.2rem, 7vw, 7.5rem)', fontWeight: 700, letterSpacing: '-0.01em', marginTop: '-0.25em', marginBottom: '0.5em' }}>
-                  CALL CENTER
+                <h1 className="leading-none" style={{ color: '#ffffff', fontSize: 'clamp(4rem, 8vw, 9rem)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '-10px' }}>
+                  Llámenos
                 </h1>
               </FadeIn>
-              <FadeIn direction="left" delay={0.4}>
-                <p className="leading-snug" style={{ color: '#ffffff', fontSize: 'clamp(2.5rem, 3vw, 3rem)', letterSpacing: '0.05em', fontWeight: 200 }}>
-                  Estamos para atenderte,<br />compra y reserva tus pasajes.
+              <FadeIn direction="left" delay={0.25}>
+                <p className="leading-none mb-5" style={{ color: '#ffffff', fontSize: 'clamp(2rem, 4vw, 4.2rem)', fontWeight: 400, letterSpacing: '-0.02em' }}>
+                  y compra tus Pasajes
                 </p>
+              </FadeIn>
+              <FadeIn direction="left" delay={0.4}>
+                <div className="flex justify-around">
+                  <div
+                    className="inline-flex items-center gap-4 px-6 py-4"
+                    style={{ border: '6px solid #ffffff', borderRadius: '80px' }}
+                  >
+                    {/* Ícono blanco sin relleno, solo outline con ondas */}
+                    <svg width="110" height="110" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <mask id="phoneMask">
+                          {/* Todo blanco = visible */}
+                          <circle cx="12" cy="12" r="11" fill="white"/>
+                          {/* Negro = transparente/recortado */}
+                          <path d="M5 9c.2-.8.8-1.5 1.5-1.5h1.2l2 4.5-1.2 1.2c.9 1.8 2.3 3.2 4.1 4.1l1.2-1.2 4.5 2v1.2c0 .7-.7 1.3-1.5 1.5C11 22 3 14 5 9z" stroke="black" strokeWidth="1.6" fill="black" strokeLinejoin="round"/>
+                          <path d="M15 8c.8.8 1.2 1.8 1.2 2.8" stroke="black" strokeWidth="1.5" strokeLinecap="round"/>
+                          <path d="M16.8 6.2c1.3 1.3 2 3 2 4.6" stroke="black" strokeWidth="1.5" strokeLinecap="round"/>
+                          <path d="M18.6 4.4c1.8 1.8 2.8 4.2 2.8 6.4" stroke="black" strokeWidth="1.5" strokeLinecap="round"/>
+                        </mask>
+                      </defs>
+                      {/* Círculo blanco con el teléfono recortado */}
+                      <circle cx="12" cy="12" r="11" fill="white" mask="url(#phoneMask)"/>
+                    </svg>
+                    <div className="text-left">
+                      <p className="font-semibold leading-tight" style={{ color: '#ffffff', fontSize: 'clamp(2rem, 3.2vw, 3.5rem)' }}>
+                        991 723 671
+                      </p>
+                      <p className="font-semibold leading-tight" style={{ color: '#ffffff', fontSize: 'clamp(2rem, 3.2vw, 3.5rem)' }}>
+                        949 188 240
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </FadeIn>
             </div>
           </div>
@@ -65,19 +93,41 @@ export default function ContactoPage() {
         <div className="absolute inset-0 flex md:hidden items-center justify-center" style={{ background: 'rgba(0,15,60,0.48)' }}>
           <div className="text-center px-5">
             <FadeIn direction="up" delay={0.1}>
-              <p className="italic uppercase leading-tight" style={{ color: '#fff', fontSize: 'clamp(1.2rem, 5.5vw, 1.8rem)', fontWeight: 100, letterSpacing: '0.12em', opacity: 0.88 }}>
-                SERVICIO DE
-              </p>
-            </FadeIn>
-            <FadeIn direction="up" delay={0.25}>
-              <h1 className="uppercase leading-none whitespace-nowrap" style={{ color: '#fff', fontSize: 'clamp(2.4rem, 12vw, 3.8rem)', fontWeight: 700, letterSpacing: '-0.01em', marginTop: '-0.05em', marginBottom: '0.3em' }}>
-                CALL CENTER
+              <h1 className="leading-none" style={{ color: '#fff', fontSize: 'clamp(2.8rem, 13vw, 4rem)', fontWeight: 700 }}>
+                Llámenos
               </h1>
             </FadeIn>
-            <FadeIn direction="up" delay={0.4}>
-              <p className="leading-snug" style={{ color: '#fff', fontSize: 'clamp(1rem, 4.5vw, 1.4rem)', letterSpacing: '0.03em', fontWeight: 200 }}>
-                Estamos para atenderte,<br />compra y reserva tus pasajes.
+            <FadeIn direction="up" delay={0.25}>
+              <p className="leading-snug mb-3" style={{ color: '#fff', fontSize: 'clamp(1.2rem, 5.5vw, 1.7rem)', fontWeight: 400 }}>
+                y compra tus Pasajes
               </p>
+            </FadeIn>
+            <FadeIn direction="up" delay={0.4}>
+              <div
+                className="inline-flex items-center gap-3 px-6 py-4 rounded-full"
+                style={{ border: '4px solid #ffffff' }}
+              >
+                <svg width="65" height="65" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <mask id="phoneMaskMobile">
+                      <circle cx="12" cy="12" r="11" fill="white"/>
+                      <path d="M5 9c.2-.8.8-1.5 1.5-1.5h1.2l2 4.5-1.2 1.2c.9 1.8 2.3 3.2 4.1 4.1l1.2-1.2 4.5 2v1.2c0 .7-.7 1.3-1.5 1.5C11 22 3 14 5 9z" stroke="black" strokeWidth="1.6" fill="black" strokeLinejoin="round"/>
+                      <path d="M15 8c.8.8 1.2 1.8 1.2 2.8" stroke="black" strokeWidth="1.5" strokeLinecap="round"/>
+                      <path d="M16.8 6.2c1.3 1.3 2 3 2 4.6" stroke="black" strokeWidth="1.5" strokeLinecap="round"/>
+                      <path d="M18.6 4.4c1.8 1.8 2.8 4.2 2.8 6.4" stroke="black" strokeWidth="1.5" strokeLinecap="round"/>
+                    </mask>
+                  </defs>
+                  <circle cx="12" cy="12" r="11" fill="white" mask="url(#phoneMaskMobile)"/>
+                </svg>
+                <div className="text-left">
+                  <p className="font-semibold leading-tight" style={{ color: '#fff', fontSize: 'clamp(1.3rem, 6vw, 1.8rem)' }}>
+                    991 723 671
+                  </p>
+                  <p className="font-semibold leading-tight" style={{ color: '#fff', fontSize: 'clamp(1.3rem, 6vw, 1.8rem)' }}>
+                    949 188 240
+                  </p>
+                </div>
+              </div>
             </FadeIn>
           </div>
         </div>
