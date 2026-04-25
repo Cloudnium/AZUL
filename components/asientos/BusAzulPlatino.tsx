@@ -1,4 +1,3 @@
-// app/asientos/BusAzulPlatino.tsx
 'use client';
 
 import Image from 'next/image';
@@ -11,52 +10,45 @@ interface BusProps {
   onSelect: (num: string) => void;
 }
 
-// ─── Platino Piso 1 — asientos 4.png ─────────────────────────────────────────
-// 4 filas, layout [2 + pasillo + 2]
-// Fila 1: azul azul | libre libre
-// Fila 2: libre libre | libre libre
-// Fila 3: azul azul | libre libre
-// Fila 4: libre libre | gris gris
 const LAYOUT_P1: (S | null)[][] = [
-  ['R','R',null,'A','A'],
-  ['A','A',null,'A','A'],
-  ['R','R',null,'A','A'],
-  ['A','A',null,'R','R'],
+  ['R', 'R', null, 'R'],
+  ['A', 'A', null, 'A'],
+  ['R', 'R', null, 'A'],
+  ['A', 'A', null, 'A'],
 ];
-const TV_P1: number[] = []; // no hay TV en piso 1 platino
+const TV_P1: number[] = [0];
 
-// ─── Platino Piso 2 — asientos 3.png ─────────────────────────────────────────
-// 11 filas, layout [2 + pasillo + 2]
-// Mirando la imagen de arriba hacia abajo:
 const LAYOUT_P2: (S | null)[][] = [
-  ['A','A',null,'A','A'],  // fila 0 — TV en pasillo
-  ['R','R',null,'A','A'],  // fila 1
-  ['R','A',null,'R','R'],  // fila 2 — escaleras derecha
-  ['R','R',null,'R','R'],  // fila 3
-  ['R','A',null,'R','R'],  // fila 4 — TV en pasillo
-  ['R','A',null,'R','R'],  // fila 5
-  ['A','A',null,'R','R'],  // fila 6
-  ['A','A',null,'A','A'],  // fila 7
-  ['A','A',null,'A','A'],  // fila 8 — TV en pasillo
-  ['A','A',null,'A','A'],  // fila 9
-  ['A','A',null,'A','A'],  // fila 10
+  ['A', 'A', null, 'A'],
+  ['R', 'R', null, null],
+  ['R', 'A', null, null],
+  ['R', 'R', null, 'R'],
+  ['R', 'A', null, 'R'],
+  ['R', 'A', null, 'R'],
+  ['A', 'A', null, 'R'],
+  ['A', 'A', null, 'A'],
+  ['A', 'A', null, 'A'],
+  ['A', 'A', null, 'A'],
+  ['A', 'A', null, 'A'],
 ];
-const TV_P2 = [0, 4, 8];
+const TV_P2: number[] = [0, 4, 8];
+const ESCALERA_ROW_P2 = 2; // ← subida una fila (era 2)
 
 function BusMap({
-  piso,
   layout,
   tvRows,
   selected,
   onSelect,
   busImg,
+  isPiso1,
 }: {
-  piso: 1 | 2;
   layout: (S | null)[][];
   tvRows: number[];
   selected: string[];
   onSelect: (num: string) => void;
   busImg: string;
+  showBano: boolean;
+  isPiso1: boolean;
 }) {
   let seatCounter = 0;
   const seatNumbers: (string | null)[][] = layout.map(row =>
@@ -67,93 +59,209 @@ function BusMap({
     })
   );
 
-  const colCount = layout[0]?.length ?? 4;
+  // Tus valores corregidos — no se tocan
+  const patchLeft   = isPiso1 ? '12.5%' : '12.5%';
+  const patchRight  = isPiso1 ? '12.5%' : '12.5%';
+  const patchTop    = isPiso1 ? '15.5%' : '9.5%';
+  const patchBottom = isPiso1 ? '6%'    : '6%';
+  const seatSize    = isPiso1 ? 40      : 40;
 
   return (
     <>
       <div className="relative flex justify-center items-start mb-10">
+        <div className="relative" style={{ width: '100%', maxWidth: 280 }}>
 
-        {/* Iconos laterales */}
-        <div className="absolute left-0 top-0 z-10">
-          <Image src="/images/ASIENTOS/Recurso 592.png" alt="baños"
-            width={22} height={22}
-            style={{ width: 22, height: 22, objectFit: 'contain' }} />
-        </div>
-        <div className="absolute right-0 top-0 z-10">
-          <Image src="/images/ASIENTOS/Recurso 596.png" alt="escaleras"
-            width={22} height={22}
-            style={{ width: 22, height: 22, objectFit: 'contain' }} />
-        </div>
-
-        <div className="relative" style={{ maxWidth: 240, width: '100%' }}>
-
-          {/* Imagen del bus */}
-          <Image src={busImg} alt="bus" width={240} height={500}
+          <Image
+            src={busImg}
+            alt="bus"
+            width={280}
+            height={640}
             style={{ width: '100%', height: 'auto', objectFit: 'contain', display: 'block' }}
-            priority />
+            priority
+          />
 
           {/* Parche blanco */}
-          <div className="absolute" style={{
-            top: '22%', bottom: '7%', left: '14%', right: '8%',
-            backgroundColor: '#ffffff', zIndex: 1,
+          <div style={{
+            position: 'absolute',
+            top: patchTop, bottom: patchBottom,
+            left: patchLeft, right: patchRight,
+            backgroundColor: '#ffffff',
+            borderRadius: '0 0 18px 18px',
+            zIndex: 1,
           }} />
 
-          {/* Grid de asientos */}
-          <div className="absolute" style={{
-            top: '22%', bottom: '7%', left: '14%', right: '8%',
-            zIndex: 2,
-            display: 'grid',
-            gridTemplateColumns: `repeat(${colCount}, 1fr)`,
-            gap: '2px',
-            alignContent: 'start',
-            padding: '3px 2px',
-          }}>
-            {layout.map((row, ri) =>
-              row.map((seat, ci) => {
-                // Pasillo
-                if (seat === null) {
+          {/* PISO 1: bloque subido — justifyContent flex-start con paddingTop */}
+          {isPiso1 && (
+            <div style={{
+              position: 'absolute',
+              top: patchTop,
+              bottom: patchBottom,
+              left: patchLeft,
+              right: patchRight,
+              zIndex: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',  // ← sube el bloque
+              padding: '32% 6px 8px 6px',     // ← paddingTop empuja hasta la línea
+              gap: 25,
+            }}>
+              {/* Íconos baño + escalera */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: 8,
+                padding: '0 2px',
+              }}>
+                <Image
+                  src="/images/ASIENTOS/banio.png"
+                  alt="baños"
+                  width={28} height={28}
+                  style={{ width: 28, height: 28, objectFit: 'contain' }}
+                />
+                <Image
+                  src="/images/ASIENTOS/escalera.png"
+                  alt="escaleras"
+                  width={32} height={32}
+                  style={{ width: 32, height: 32, objectFit: 'contain' }}
+                />
+              </div>
+
+              {/* Grid asientos piso 1 */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '12px 3px',
+              }}>
+                {layout.map((row, ri) =>
+                  row.map((seat, ci) => {
+                    if (ci === 2) {
+                      return (
+                        <div key={`${ri}-${ci}`} style={{
+                          display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-start', marginBottom: 22
+                        }}>
+                          {tvRows.includes(ri) && (
+                            <Image src="/images/ASIENTOS/televisor.png" alt="tv"
+                              width={30} height={30}
+                              style={{ width: 30, height: 30, objectFit: 'contain' }} />
+                          )}
+                        </div>
+                      );
+                    }
+                    if (seat === null) return <div key={`${ri}-${ci}`} />;
+
+                    const num = seatNumbers[ri][ci]!;
+                    const isSel = selected.includes(num);
+                    const isReserved = seat === 'R';
+                    const imgSrc = isSel
+                      ? '/images/ASIENTOS/tu asiento.png'
+                      : isReserved
+                      ? '/images/ASIENTOS/asiento reservado.png'
+                      : '/images/ASIENTOS/asiento libre.png';
+
+                    return (
+                      <button key={`${ri}-${ci}`}
+                        onClick={() => !isReserved && onSelect(num)}
+                        disabled={isReserved}
+                        style={{
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          background: 'transparent', border: 0, outline: 'none', padding: 0,
+                          cursor: isReserved ? 'not-allowed' : 'pointer',
+                          transform: isSel ? 'scale(1.06)' : 'scale(1)',
+                          transition: 'transform 0.12s',
+                        }}
+                        aria-label={`Asiento ${num}`}
+                      >
+                        <Image src={imgSrc} alt={`Asiento ${num}`}
+                          width={seatSize} height={seatSize}
+                          style={{ width: '100%', maxWidth: seatSize, height: 'auto', objectFit: 'contain' }} />
+                      </button>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* PISO 2: grid completo */}
+          {!isPiso1 && (
+            <div style={{
+              position: 'absolute',
+              top: patchTop,
+              bottom: patchBottom,
+              left: patchLeft,
+              right: patchRight,
+              zIndex: 2,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '3px',
+              alignContent: 'space-evenly',
+              padding: '4px 2px',
+            }}>
+              {layout.map((row, ri) =>
+                row.map((seat, ci) => {
+                  if (ci === 2) {
+                    const showTv = tvRows.includes(ri);
+                    return (
+                      <div key={`${ri}-${ci}`} style={{
+                        display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-start', marginBottom: 22
+                      }}>
+                        {showTv && (
+                          <Image src="/images/ASIENTOS/televisor.png" alt="tv"
+                            width={30} height={30}
+                            style={{ width: 30, height: 30, objectFit: 'contain' }} />
+                        )}
+                      </div>
+                    );
+                  }
+
+                  // Escalera en col 3, fila 1 (subida)
+                  if (ci === 3 && ri === ESCALERA_ROW_P2 && seat === null) {
+                    return (
+                      <div key={`${ri}-${ci}`} style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '-36px'
+                      }}>
+                        <Image src="/images/ASIENTOS/escalera.png" alt="escaleras"
+                          width={32} height={32}
+                          style={{ width: 32, height: 32, objectFit: 'contain' }} />
+                      </div>
+                    );
+                  }
+
+                  if (seat === null) return <div key={`${ri}-${ci}`} />;
+
+                  const num = seatNumbers[ri][ci]!;
+                  const isSel = selected.includes(num);
+                  const isReserved = seat === 'R';
+                  const imgSrc = isSel
+                    ? '/images/ASIENTOS/tu asiento.png'
+                    : isReserved
+                    ? '/images/ASIENTOS/asiento reservado.png'
+                    : '/images/ASIENTOS/asiento libre.png';
+
                   return (
-                    <div key={`${ri}-${ci}`}
-                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 32 }}>
-                      {tvRows.includes(ri) && (
-                        <Image src="/images/ASIENTOS/Recurso 598.png" alt="tv"
-                          width={14} height={14}
-                          style={{ width: 14, height: 14, objectFit: 'contain' }} />
-                      )}
-                    </div>
+                    <button key={`${ri}-${ci}`}
+                      onClick={() => !isReserved && onSelect(num)}
+                      disabled={isReserved}
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        background: 'transparent', border: 0, outline: 'none', padding: 0,
+                        cursor: isReserved ? 'not-allowed' : 'pointer',
+                        transform: isSel ? 'scale(1.06)' : 'scale(1)',
+                        transition: 'transform 0.12s',
+                      }}
+                      aria-label={`Asiento ${num}`}
+                    >
+                      <Image src={imgSrc} alt={`Asiento ${num}`}
+                        width={seatSize} height={seatSize}
+                        style={{ width: '100%', maxWidth: seatSize, height: 'auto', objectFit: 'contain' }} />
+                    </button>
                   );
-                }
+                })
+              )}
+            </div>
+          )}
 
-                const num = seatNumbers[ri][ci]!;
-                const isSel = selected.includes(num);
-                const isReserved = seat === 'R';
-
-                const imgSrc = isSel
-                  ? '/images/ASIENTOS/tu asiento.png'
-                  : isReserved
-                  ? '/images/ASIENTOS/asiento reservado.png'
-                  : '/images/ASIENTOS/asiento libre.png';
-
-                return (
-                  <button key={`${ri}-${ci}`}
-                    onClick={() => !isReserved && onSelect(num)}
-                    disabled={isReserved}
-                    className="flex items-center justify-center bg-transparent border-0 outline-none p-0"
-                    style={{
-                      cursor: isReserved ? 'not-allowed' : 'pointer',
-                      transform: isSel ? 'scale(1.08)' : 'scale(1)',
-                      transition: 'transform 0.12s',
-                    }}
-                    aria-label={`Asiento ${num}`}
-                  >
-                    <Image src={imgSrc} alt={`Asiento ${num}`}
-                      width={44} height={44}
-                      style={{ width: '100%', maxWidth: 44, height: 'auto', objectFit: 'contain' }} />
-                  </button>
-                );
-              })
-            )}
-          </div>
         </div>
       </div>
 
@@ -177,20 +285,21 @@ function BusMap({
 }
 
 export function BusAzulPlatino({ piso, selected, onSelect }: BusProps) {
-  const layout  = piso === 1 ? LAYOUT_P1 : LAYOUT_P2;
-  const tvRows  = piso === 1 ? TV_P1     : TV_P2;
-  const busImg  = piso === 1
-    ? '/images/ASIENTOS/asientos 4.png'
-    : '/images/ASIENTOS/asientos 3.png';
+  const layout = piso === 1 ? LAYOUT_P1 : LAYOUT_P2;
+  const tvRows = piso === 1 ? TV_P1     : TV_P2;
+  const busImg = piso === 1
+    ? '/images/ASIENTOS/asientos 1.png'
+    : '/images/ASIENTOS/asientos 2.png';
 
   return (
     <BusMap
-      piso={piso}
       layout={layout}
       tvRows={tvRows}
       selected={selected}
       onSelect={onSelect}
       busImg={busImg}
+      showBano={piso === 1}
+      isPiso1={piso === 1}
     />
   );
 }
