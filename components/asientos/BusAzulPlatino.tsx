@@ -1,3 +1,4 @@
+// components/asientos/BusAzul.tsx
 'use client';
 
 import Image from 'next/image';

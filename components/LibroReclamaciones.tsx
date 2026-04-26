@@ -1,3 +1,4 @@
+// components/LibroReclamaciones.tsx
 'use client';
 
 import { useState } from 'react';
@@ -10,7 +11,11 @@ export default function LibroReclamaciones() {
   const today = new Date().toISOString().split('T')[0];
 
   function resetForm() { setTipo('reclamo'); setEnviado(false); }
-  function handleClose() { setOpen(false); resetForm(); }
+  function handleClose() { 
+    setOpen(false); 
+    resetForm(); 
+    document.body.style.overflow = '';
+  }
   const [codigo, setCodigo] = useState(''); // ← agrega esta línea junto a los otros useState del inicio
 
   async function handleEnviar(e: React.FormEvent<HTMLFormElement>) {
@@ -41,7 +46,7 @@ export default function LibroReclamaciones() {
     <>
       {/* ── TRIGGER EN FOOTER ── */}
       <button
-        onClick={() => setOpen(true)}
+        onClick={() => { setOpen(true); document.body.style.overflow = 'hidden'; }}
         className="text-blue-200 hover:text-white transition-colors text-left text-base bg-transparent border-none cursor-pointer p-0"
       >
         Libro de reclamaciones
@@ -51,7 +56,7 @@ export default function LibroReclamaciones() {
       {open && (
         <div
           onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
-          className="fixed inset-0 z-[9999] overflow-y-auto flex items-start justify-center p-3 sm:p-6"
+          className="fixed inset-0 z-9999 overflow-y-auto flex items-start justify-center p-3 sm:p-6"
           style={{ background: 'rgba(0,0,0,0.65)' }}
         >
           <div className="bg-white rounded-xl w-full max-w-2xl my-3 overflow-hidden shadow-2xl">
@@ -59,7 +64,7 @@ export default function LibroReclamaciones() {
             {/* CABECERA */}
             <div className="flex items-start justify-between gap-3 px-4 sm:px-6 py-4" style={{ background: '#1a4fa0' }}>
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg flex items-center justify-center shrink-0">
                   <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
                     <rect width="36" height="36" rx="5" fill="#1a4fa0"/>
                     <path d="M8 10h20M8 14h14M8 18h16M8 22h12M8 26h10" stroke="white" strokeWidth="2" strokeLinecap="round"/>
@@ -76,7 +81,7 @@ export default function LibroReclamaciones() {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-1 flex-shrink-0">
+              <div className="flex gap-1 shrink-0">
                 <button onClick={resetForm} title="Reiniciar"
                   className="text-white opacity-70 hover:opacity-100 text-xl px-2 py-1 bg-transparent border-none cursor-pointer leading-none">↺</button>
                 <button onClick={handleClose} title="Cerrar"
@@ -94,7 +99,7 @@ export default function LibroReclamaciones() {
               ].map((m, i) => (
                 <div key={i} className={`px-3 py-2 ${i % 2 === 0 ? 'border-r border-gray-200' : ''} sm:border-r sm:last:border-r-0`}>
                   <div className="text-[10px] text-gray-400 mb-0.5">{m.label}</div>
-                  <div className="text-[11px] font-semibold text-gray-700 leading-tight break-words">{m.value}</div>
+                  <div className="text-[11px] font-semibold text-gray-700 leading-tight wrap-break-words">{m.value}</div>
                 </div>
               ))}
             </div>
@@ -224,7 +229,7 @@ export default function LibroReclamaciones() {
                         }}
                       >
                         <div className="flex items-center gap-2 mb-1">
-                          <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                          <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0"
                             style={{ border: `1.5px solid ${tipo === t ? '#2a5cbf' : '#9ca3af'}` }}>
                             {tipo === t && <div className="w-2 h-2 rounded-full" style={{ background: '#2a5cbf' }} />}
                           </div>
@@ -243,12 +248,12 @@ export default function LibroReclamaciones() {
                     <F label="Detalle">
                       <textarea name="detalle" required
                         placeholder="Descripción breve de la ocurrencia"
-                        className={`${inp} min-h-[90px] resize-y`} />
+                        className={`${inp} min-h-90px resize-y`} />
                     </F>
                     <F label="Pedido">
                       <textarea name="pedido"
                         placeholder="¿Qué espera obtener del reclamo o queja?"
-                        className={`${inp} min-h-[90px] resize-y`} />
+                        className={`${inp} min-h-90px resize-y`} />
                     </F>
                   </div>
                 </Section>

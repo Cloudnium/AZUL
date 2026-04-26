@@ -2,10 +2,11 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Pencil } from 'lucide-react';
 import { StepsBar } from '@/components/StepsBar';
+import { useDatePicker } from '@/hooks/busqueda/useDatePicker';
 
 const styles = `
   :root {
@@ -17,14 +18,6 @@ const styles = `
     --brand-text:   #185adb;
   }
 `;
-
-const DIAS = [
-  { day: 'DOM', num: 14, month: 'Jul' },
-  { day: 'LUN', num: 15, month: 'Jul' },
-  { day: 'MAR', num: 16, month: 'Jul' },
-  { day: 'MIE', num: 17, month: 'Jul' },
-  { day: 'JUE', num: 18, month: 'Jul' },
-];
 
 const VIAJES = [
   {
@@ -71,15 +64,39 @@ function BusquedaContent() {
   const destino = searchParams.get('destino') || 'Piura';
   const salida  = searchParams.get('salida')  || '';
   const regreso = searchParams.get('regreso') || '';
-  const [diaActivo, setDiaActivo] = useState(1);
-  const diaSeleccionado = DIAS[diaActivo];
-  const MESES: Record<string, string> = {
-    'Ene':'01','Feb':'02','Mar':'03','Abr':'04','May':'05','Jun':'06',
-    'Jul':'07','Ago':'08','Sep':'09','Oct':'10','Nov':'11','Dic':'12'
-  };
-  const fechaActiva = `${String(diaSeleccionado.num).padStart(2,'0')}/${MESES[diaSeleccionado.month]}/2026`;
+  const tipo    = searchParams.get('tipo')    || '';
+  const esIdaVuelta = tipo === 'ida-vuelta' || (tipo === '' && !!regreso);
 
-  // Construye la URL de asientos con TODOS los datos del viaje
+  const {
+    dias: DIAS,
+    activeIndex: diaActivo,
+    setActiveIndex: setDiaActivo,
+    fechaActiva,
+    fechaActivaDate,
+    irAtras,
+    irAdelante,
+  } = useDatePicker(salida);
+
+  const fechaRegresoAjustada = (() => {
+    if (!regreso || !esIdaVuelta) return '';
+    function parseSlash(f: string): Date {
+      const [d, m, y] = f.split('/');
+      const date = new Date(Number(y), Number(m) - 1, Number(d));
+      date.setHours(0, 0, 0, 0);
+      return date;
+    }
+    const salidaOrig  = salida  ? parseSlash(salida)  : new Date();
+    const regresoOrig = parseSlash(regreso);
+    const diffMs   = regresoOrig.getTime() - salidaOrig.getTime();
+    const diffDias = Math.round(diffMs / (1000 * 60 * 60 * 24));
+    const regresoNuevo = new Date(fechaActivaDate);
+    regresoNuevo.setDate(regresoNuevo.getDate() + diffDias);
+    const dd = String(regresoNuevo.getDate()).padStart(2, '0');
+    const mm = String(regresoNuevo.getMonth() + 1).padStart(2, '0');
+    const yy = regresoNuevo.getFullYear();
+    return `${dd}/${mm}/${yy}`;
+  })();
+
   function buildAsientosUrl(v: typeof VIAJES[0]) {
     const params = new URLSearchParams({
       viajeId:      String(v.id),
@@ -95,8 +112,8 @@ function BusquedaContent() {
       tipo1:        v.piso1.tipo,
       tipo2:        v.piso2.tipo,
       grados2:      String(v.piso2.grados),
-      fecha:        salida || fechaActiva,
-      fechaLlegada: regreso,
+      fecha:        fechaActiva,
+      fechaLlegada: fechaRegresoAjustada || regreso,
     });
     return `/asientos?${params.toString()}`;
   }
@@ -111,7 +128,8 @@ function BusquedaContent() {
           <p className="text-sm text-gray-500 mb-5 font-semibold mt-10">
             Inicio <span className="mx-2">›</span> Búsqueda
           </p>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          {/* MÓVIL: título + lápiz en misma fila. PC: layout original */}
+          <div className="flex items-start justify-between gap-2 sm:items-center">
             <div>
               <h1 className="text-4xl font-semibold flex items-center gap-3 text-gray-900">
                 {origen}
@@ -125,12 +143,24 @@ function BusquedaContent() {
                 {destino}
               </h1>
               <p className="text-sm text-gray-500 mt-1 font-semibold">
-                Ida • 1 Pasajero{salida ? ` • ${salida}` : ''}
+                {esIdaVuelta ? 'Ida y vuelta' : 'Ida'} • 1 Pasajero • {fechaActiva}
               </p>
             </div>
-            <Link href={`/?origen=${origen}&destino=${destino}`}>
+            <Link href={`/?origen=${origen}&destino=${destino}`} className="shrink-0">
+              {/* Móvil: solo ícono */}
               <button
-                className="flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold tracking-widest transition-all w-fit shadow-sm"
+                className="flex sm:hidden items-center justify-center w-10 h-10 rounded-full mt-1"
+                style={{
+                  border: '1px solid var(--brand-mid)',
+                  backgroundColor: 'var(--brand-light)',
+                  color: 'var(--brand)',
+                }}
+              >
+                <Pencil className="w-4 h-4" />
+              </button>
+              {/* PC: botón completo — idéntico al original */}
+              <button
+                className="hidden sm:flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold tracking-widest transition-all w-fit shadow-sm"
                 style={{
                   border: '1px solid var(--brand-mid)',
                   backgroundColor: 'var(--brand-light)',
@@ -150,21 +180,27 @@ function BusquedaContent() {
       <div className="max-w-5xl mx-auto px-2">
         {/* Date selector */}
         <div className="flex items-center gap-2 overflow-x-auto pb-8">
+
+          {/* Flecha izquierda — PC: tamaño original. Móvil: más compacta */}
           <button
-            className="flex flex-col items-center justify-center px-3 py-1 rounded-lg border-2 border-gray-200 bg-white text-gray-800 text-4xl shrink-0 transition-all"
-            style={{ minWidth: 48, minHeight: 80 }}
+            onClick={irAtras}
+            className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-200 bg-white text-gray-800 shrink-0 transition-all
+                       w-9 h-16 text-2xl px-1
+                       sm:w-auto sm:h-auto sm:min-w-12 sm:min-h-20 sm:text-4xl sm:px-3"
             onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--brand-mid)')}
             onMouseLeave={e => (e.currentTarget.style.borderColor = '#e5e7eb')}
           >
             ‹
           </button>
+
           {DIAS.map((d, i) => (
             <button
-              key={i}
+              key={d.iso}
               onClick={() => setDiaActivo(i)}
-              className="flex flex-col items-center px-6 py-1 rounded-lg border-2 transition-all shrink-0"
+              className="flex flex-col items-center rounded-lg border-2 transition-all shrink-0
+                         px-3 py-1 sm:px-6 sm:py-1"
               style={{
-                minWidth: 80,
+                minWidth: 52,
                 backgroundColor: diaActivo === i ? 'var(--brand)' : '#fff',
                 color: diaActivo === i ? '#fff' : '#4b5563',
                 borderColor: diaActivo === i ? 'var(--brand)' : '#e5e7eb',
@@ -176,14 +212,18 @@ function BusquedaContent() {
                 if (diaActivo !== i) e.currentTarget.style.borderColor = '#e5e7eb';
               }}
             >
-              <span className="text-[14px] font-bold uppercase tracking-widest">{d.day}</span>
-              <span className="text-2xl font-semibold leading-tight">{d.num}</span>
-              <span className="text-xs font-normal" style={{ opacity: 0.95 }}>{d.month}</span>
+              <span className="text-[11px] sm:text-[14px] font-bold uppercase tracking-widest">{d.day}</span>
+              <span className="text-lg sm:text-2xl font-semibold leading-tight">{d.num}</span>
+              <span className="text-[10px] sm:text-xs font-normal" style={{ opacity: 0.95 }}>{d.month}</span>
             </button>
           ))}
+
+          {/* Flecha derecha — PC: tamaño original. Móvil: más compacta */}
           <button
-            className="flex flex-col items-center justify-center px-3 py-1 rounded-lg border-2 border-gray-200 bg-white text-gray-800 text-4xl shrink-0 transition-all"
-            style={{ minWidth: 48, minHeight: 80 }}
+            onClick={irAdelante}
+            className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-200 bg-white text-gray-800 shrink-0 transition-all
+                       w-9 h-16 text-2xl px-1
+                       sm:w-auto sm:h-auto sm:min-w-12 sm:min-h-20 sm:text-4xl sm:px-3"
             onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--brand-mid)')}
             onMouseLeave={e => (e.currentTarget.style.borderColor = '#e5e7eb')}
           >
