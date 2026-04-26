@@ -11,13 +11,31 @@ export default function LibroReclamaciones() {
 
   function resetForm() { setTipo('reclamo'); setEnviado(false); }
   function handleClose() { setOpen(false); resetForm(); }
-  function handleEnviar(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // Conecta tu backend aquí:
-    // const data = new FormData(e.currentTarget);
-    // await fetch('/api/reclamaciones', { method: 'POST', body: data });
-    setEnviado(true);
+  const [codigo, setCodigo] = useState(''); // ← agrega esta línea junto a los otros useState del inicio
+
+  async function handleEnviar(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const raw  = new FormData(form);
+  const data = Object.fromEntries(raw.entries());
+
+  try {
+    const res  = await fetch('/api/reclamaciones', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const json = await res.json();
+    if (json.ok) {
+      setEnviado(true);
+      setCodigo(json.codigo);
+    } else {
+      alert('Hubo un error al enviar. Intente nuevamente.');
+    }
+  } catch {
+    alert('Error de conexión. Intente nuevamente.');
   }
+}
 
   return (
     <>
@@ -87,6 +105,9 @@ export default function LibroReclamaciones() {
                 <div className="text-5xl mb-4">✅</div>
                 <div className="text-lg font-semibold mb-2" style={{ color: '#1a4fa0' }}>
                   Reclamo enviado con éxito
+                </div>
+                <div className="text-sm font-semibold text-gray-600 mb-6">
+                  Código de seguimiento: <span style={{ color: '#1a4fa0' }}>{codigo}</span>
                 </div>
                 <div className="text-sm text-gray-500 mb-6">
                   Recibirá una respuesta en un plazo máximo de 30 días calendario.
