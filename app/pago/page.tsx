@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { StepsBar } from '@/components/StepsBar';
 import { ResumenViaje } from '@/components/ResumenViaje';
+import TerminosModal from '@/components/pago/TerminosModal';
 
 const METODOS = [
   { label: 'Yape',      img: '/images/PAGO/Recurso 537.png' },
@@ -52,9 +53,9 @@ function PagoContent() {
   const [email, setEmail]             = useState(emailParam);
   const [confirmEmail, setConfirmEmail] = useState('');
   const [loading, setLoading]         = useState(false);
-
   // Errores
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [modalTerminos, setModalTerminos] = useState(true); // true = abre automático
 
   function marcarTocado(campo: string) {
     setTouched(prev => ({ ...prev, [campo]: true }));
@@ -80,10 +81,19 @@ function PagoContent() {
     }
   }
 
+  // 3. Handlers
+  function handleAceptarTerminos() {
+    setTerminos(true);
+    setModalTerminos(false);
+  }
+
+  function handleRechazarTerminos() {
+    setModalTerminos(false);
+    router.back(); // vuelve a página de pasajero
+  }
   const handleFinalizar = async () => {
     // Marcar todos tocados
     setTouched({ nombre: true, numDoc: true, email: true, confirmEmail: true });
-
     if (!terminos) {
       alert('Debes aceptar los términos y condiciones');
       return;
@@ -264,7 +274,13 @@ function PagoContent() {
                   onChange={e => setTerminos(e.target.checked)}
                   className="w-4 h-4 accent-[#BC171E]"
                 />
-                <a href="#" className="font-bold underline text-gray-700">Términos y condiciones</a>
+                <button
+                  type="button"
+                  onClick={() => setModalTerminos(true)}
+                  className="font-bold underline text-gray-700 bg-transparent border-none cursor-pointer p-0 text-sm"
+                >
+                  Términos y condiciones
+                </button>
               </label>
               {!terminos && touched['nombre'] && (
                 <p className="text-red-500 text-[11px] mt-1">Debes aceptar los términos y condiciones</p>
@@ -292,6 +308,12 @@ function PagoContent() {
             />
           </div>
         </div>
+          <TerminosModal
+            open={modalTerminos}
+            onAceptar={handleAceptarTerminos}
+            onRechazar={handleRechazarTerminos}
+            yaAceptado={terminos}  // ← nueva prop
+          />
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ export default function HomePage() {
   const [errorRegreso, setErrorRegreso] = useState(false);
 
   const handleSearch = () => {
-    if (tab === 'ida-vuelta' && !regreso) {
+    if (tab === 'ida-vuelta' && salida && !regreso) {
       setErrorRegreso(true);
       return;
     }
