@@ -51,7 +51,7 @@ export default function LibroReclamaciones() {
                 </div>
                 <div className="min-w-0">
                   <div className="text-white font-semibold text-sm sm:text-base leading-tight">
-                    Libro de Reclamaciones — Sullana Express (Digital)
+                    Libro de Reclamaciones — Transportes Azul (Digital)
                   </div>
                   <div className="text-blue-200 text-xs mt-0.5 hidden sm:block">
                     Registro oficial de disconformidades y quejas del consumidor
@@ -69,9 +69,9 @@ export default function LibroReclamaciones() {
             {/* BARRA META */}
             <div className="grid grid-cols-2 sm:grid-cols-4 border-b border-gray-200 bg-gray-50">
               {[
-                { label: 'Empresa',       value: 'EMP. DE TRANSP. Y TURISMO SULLANA EXPRESS' },
-                { label: 'RUC',           value: '20427652956' },
-                { label: 'Dirección',     value: 'AV. INDUSTRIAL CON SANTA LUCIA NRO. 291 LIMA' },
+                { label: 'Empresa',       value: 'TRANSPORTES Y LOGISTICA AZUL S.A.C.' },
+                { label: 'RUC',           value: '20615003663' },
+                { label: 'Dirección',     value: 'AV. INDUSTRIAL NRO. 291 URB. INDUSTRIAL LA AURORA LIMA - LIMA - ATE' },
                 { label: 'Fecha Reclamo', value: today },
               ].map((m, i) => (
                 <div key={i} className={`px-3 py-2 ${i % 2 === 0 ? 'border-r border-gray-200' : ''} sm:border-r sm:last:border-r-0`}>
@@ -169,7 +169,7 @@ export default function LibroReclamaciones() {
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <div className="col-span-2 sm:col-span-1">
                       <F label="Empresa">
-                        <input type="text" value="EMP. TRANSPORTES SULLANA" readOnly
+                        <input type="text" value="TRANSPORTES Y LOGISTICA AZUL S.A.C." readOnly
                           className={`${inp} bg-gray-100 text-gray-400 text-xs`} />
                       </F>
                     </div>
@@ -277,5 +277,5 @@ function F({ label, children }: { label: string; children: React.ReactNode }) {
   );
 }
 
-const inp = 'w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-blue-500 box-border font-[inherit]';
+const inp = 'w-full px-3 py-2 border border-gray-300 rounded-md text-sm text-blue-700 focus:outline-none focus:border-blue-500 box-border font-[inherit]';
 const sel = `${inp} cursor-pointer`;
