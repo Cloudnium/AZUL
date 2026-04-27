@@ -35,7 +35,8 @@ export default function HomePage() {
   const [destino, setDestino] = useState('');
   const [salida, setSalida]   = useState('');
   const [regreso, setRegreso] = useState('');
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000)
+  .toISOString().split('T')[0];
   const [errorRegreso, setErrorRegreso] = useState(false);
 
   const handleSearch = () => {
