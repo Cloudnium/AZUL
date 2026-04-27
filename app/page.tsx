@@ -35,6 +35,7 @@ export default function HomePage() {
   const [destino, setDestino] = useState('');
   const [salida, setSalida]   = useState('');
   const [regreso, setRegreso] = useState('');
+  const today = new Date().toISOString().split('T')[0];
   const [errorRegreso, setErrorRegreso] = useState(false);
 
   const handleSearch = () => {
@@ -116,7 +117,7 @@ export default function HomePage() {
                 <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 text-left">SALIDA</label>
                 <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 h-11 overflow-hidden">
                   <Image src="/images/inicio/Recurso 562.png" alt="" width={17} height={17} style={{ width: 17, height: 17, objectFit: 'contain' }} />
-                  <input type="date" className="w-full text-sm outline-none bg-transparent text-gray-700 cursor-pointer" value={salida} onChange={e => setSalida(e.target.value)} style={{ colorScheme: 'light', minWidth: 0 }} />
+                  <input type="date" className="w-full text-sm outline-none bg-transparent text-gray-700 cursor-pointer" value={salida} onChange={e => setSalida(e.target.value)} min={today} style={{ colorScheme: 'light', minWidth: 0 }} />
                 </div>
               </div>
 
@@ -125,7 +126,7 @@ export default function HomePage() {
                   <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 text-left">REGRESO</label>
                   <div className={`flex items-center gap-2 rounded-xl px-3 h-11 overflow-hidden border ${errorRegreso ? 'border-red-400' : 'border-gray-200'}`}>
                     <Image src="/images/inicio/Recurso 560.png" alt="" width={18} height={18} style={{ width: 18, height: 18, objectFit: 'contain' }} />
-                    <input type="date" className="w-full text-sm outline-none bg-transparent text-gray-700 cursor-pointer" value={regreso} onChange={e => { setRegreso(e.target.value); setErrorRegreso(false); }} style={{ colorScheme: 'light', minWidth: 0 }} />
+                    <input type="date" className="w-full text-sm outline-none bg-transparent text-gray-700 cursor-pointer" value={regreso} onChange={e => { setRegreso(e.target.value); setErrorRegreso(false); }} min={salida || today} style={{ colorScheme: 'light', minWidth: 0 }} />
                   </div>
                   {/* Error solo PC — flota debajo sin mover nada */}
                   {errorRegreso && (
