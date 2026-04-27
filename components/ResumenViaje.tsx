@@ -235,14 +235,24 @@ export function ResumenViaje({
 
       {/* Botón */}
       {variante === 'seleccion' ? (
-        <Link href={asiento ? href : '#'}>
+        onFinalizar ? (
           <button
+            onClick={onFinalizar}
             disabled={!asiento}
             className="mt-4 w-full bg-[#185adb] hover:bg-[#1449b0] disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl tracking-widest text-sm transition-colors shadow-md shadow-[#185adb]/30"
           >
             CONTINUAR
           </button>
-        </Link>
+        ) : (
+          <Link href={asiento ? href : '#'}>
+            <button
+              disabled={!asiento}
+              className="mt-4 w-full bg-[#185adb] hover:bg-[#1449b0] disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl tracking-widest text-sm transition-colors shadow-md shadow-[#185adb]/30"
+            >
+              CONTINUAR
+            </button>
+          </Link>
+        )
       ) : (
         <button
           onClick={onFinalizar}

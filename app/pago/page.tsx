@@ -89,8 +89,11 @@ function PagoContent() {
 
   function handleRechazarTerminos() {
     setModalTerminos(false);
-    router.back(); // vuelve a página de pasajero
+    if (!terminos) {
+      router.back(); // solo regresa si NO había aceptado
+    }
   }
+
   const handleFinalizar = async () => {
     // Marcar todos tocados
     setTouched({ nombre: true, numDoc: true, email: true, confirmEmail: true });

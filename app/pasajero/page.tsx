@@ -19,7 +19,7 @@ function validarEmail(email: string) {
 }
 function validarEdad(edad: string) {
   const n = Number(edad);
-  return n >= 1 && n <= 120;
+  return n >= 18 && n <= 120;
 }
 function validarTelefono(tel: string) {
   return /^\d{7,15}$/.test(tel.trim());
@@ -272,6 +272,7 @@ function PasajeroContent() {
                     onChange={(e) => setTelefono(e.target.value)}
                     onBlur={() => marcarTocado('telefono')}
                     placeholder="999 999 999"
+                    maxLength={9}
                   />
                   {touched['telefono'] && getError('telefono') && (
                     <p className="text-red-500 text-[11px] mt-1">{getError('telefono')}</p>
@@ -296,8 +297,9 @@ function PasajeroContent() {
 
               {/* Botón continuar */}
               <button
+                id="btn-continuar-hidden"
                 onClick={handleContinuar}
-                className="mt-6 w-full bg-[#185adb] hover:bg-[#1449b0] text-white font-semibold py-3.5 rounded-2xl tracking-widest text-sm transition-colors shadow-md shadow-[#185adb]/30"
+                className="hidden"
               >
                 CONTINUAR AL PAGO
               </button>
@@ -319,6 +321,7 @@ function PasajeroContent() {
               horaLlegada={horaLlegada}
               fecha={fecha}
               fechaLlegada={fechaLlegada}
+              onFinalizar={() => document.getElementById('btn-continuar-hidden')?.click()}
             />
           </div>
         </div>

@@ -78,14 +78,26 @@ function BusquedaContent() {
   } = useDatePicker(salida);
 
   const fechaRegresoAjustada = (() => {
-    if (!regreso || !esIdaVuelta) return '';
+    if (!esIdaVuelta) return '';
+
     function parseSlash(f: string): Date {
       const [d, m, y] = f.split('/');
       const date = new Date(Number(y), Number(m) - 1, Number(d));
       date.setHours(0, 0, 0, 0);
       return date;
     }
-    const salidaOrig  = salida  ? parseSlash(salida)  : new Date();
+    // Si no hay regreso original → fallback de 3 días sobre fechaActivaDate
+    if (!regreso) {
+      const regresoNuevo = new Date(fechaActivaDate);
+      regresoNuevo.setDate(regresoNuevo.getDate() + 3);
+      const dd = String(regresoNuevo.getDate()).padStart(2, '0');
+      const mm = String(regresoNuevo.getMonth() + 1).padStart(2, '0');
+      const yy = regresoNuevo.getFullYear();
+      return `${dd}/${mm}/${yy}`;
+    }
+    // Lógica original intacta: mantener la diferencia relativa al mover flechas
+    const salidaOrig  = salida ? parseSlash(salida) : new Date();
+    salidaOrig.setHours(0, 0, 0, 0);
     const regresoOrig = parseSlash(regreso);
     const diffMs   = regresoOrig.getTime() - salidaOrig.getTime();
     const diffDias = Math.round(diffMs / (1000 * 60 * 60 * 24));
