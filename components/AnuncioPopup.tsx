@@ -7,12 +7,11 @@ export default function AnuncioPopup() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      const yaVisto = sessionStorage.getItem('anuncio-visto');
-      if (!yaVisto) {
-        setVisible(true);
-      }
-    }, 0);
+    // Mostrar el popup solo una vez por sesión
+    const yaVisto = sessionStorage.getItem('anuncio-visto');
+    if (!yaVisto) {
+      setVisible(true);
+    }
   }, []);
 
   function cerrar() {
