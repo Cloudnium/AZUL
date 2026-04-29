@@ -12,21 +12,21 @@ interface BusProps {
 }
 
 const LAYOUT_P1: (S | null)[][] = [
-  ['R', 'R', null, 'R'],
   ['A', 'A', null, 'A'],
-  ['R', 'R', null, 'A'],
+  ['A', 'A', null, 'A'],
+  ['A', 'A', null, 'A'],
   ['A', 'A', null, 'A'],
 ];
 const TV_P1: number[] = [0];
 
 const LAYOUT_P2: (S | null)[][] = [
   ['A', 'A', null, 'A'],
-  ['R', 'R', null, null],
-  ['R', 'A', null, null],
-  ['R', 'R', null, 'R'],
-  ['R', 'A', null, 'R'],
-  ['R', 'A', null, 'R'],
-  ['A', 'A', null, 'R'],
+  ['A', 'A', null, null],
+  ['A', 'A', null, null],
+  ['A', 'A', null, 'A'],
+  ['A', 'A', null, 'A'],
+  ['A', 'A', null, 'A'],
+  ['A', 'A', null, 'A'],
   ['A', 'A', null, 'A'],
   ['A', 'A', null, 'A'],
   ['A', 'A', null, 'A'],

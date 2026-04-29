@@ -13,9 +13,9 @@ interface BusProps {
 
 // ─── Azul Piso 1 — layout [2 + pasillo + 1], 11 filas ────────────────────────
 const LAYOUT_P1: (S | null)[][] = [
-  ['R', 'R', null, 'R'],
   ['A', 'A', null, 'A'],
-  ['R', 'R', null, 'A'],
+  ['A', 'A', null, 'A'],
+  ['A', 'A', null, 'A'],
   ['A', 'A', null, 'A'],
 ];
 const TV_P1: number[] = [0, 4, 7];
@@ -25,9 +25,9 @@ const LAYOUT_P2: (S | null)[][] = [
   ['A','A', null, 'A','A'],
   ['A','A', null,  null, null],
   ['A','A', null, null, null],
-  ['A','A', null, 'R','R'],
-  ['A','A', null, 'R','R'],
-  ['A','A', null, 'R','R'],
+  ['A','A', null, 'A','A'],
+  ['A','A', null, 'A','A'],
+  ['A','A', null, 'A','A'],
   ['A','A', null, 'A','A'],
   ['A','A', null, 'A','A'],
   ['A','A', null, 'A','A'],
