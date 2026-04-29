@@ -1,3 +1,4 @@
+// componentes/AnuncioPopup.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -7,11 +8,12 @@ export default function AnuncioPopup() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Mostrar el popup solo una vez por sesión
-    const yaVisto = sessionStorage.getItem('anuncio-visto');
-    if (!yaVisto) {
-      setVisible(true);
-    }
+    setTimeout(() => {
+      const yaVisto = sessionStorage.getItem('anuncio-visto');
+      if (!yaVisto) {
+        setVisible(true);
+      }
+    }, 0);
   }, []);
 
   function cerrar() {
