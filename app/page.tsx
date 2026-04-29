@@ -129,6 +129,7 @@ export default function HomePage() {
                     <Image src="/images/inicio/Recurso 560.png" alt="" width={18} height={18} style={{ width: 18, height: 18, objectFit: 'contain' }} />
                     <input type="date" className="w-full text-sm outline-none bg-transparent text-gray-700 cursor-pointer" value={regreso} onChange={e => { setRegreso(e.target.value); setErrorRegreso(false); }} min={salida || today} style={{ colorScheme: 'light', minWidth: 0 }} />
                   </div>
+                  {/* Error solo PC — flota debajo sin mover nada */}
                   {errorRegreso && (
                     <p className="text-red-500 text-xs hidden sm:block" style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: 2 }}>
                       Ingresa una fecha de regreso.
@@ -137,6 +138,7 @@ export default function HomePage() {
                 </div>
               )}
 
+              {/* Botón solo PC — dentro del flex */}
               <div className={`self-end hidden sm:block ${tab === 'ida-vuelta' ? 'w-auto' : 'shrink-0'}`}>
                 <button onClick={handleSearch} className="h-11 w-12 rounded-xl flex items-center justify-center transition-colors hover:opacity-90" style={{ backgroundColor: '#0560c5' }}>
                   <Image src="/images/inicio/Recurso 558.png" alt="Buscar" width={22} height={22} style={{ width: 22, height: 22, filter: 'brightness(0) invert(1)' }} />
@@ -144,12 +146,14 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Error solo móvil — debajo del flex, ANTES del botón */}
             {tab === 'ida-vuelta' && errorRegreso && (
               <p className="text-red-500 text-xs mt-2 sm:hidden">
                 Ingresa una fecha de regreso.
               </p>
             )}
 
+            {/* Botón solo móvil — fuera del flex, siempre abajo */}
             <div className="sm:hidden mt-3">
               <button onClick={handleSearch} className="h-11 w-full rounded-xl flex items-center justify-center transition-colors hover:opacity-90" style={{ backgroundColor: '#0560c5' }}>
                 <Image src="/images/inicio/Recurso 558.png" alt="Buscar" width={22} height={22} style={{ width: 22, height: 22, filter: 'brightness(0) invert(1)' }} />
@@ -209,24 +213,22 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {DESTINOS.map((d, index) => (
               <FadeIn key={d.name} delay={index * 0.15} direction="up">
-                {/* ✅ CAMBIO: Link envuelve toda la card */}
-                <Link href={`/busqueda?origen=Lima&destino=${d.name}`}>
-                  <div className="relative rounded-2xl overflow-hidden cursor-pointer group" style={{ height: 280 }}>
-                    <Image src={d.img} alt={d.name} fill sizes="(max-width: 640px) 100vw, 33vw" style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 0.4s ease' }} className="group-hover:scale-105" />
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.35) 50%, transparent 75%)' }} />
-                    <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                      {d.badge && (
-                        <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wide block w-fit mb-2" style={{ backgroundColor: '#0560c5' }}>
-                          {d.badge}
-                        </span>
-                      )}
-                      <div className="text-3xl font-semibold leading-tight">{d.name}</div>
-                      <div className="text-sm mb-3 opacity-80">Desde S/ {d.price}</div>
-                      {/* ✅ CAMBIO: botón sin Link propio, ya está dentro del Link padre */}
+                <div className="relative rounded-2xl overflow-hidden cursor-pointer group" style={{ height: 280 }}>
+                  <Image src={d.img} alt={d.name} fill sizes="(max-width: 640px) 100vw, 33vw" style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 0.4s ease' }} className="group-hover:scale-105" />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.35) 50%, transparent 75%)' }} />
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                    {d.badge && (
+                      <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wide block w-fit mb-2" style={{ backgroundColor: '#0560c5' }}>
+                        {d.badge}
+                      </span>
+                    )}
+                    <div className="text-3xl font-semibold leading-tight">{d.name}</div>
+                    <div className="text-sm mb-3 opacity-80">Desde S/ {d.price}</div>
+                    <Link href={`/busqueda?origen=Lima&destino=${d.name}`}>
                       <button className="text-white text-xs font-semibold flex items-center gap-1 hover:opacity-75 transition-opacity">RESERVAR →</button>
-                    </div>
+                    </Link>
                   </div>
-                </Link>
+                </div>
               </FadeIn>
             ))}
           </div>
